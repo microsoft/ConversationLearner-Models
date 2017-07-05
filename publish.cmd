@@ -1,0 +1,1 @@
+npm pack && move /Y blis-models-0.0.1.tgz C:\Users\laliden\OneDrive\Microsoft\blis-models.tgz && START cmd.exe /k "cd C:\codebox\BLIS-REPO\BLIS-SDK & npm install https://aka.ms/blis-models --force --save && exit"
