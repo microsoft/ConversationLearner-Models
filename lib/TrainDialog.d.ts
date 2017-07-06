@@ -1,4 +1,4 @@
-import { ScoreInput } from './Score';
+import { ScoreInput, ScoredAction } from './Score';
 export declare class LabeledEntity {
     startCharIndex: number;
     endCharIndex: number;
@@ -17,7 +17,7 @@ export declare class TrainExtractorStep {
 }
 export declare class TrainScorerStep {
     input: ScoreInput;
-    labelAction: string;
+    scoredAction: ScoredAction;
     constructor(init?: Partial<TrainScorerStep>);
 }
 export declare class TrainRound {
