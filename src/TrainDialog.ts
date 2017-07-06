@@ -1,5 +1,5 @@
 import { JsonProperty } from 'json-typescript-mapper';
-import { ScoreInput } from './Score';
+import { ScoreInput, ScoredAction } from './Score';
 
 export class LabeledEntity
 {
@@ -58,13 +58,13 @@ export class TrainScorerStep
     @JsonProperty({clazz: ScoreInput, name: 'input'})
     public input : ScoreInput;
 
-    @JsonProperty('labelAction')
-    public labelAction : string;
+    @JsonProperty('scoredAction')
+    public scoredAction : ScoredAction;
 
     public constructor(init?:Partial<TrainScorerStep>)
     {
         this.input = undefined;
-        this.labelAction = undefined;
+        this.scoredAction = undefined;
         (<any>Object).assign(this, init);
     }
 }
