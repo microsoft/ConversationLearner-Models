@@ -1,5 +1,6 @@
 import { JsonProperty } from 'json-typescript-mapper';
 import { Metrics } from './Metrics';
+import { ActionMetaData } from './Action';
 
 export class ScoreInput
 {
@@ -45,10 +46,22 @@ export class ScoredAction
     @JsonProperty('score')
     public score : number;
 
+    @JsonProperty('payload')
+    public payload : string;
+
+    @JsonProperty('isTerminal')
+    public isTerminal : boolean;
+
+    @JsonProperty({clazz: ActionMetaData, name: 'metadata'})
+    public metadata : ActionMetaData;
+
     public constructor(init?:Partial<ScoredAction>)
     {
         this.actionId = undefined;
         this.score = undefined;
+        this.payload = undefined;
+        this.isTerminal = undefined;
+        this.metadata = undefined;
         (<any>Object).assign(this, init);
     }
 }
