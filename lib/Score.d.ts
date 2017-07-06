@@ -1,4 +1,5 @@
 import { Metrics } from './Metrics';
+import { ActionMetaData } from './Action';
 export declare class ScoreInput {
     filledEntities: string[];
     context: string;
@@ -13,6 +14,9 @@ export declare class UnscoredAction {
 export declare class ScoredAction {
     actionId: string;
     score: number;
+    payload: string;
+    isTerminal: boolean;
+    metadata: ActionMetaData;
     constructor(init?: Partial<ScoredAction>);
 }
 export declare class ScoreResponse {

@@ -1,5 +1,14 @@
 import { JsonProperty } from 'json-typescript-mapper';
 
+export const ActionTypes =
+{
+    TEXT : "TEXT",
+    API_LOCAL : "API_LOCAL",
+    API_AZURE : "API_AZURE",
+    INTENT : "INTENT",
+    CARD : "CARD"
+}
+
 export class ActionMetaData
 {
     // APIType

@@ -1,5 +1,6 @@
 import { JsonProperty } from 'json-typescript-mapper';
 import { LabeledEntity } from './TrainDialog';
+import { EntityMetaData } from './Entity'
 import { Metrics } from './Metrics'
 
 export class PredictedEntity extends LabeledEntity
@@ -7,10 +8,14 @@ export class PredictedEntity extends LabeledEntity
     @JsonProperty('score')
     public score : number;
 
+    @JsonProperty({clazz: EntityMetaData, name: 'metadata'})
+    public metadata : EntityMetaData;
+
     public constructor(init?:Partial<PredictedEntity>)
     {
         super(init);
         this.score = undefined;
+        this.metadata = undefined;
         (<any>Object).assign(this, init);
     }
 }

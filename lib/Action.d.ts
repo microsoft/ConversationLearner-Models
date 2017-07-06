@@ -1,3 +1,10 @@
+export declare const ActionTypes: {
+    TEXT: string;
+    API_LOCAL: string;
+    API_AZURE: string;
+    INTENT: string;
+    CARD: string;
+};
 export declare class ActionMetaData {
     actionType: string;
     constructor(init?: Partial<ActionMetaData>);
