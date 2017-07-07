@@ -11,7 +11,7 @@ export class Teach
     @JsonProperty("lastQueryDatetime")
     public lastQueryDatetime : string;
 
-    @JsonProperty("lastQueryDatetime")
+    @JsonProperty("packageId")
     public packageId : number;
 
     public constructor(init?:Partial<Teach>)
@@ -42,4 +42,28 @@ export class TeachResponse
         this.trainDialogId = undefined;
         (<any>Object).assign(this, init);
     } 
+}
+
+export class TeachList
+{
+    @JsonProperty({clazz: Teach, name: 'teaches'})
+    public teaches : Teach[];
+
+    public constructor(init?:Partial<TeachList>)
+    {
+        this.teaches = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
+
+export class TeachIdList
+{
+    @JsonProperty('teachIds')  
+    public teachIds : string[];
+
+    public constructor(init?:Partial<TeachIdList>)
+    {
+        this.teachIds = undefined;
+        (<any>Object).assign(this, init);
+    }
 }

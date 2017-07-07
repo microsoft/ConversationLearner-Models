@@ -27,3 +27,27 @@ export class Session
         (<any>Object).assign(this, init);
     } 
 }
+
+export class SessionList
+{
+    @JsonProperty({clazz: Session, name: 'sessions'})
+    public sessions : Session[];
+
+    public constructor(init?:Partial<SessionList>)
+    {
+        this.sessions = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
+
+export class SessionIdList
+{
+    @JsonProperty('sessionIds')  
+    public sessionIds : string[];
+
+    public constructor(init?:Partial<SessionIdList>)
+    {
+        this.sessionIds = undefined;
+        (<any>Object).assign(this, init);
+    }
+}

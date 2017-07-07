@@ -11,3 +11,11 @@ export declare class TeachResponse {
     trainDialogId: string;
     constructor(init?: Partial<TeachResponse>);
 }
+export declare class TeachList {
+    teaches: Teach[];
+    constructor(init?: Partial<TeachList>);
+}
+export declare class TeachIdList {
+    teachIds: string[];
+    constructor(init?: Partial<TeachIdList>);
+}
