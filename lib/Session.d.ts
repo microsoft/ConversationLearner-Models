@@ -6,3 +6,11 @@ export declare class Session {
     saveToLog: boolean;
     constructor(init?: Partial<Session>);
 }
+export declare class SessionList {
+    sessions: Session[];
+    constructor(init?: Partial<SessionList>);
+}
+export declare class SessionIdList {
+    sessionIds: string[];
+    constructor(init?: Partial<SessionIdList>);
+}
