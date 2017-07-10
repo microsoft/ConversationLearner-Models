@@ -14,3 +14,7 @@ export declare class BlisAppList {
     apps: BlisAppBase[];
     constructor(init?: Partial<BlisAppList>);
 }
+export declare class BlisAppIdList {
+    appIds: string[];
+    constructor(init?: Partial<BlisAppIdList>);
+}
