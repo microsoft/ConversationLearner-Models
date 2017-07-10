@@ -12,6 +12,9 @@ export class LabeledEntity
     @JsonProperty('entityId')
     public entityId : string;
 
+    @JsonProperty('entityName')
+    public entityName : string;
+
     @JsonProperty('entityText')
     public entityText : string;
 
@@ -20,6 +23,7 @@ export class LabeledEntity
         this.startCharIndex = undefined;
         this.endCharIndex = undefined;
         this.entityId = undefined;
+        this.entityName = undefined;
         this.entityText = undefined;
         (<any>Object).assign(this, init);
     }
