@@ -52,3 +52,15 @@ export class BlisAppList
         (<any>Object).assign(this, init);
     }
 }
+
+export class BlisAppIdList
+{
+    @JsonProperty('appIds')  
+    public appIds : string[];
+
+    public constructor(init?:Partial<BlisAppIdList>)
+    {
+        this.appIds = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
