@@ -3,6 +3,7 @@ export declare class LabeledEntity {
     startCharIndex: number;
     endCharIndex: number;
     entityId: string;
+    entityName: string;
     entityText: string;
     constructor(init?: Partial<LabeledEntity>);
 }
