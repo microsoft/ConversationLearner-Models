@@ -1,6 +1,7 @@
 import { JsonProperty } from 'json-typescript-mapper';
 import { Metrics } from './Metrics';
 import { ActionMetaData } from './Action';
+import { Memory } from './Memory';
 
 export class ScoreInput
 {
@@ -82,6 +83,22 @@ export class ScoreResponse
         this.scoredActions = undefined;
         this.unscoredActions = undefined;
         this.metrics = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
+
+export class UIScoreResponse
+{
+    @JsonProperty({clazz: ScoreResponse, name: 'scoreResponse'})
+    public scoreResponse : ScoreResponse;
+
+    @JsonProperty({clazz: Memory, name: 'memories'})
+    public memories : Memory[];
+
+    public constructor(init?:Partial<UIScoreResponse>)
+    {
+        this.scoreResponse = undefined;
+        this.memories = undefined;
         (<any>Object).assign(this, init);
     }
 }
