@@ -5,6 +5,7 @@ export * from './Extract';
 export * from './KeyGen';
 export * from './LogDialog';
 export * from './Metrics';
+export * from './Memory';
 export * from './Score';
 export * from './Session';
 export * from './teach';
