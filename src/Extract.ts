@@ -2,6 +2,7 @@ import { JsonProperty } from 'json-typescript-mapper';
 import { LabeledEntity } from './TrainDialog';
 import { EntityMetaData } from './Entity'
 import { Metrics } from './Metrics'
+import { Memory } from './Memory';
 
 export class PredictedEntity extends LabeledEntity
 {
@@ -43,3 +44,20 @@ export class ExtractResponse
         (<any>Object).assign(this, init);
     }
 }
+
+export class UIExtractResponse
+{
+    @JsonProperty({clazz: ExtractResponse, name: 'extractResponse'})
+    public extractResponse : ExtractResponse;
+
+    @JsonProperty({clazz: Memory, name: 'memories'})
+    public memories : Memory[];
+
+    public constructor(init?:Partial<UIExtractResponse>)
+    {
+        this.extractResponse = undefined;
+        this.memories = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
+
