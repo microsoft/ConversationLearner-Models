@@ -23,29 +23,10 @@ export class ScoreInput
     }
 }
 
-export class UnscoredAction
+export class ScoredBase
 {
     @JsonProperty('actionId')
     public actionId : string;
-
-    @JsonProperty('reason')
-    public reason : string;
-
-    public constructor(init?:Partial<ScoredAction>)
-    {
-        this.actionId = undefined;
-        this.reason = undefined;
-        (<any>Object).assign(this, init);
-    }
-}
-
-export class ScoredAction
-{
-    @JsonProperty('actionId')
-    public actionId : string;
-
-    @JsonProperty('score')
-    public score : number;
 
     @JsonProperty('payload')
     public payload : string;
@@ -59,10 +40,39 @@ export class ScoredAction
     public constructor(init?:Partial<ScoredAction>)
     {
         this.actionId = undefined;
-        this.score = undefined;
         this.payload = undefined;
         this.isTerminal = undefined;
         this.metadata = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
+
+
+export class UnscoredAction extends ScoredBase
+{
+    @JsonProperty('reason')
+    public reason : string;
+
+    public constructor(init?:Partial<ScoredAction>)
+    {
+        super(init);
+        this.reason = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
+
+export class ScoredAction extends ScoredBase
+{
+    @JsonProperty('score')
+    public score : number;
+
+    @JsonProperty({clazz: ActionMetaData, name: 'metadata'})
+    public metadata : ActionMetaData;
+
+    public constructor(init?:Partial<ScoredAction>)
+    {
+        super(init);
+        this.score = undefined;
         (<any>Object).assign(this, init);
     }
 }
