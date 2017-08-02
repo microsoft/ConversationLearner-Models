@@ -7,16 +7,19 @@ export declare class ScoreInput {
     maskedActions: string[];
     constructor(init?: Partial<ScoreInput>);
 }
-export declare class UnscoredAction {
+export declare class ScoredBase {
     actionId: string;
+    payload: string;
+    isTerminal: boolean;
+    metadata: ActionMetaData;
+    constructor(init?: Partial<ScoredAction>);
+}
+export declare class UnscoredAction extends ScoredBase {
     reason: string;
     constructor(init?: Partial<ScoredAction>);
 }
-export declare class ScoredAction {
-    actionId: string;
+export declare class ScoredAction extends ScoredBase {
     score: number;
-    payload: string;
-    isTerminal: boolean;
     metadata: ActionMetaData;
     constructor(init?: Partial<ScoredAction>);
 }
