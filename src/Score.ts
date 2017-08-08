@@ -9,7 +9,7 @@ export class ScoreInput
     public filledEntities : string[];
 
     @JsonProperty('context')
-    public context : string;
+    public context : {};
 
     @JsonProperty('maskedActions')
     public maskedActions : string[];
