@@ -31,6 +31,7 @@ export declare class ScoreResponse {
 }
 export declare class UIScoreResponse {
     scoreResponse: ScoreResponse;
+    scoreInput: ScoreInput;
     memories: Memory[];
     constructor(init?: Partial<UIScoreResponse>);
 }

@@ -62,12 +62,18 @@ export class TrainScorerStep
     @JsonProperty({clazz: ScoreInput, name: 'input'})
     public input : ScoreInput;
 
+    // I'd of the selected action
+    @JsonProperty('labelAction')
+    public labelAction : string;
+
+    // Score of the selected action
     @JsonProperty('scoredAction')
     public scoredAction : ScoredAction;
 
     public constructor(init?:Partial<TrainScorerStep>)
     {
         this.input = undefined;
+        this.labelAction = undefined;
         this.scoredAction = undefined;
         (<any>Object).assign(this, init);
     }

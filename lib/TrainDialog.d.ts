@@ -18,6 +18,7 @@ export declare class TrainExtractorStep {
 }
 export declare class TrainScorerStep {
     input: ScoreInput;
+    labelAction: string;
     scoredAction: ScoredAction;
     constructor(init?: Partial<TrainScorerStep>);
 }
