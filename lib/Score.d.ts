@@ -12,11 +12,11 @@ export declare class ScoredBase {
     payload: string;
     isTerminal: boolean;
     metadata: ActionMetaData;
-    constructor(init?: Partial<ScoredAction>);
+    constructor(init?: Partial<ScoredBase>);
 }
 export declare class UnscoredAction extends ScoredBase {
     reason: string;
-    constructor(init?: Partial<ScoredAction>);
+    constructor(init?: Partial<UnscoredAction>);
 }
 export declare class ScoredAction extends ScoredBase {
     score: number;

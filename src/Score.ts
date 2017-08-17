@@ -37,7 +37,7 @@ export class ScoredBase
     @JsonProperty({clazz: ActionMetaData, name: 'metadata'})
     public metadata : ActionMetaData;
 
-    public constructor(init?:Partial<ScoredAction>)
+    public constructor(init?:Partial<ScoredBase>)
     {
         this.actionId = undefined;
         this.payload = undefined;
@@ -53,7 +53,7 @@ export class UnscoredAction extends ScoredBase
     @JsonProperty('reason')
     public reason : string;
 
-    public constructor(init?:Partial<ScoredAction>)
+    public constructor(init?:Partial<UnscoredAction>)
     {
         super(init);
         this.reason = undefined;
