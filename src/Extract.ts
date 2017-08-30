@@ -45,19 +45,3 @@ export class ExtractResponse
     }
 }
 
-export class UIExtractResponse
-{
-    @JsonProperty({clazz: ExtractResponse, name: 'extractResponse'})
-    public extractResponse : ExtractResponse;
-
-    @JsonProperty({clazz: Memory, name: 'memories'})
-    public memories : Memory[];
-
-    public constructor(init?:Partial<UIExtractResponse>)
-    {
-        this.extractResponse = undefined;
-        this.memories = undefined;
-        (<any>Object).assign(this, init);
-    }
-}
-

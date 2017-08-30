@@ -1,6 +1,5 @@
 import { Metrics } from './Metrics';
 import { ActionMetaData } from './Action';
-import { Memory } from './Memory';
 export declare class ScoreInput {
     filledEntities: string[];
     context: {};
@@ -28,10 +27,4 @@ export declare class ScoreResponse {
     unscoredActions: UnscoredAction[];
     metrics: Metrics;
     constructor(init?: Partial<ScoreResponse>);
-}
-export declare class UIScoreResponse {
-    scoreResponse: ScoreResponse;
-    scoreInput: ScoreInput;
-    memories: Memory[];
-    constructor(init?: Partial<UIScoreResponse>);
 }

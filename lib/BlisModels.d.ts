@@ -11,3 +11,4 @@ export * from './Session';
 export * from './teach';
 export * from './TrainDialog';
 export * from './UserInput';
+export * from './UI';
