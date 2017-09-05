@@ -4,6 +4,13 @@ import { ScoreInput, ScoreResponse } from './Score';
 import { ExtractResponse } from './Extract';
 import { TrainExtractorStep } from './TrainDialog';
 
+export enum ScoreReason 
+{
+    NotAvailable = "notAvailable",
+    NotScorable = "notScorable",
+    NotCalculated = "notCalculated"
+}
+
 export class UIScoreInput
 {
     @JsonProperty({clazz: TrainExtractorStep, name: 'trainExtractorStep'})

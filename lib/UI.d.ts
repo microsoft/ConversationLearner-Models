@@ -2,6 +2,11 @@ import { Memory } from './Memory';
 import { ScoreInput, ScoreResponse } from './Score';
 import { ExtractResponse } from './Extract';
 import { TrainExtractorStep } from './TrainDialog';
+export declare enum ScoreReason {
+    NotAvailable = "notAvailable",
+    NotScorable = "notScorable",
+    NotCalculated = "notCalculated",
+}
 export declare class UIScoreInput {
     trainExtractorStep: TrainExtractorStep;
     extractResponse: ExtractResponse;
