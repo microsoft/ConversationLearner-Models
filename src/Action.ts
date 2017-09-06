@@ -9,22 +9,52 @@ export const ActionTypes =
     CARD : "CARD"
 }
 
+export class EntitySuggestion
+{
+    @JsonProperty('entityName')  
+    public entityName : string;
+
+    @JsonProperty('entityId')  
+    public entityId : string;
+
+    public constructor(init?:Partial<EntitySuggestion>)
+    {
+        this.entityName = undefined;
+        this.entityId = undefined;
+        (<any>Object).assign(this, init);
+    }
+
+    public Equal(entitySuggestion : EntitySuggestion) : boolean
+    {
+        if (!entitySuggestion) return false;
+        if (this.entityName != entitySuggestion.entityName) return false;
+        if (this.entityId != entitySuggestion.entityId) return false;
+        return true;
+    }
+}
+
 export class ActionMetaData
 {
     // APIType
     @JsonProperty('actionType')  
     public actionType : string;
 
+    // APIType
+    @JsonProperty('entitySuggestion')  
+    public entitySuggestion : EntitySuggestion;
+
     public constructor(init?:Partial<ActionMetaData>)
     {
         this.actionType = undefined;
+        this.entitySuggestion = undefined;
         (<any>Object).assign(this, init);
     }
 
     public Equal(metaData : ActionMetaData) : boolean
     {
         if (this.actionType != metaData.actionType) return false;
-        return true;
+        if (!this.entitySuggestion && metaData.entitySuggestion) return false;
+        return this.entitySuggestion.Equal(metaData.entitySuggestion);
     }
 }
 
