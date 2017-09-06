@@ -5,8 +5,15 @@ export declare const ActionTypes: {
     INTENT: string;
     CARD: string;
 };
+export declare class EntitySuggestion {
+    entityName: string;
+    entityId: string;
+    constructor(init?: Partial<EntitySuggestion>);
+    Equal(entitySuggestion: EntitySuggestion): boolean;
+}
 export declare class ActionMetaData {
     actionType: string;
+    entitySuggestion: EntitySuggestion;
     constructor(init?: Partial<ActionMetaData>);
     Equal(metaData: ActionMetaData): boolean;
 }
