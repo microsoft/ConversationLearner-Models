@@ -1,6 +1,7 @@
 import { LabeledEntity } from './TrainDialog';
 import { EntityMetaData } from './Entity';
 import { Metrics } from './Metrics';
+import { AppDefinition } from './AppDefinition';
 export declare class PredictedEntity extends LabeledEntity {
     score: number;
     metadata: EntityMetaData;
@@ -11,5 +12,6 @@ export declare class ExtractResponse {
     predictedEntities: PredictedEntity[];
     metrics: Metrics;
     packageId: string;
+    definitions: AppDefinition;
     constructor(init?: Partial<ExtractResponse>);
 }

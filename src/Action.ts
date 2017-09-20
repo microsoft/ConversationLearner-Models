@@ -35,12 +35,12 @@ export class EntitySuggestion
 
 export class ActionMetaData
 {
-    // APIType
+    // Action Type
     @JsonProperty('actionType')  
     public actionType : string;
 
-    // APIType
-    @JsonProperty('entitySuggestion')  
+    // Entity Suggestion
+    @JsonProperty({clazz: EntitySuggestion, name: 'entitySuggestion'})  
     public entitySuggestion : EntitySuggestion;
 
     public constructor(init?:Partial<ActionMetaData>)

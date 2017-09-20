@@ -3,6 +3,7 @@ import { LabeledEntity } from './TrainDialog';
 import { EntityMetaData } from './Entity'
 import { Metrics } from './Metrics'
 import { Memory } from './Memory';
+import { AppDefinition } from './AppDefinition';
 
 export class PredictedEntity extends LabeledEntity
 {
@@ -35,12 +36,16 @@ export class ExtractResponse
     @JsonProperty('packageId')
     public packageId : string;
 
+    @JsonProperty({clazz: AppDefinition, name: 'definitions'})
+    public definitions : AppDefinition;
+
     public constructor(init?:Partial<ExtractResponse>)
     {
         this.text = undefined;
         this.predictedEntities = undefined;
         this.metrics = undefined;
         this.packageId = undefined;
+        this.definitions = undefined;
         (<any>Object).assign(this, init);
     }
 }
