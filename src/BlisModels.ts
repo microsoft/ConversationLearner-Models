@@ -1,6 +1,7 @@
 export * from './Action';
 export * from './AppDefinition';
 export * from './BlisApp';
+export * from './BotInfo';
 export * from './Entity';
 export * from './Extract';
 export * from './KeyGen';
