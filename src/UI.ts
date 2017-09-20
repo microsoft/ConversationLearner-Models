@@ -3,6 +3,7 @@ import { Memory } from './Memory';
 import { ScoreInput, ScoreResponse } from './Score';
 import { ExtractResponse } from './Extract';
 import { TrainExtractorStep } from './TrainDialog';
+import { BlisAppBase } from './BlisApp';
 
 export enum ScoreReason 
 {
