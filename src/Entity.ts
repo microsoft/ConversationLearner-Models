@@ -1,5 +1,10 @@
 import { JsonProperty } from 'json-typescript-mapper';
 
+export enum EntityType {
+    LOCAL = "LOCAL",
+    LUIS = "LUIS"
+};
+
 export class EntityMetaData
 {
     @JsonProperty('isBucket')  

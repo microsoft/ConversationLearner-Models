@@ -1,3 +1,7 @@
+export declare enum EntityType {
+    LOCAL = "LOCAL",
+    LUIS = "LUIS",
+}
 export declare class EntityMetaData {
     isBucket: boolean;
     /** If set, has a negative and positive version */
