@@ -1,5 +1,4 @@
 import { JsonProperty } from 'json-typescript-mapper';
-import { ScoreInput } from './Score';
 
 export class BlisAppMetaData
 {

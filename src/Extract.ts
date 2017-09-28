@@ -2,7 +2,6 @@ import { JsonProperty } from 'json-typescript-mapper';
 import { LabeledEntity } from './TrainDialog';
 import { EntityMetaData } from './Entity'
 import { Metrics } from './Metrics'
-import { Memory } from './Memory';
 import { AppDefinition } from './AppDefinition';
 
 export class PredictedEntity extends LabeledEntity
