@@ -5,12 +5,12 @@ export class Memory {
     public entityName : string;
 
     @JsonProperty('entityValue')
-    public entityValue : string;
+    public entityValues : string[];
 
     public constructor(init?:Partial<Memory>)
     {
         this.entityName = undefined;
-        this.entityValue = undefined;
+        this.entityValues = undefined;
         (<any>Object).assign(this, init);
     }
 }

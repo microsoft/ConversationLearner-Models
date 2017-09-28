@@ -1,7 +1,6 @@
 import { JsonProperty } from 'json-typescript-mapper';
 import { Metrics } from './Metrics';
 import { ActionMetaData } from './Action';
-import { Memory } from './Memory';
 
 export class ScoreInput
 {
