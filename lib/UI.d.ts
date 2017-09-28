@@ -1,7 +1,8 @@
 import { Memory } from './Memory';
 import { ScoreInput, ScoreResponse } from './Score';
 import { ExtractResponse } from './Extract';
-import { TrainExtractorStep } from './TrainDialog';
+import { TrainExtractorStep, TrainScorerStep } from './TrainDialog';
+import { EntityBase } from './Entity';
 export declare enum ScoreReason {
     NotAvailable = "notAvailable",
     NotScorable = "notScorable",
@@ -22,4 +23,9 @@ export declare class UIScoreResponse {
     scoreInput: ScoreInput;
     memories: Memory[];
     constructor(init?: Partial<UIScoreResponse>);
+}
+export declare class UITrainScorerStep {
+    trainScorerStep: TrainScorerStep;
+    entities: EntityBase[];
+    constructor(init?: Partial<UITrainScorerStep>);
 }
