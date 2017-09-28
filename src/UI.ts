@@ -2,7 +2,8 @@ import { JsonProperty } from 'json-typescript-mapper';
 import { Memory } from './Memory';
 import { ScoreInput, ScoreResponse } from './Score';
 import { ExtractResponse } from './Extract';
-import { TrainExtractorStep } from './TrainDialog';
+import { TrainExtractorStep, TrainScorerStep } from './TrainDialog';
+import { EntityBase } from './Entity'
 
 export enum ScoreReason 
 {
@@ -59,6 +60,22 @@ export class UIScoreResponse
         this.scoreResponse = undefined;
         this.scoreInput = undefined;
         this.memories = undefined;
+        (<any>Object).assign(this, init);
+    }
+}
+
+export class UITrainScorerStep
+{
+    @JsonProperty({clazz: TrainScorerStep, name: 'trainScorerStep'})
+    public trainScorerStep : TrainScorerStep;
+
+    @JsonProperty({clazz: EntityBase, name: 'entities'})
+    public entities : EntityBase[];
+
+    public constructor(init?:Partial<UITrainScorerStep>)
+    {
+        this.trainScorerStep = undefined;
+        this.entities = undefined;
         (<any>Object).assign(this, init);
     }
 }
