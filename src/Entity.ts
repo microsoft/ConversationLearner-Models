@@ -5,19 +5,15 @@ export enum EntityType {
 
 export class EntityMetaData
 {
-    @JsonProperty('isBucket')  
     public isBucket : boolean;
         
     /** If set, has a negative and positive version */
-    @JsonProperty('isReversable')  
     public isReversable : boolean;
 
     /** If Negatable, the Id of negative entity associates with this Entity */
-    @JsonProperty('negativeId')  
     public negativeId : string;
 
     /** If a Negative, Id of positive entity associated with this Entity */
-    @JsonProperty('positiveId')  
     public positiveId : string;
 
     public constructor(init?:Partial<EntityMetaData>)
@@ -72,7 +68,6 @@ export class EntityList
 
 export class EntityIdList
 {
-    @JsonProperty('entityIds')  
     public entityIds : string[];
 
     public constructor(init?:Partial<EntityIdList>)

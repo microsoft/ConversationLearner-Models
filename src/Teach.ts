@@ -43,7 +43,6 @@ export class TeachList
 
 export class TeachIdList
 {
-    @JsonProperty('teachIds')  
     public teachIds : string[];
 
     public constructor(init?:Partial<TeachIdList>)

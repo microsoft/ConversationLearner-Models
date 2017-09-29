@@ -30,7 +30,6 @@ export class SessionList
 
 export class SessionIdList
 {
-    @JsonProperty('sessionIds')  
     public sessionIds : string[];
 
     public constructor(init?:Partial<SessionIdList>)

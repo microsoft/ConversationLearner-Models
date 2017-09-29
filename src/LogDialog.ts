@@ -84,7 +84,6 @@ export class LogDialogList
 
 export class LogDialogIdList
 {
-    @JsonProperty('logdialogIds')  
     public logDialogIds : string[];
 
     public constructor(init?:Partial<LogDialogIdList>)

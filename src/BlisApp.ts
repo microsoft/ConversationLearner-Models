@@ -30,7 +30,6 @@ export class BlisAppBase
 
 export class BlisAppList
 {
-    @JsonProperty('apps')  
     public apps : BlisAppBase[];
 
     public constructor(init?:Partial<BlisAppList>)
@@ -42,7 +41,6 @@ export class BlisAppList
 
 export class BlisAppIdList
 {
-    @JsonProperty('appIds')  
     public appIds : string[];
 
     public constructor(init?:Partial<BlisAppIdList>)
