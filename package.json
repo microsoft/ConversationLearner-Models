@@ -4,11 +4,19 @@
   "description": "Models for Blis",
   "main": "lib/BlisModels.js",
   "typings": "lib/BlisModels.d.ts",
+  "keywords": [
+    "Microsoft",
+    "BLIS",
+    "LUIS",
+    "Bot",
+    "bot framework",
+    "models"
+  ],
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib"
   },
-  "author": "",
+  "author": "Microsoft",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
