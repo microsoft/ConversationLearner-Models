@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublish": "tsc",
+    "prepublishOnly": "tsc",
     "clean": "rm -rf lib"
   },
   "author": "Microsoft",
