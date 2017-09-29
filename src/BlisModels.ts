@@ -11,7 +11,7 @@ export * from './Memory';
 export * from './ModelUtils';
 export * from './Score';
 export * from './Session';
-export * from './teach';
+export * from './Teach';
 export * from './TrainDialog';
 export * from './UserInput';
 export * from './UI';

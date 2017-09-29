@@ -2,6 +2,12 @@
     "compileOnSave": true,
     "compilerOptions": { 
         "noUnusedLocals": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": false, // TODO: Enable
+        "suppressImplicitAnyIndexErrors": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "importHelpers": true,
@@ -11,14 +17,10 @@
         "outDir": "lib",
         "rootDir" : "src",
         "watch" : true,
-        "lib" : ["es2016", "dom"],
-        "declaration": true
+        "declaration": true,
+        "lib" : ["es2016", "dom"]
     },
-    "scripts":
-    {
-        "build": "rm -rf lib/ && tsc"
-    },
-    "exclude": [
-        "node_modules"
+    "include": [
+        "src"
     ]
 }
