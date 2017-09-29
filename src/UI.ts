@@ -1,4 +1,3 @@
-import { JsonProperty } from 'json-typescript-mapper';
 import { Memory } from './Memory';
 import { ScoreInput, ScoreResponse } from './Score';
 import { ExtractResponse } from './Extract';
@@ -14,10 +13,8 @@ export enum ScoreReason
 
 export class UIScoreInput
 {
-    @JsonProperty({clazz: TrainExtractorStep, name: 'trainExtractorStep'})
     public trainExtractorStep : TrainExtractorStep;
 
-    @JsonProperty({clazz: ExtractResponse, name: 'extractResponse'})
     public extractResponse : ExtractResponse;
 
     public constructor(init?:Partial<UIScoreInput>)
@@ -30,10 +27,8 @@ export class UIScoreInput
 
 export class UIExtractResponse
 {
-    @JsonProperty({clazz: ExtractResponse, name: 'extractResponse'})
     public extractResponse : ExtractResponse;
 
-    @JsonProperty({clazz: Memory, name: 'memories'})
     public memories : Memory[];
 
     public constructor(init?:Partial<UIExtractResponse>)
@@ -46,13 +41,10 @@ export class UIExtractResponse
 
 export class UIScoreResponse
 {
-    @JsonProperty({clazz: ScoreResponse, name: 'scoreResponse'})
     public scoreResponse : ScoreResponse;
 
-    @JsonProperty({clazz: ScoreInput, name: 'scoreInput'})
     public scoreInput : ScoreInput;
 
-    @JsonProperty({clazz: Memory, name: 'memories'})
     public memories : Memory[];
 
     public constructor(init?:Partial<UIScoreResponse>)
@@ -66,10 +58,8 @@ export class UIScoreResponse
 
 export class UITrainScorerStep
 {
-    @JsonProperty({clazz: TrainScorerStep, name: 'trainScorerStep'})
     public trainScorerStep : TrainScorerStep;
 
-    @JsonProperty({clazz: EntityBase, name: 'entities'})
     public entities : EntityBase[];
 
     public constructor(init?:Partial<UITrainScorerStep>)

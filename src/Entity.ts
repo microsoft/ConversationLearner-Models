@@ -1,5 +1,3 @@
-import { JsonProperty } from 'json-typescript-mapper';
-
 export enum EntityType {
     LOCAL = "LOCAL",
     LUIS = "LUIS"
@@ -40,25 +38,12 @@ export class EntityMetaData
 }
 
 export class EntityBase {
-    @JsonProperty('entityId')
     public entityId : string;
-
-    @JsonProperty('entityName')
     public entityName : string;
-
-    @JsonProperty('entityType')
     public entityType : string;
-
-    @JsonProperty('version')
     public version : number;
-
-    @JsonProperty('packageCreationId')
     public packageCreationId : number;
-
-    @JsonProperty('packageDeletionId')
     public packageDeletionId : number;
-
-    @JsonProperty({clazz: EntityMetaData, name: 'metadata'})
     public metadata : EntityMetaData;
 
     public constructor(init?:Partial<EntityBase>)
@@ -76,7 +61,6 @@ export class EntityBase {
 
 export class EntityList
 {
-    @JsonProperty({clazz: EntityBase, name: 'entities'})
     public entities : EntityBase[];
 
     public constructor(init?:Partial<EntityList>)

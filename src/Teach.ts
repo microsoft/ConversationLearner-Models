@@ -1,17 +1,8 @@
-import { JsonProperty } from 'json-typescript-mapper';
-
 export class Teach
 {
-    @JsonProperty("teachId")
     public teachId : string;
-
-    @JsonProperty("createdDatetime")
     public createdDatetime : string;
-
-    @JsonProperty("lastQueryDatetime")
     public lastQueryDatetime : string;
-
-    @JsonProperty("packageId")
     public packageId : number;
 
     public constructor(init?:Partial<Teach>)
@@ -26,13 +17,8 @@ export class Teach
 
 export class TeachResponse
 {
-    @JsonProperty("packageId")
     public packageId : number;
-
-    @JsonProperty("teachId")
     public teachId : string;
-
-    @JsonProperty("trainDialogId")
     public trainDialogId : string;
 
     public constructor(init?:Partial<TeachResponse>)
@@ -46,7 +32,6 @@ export class TeachResponse
 
 export class TeachList
 {
-    @JsonProperty({clazz: Teach, name: 'teaches'})
     public teaches : Teach[];
 
     public constructor(init?:Partial<TeachList>)

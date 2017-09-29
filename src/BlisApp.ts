@@ -1,8 +1,5 @@
-import { JsonProperty } from 'json-typescript-mapper';
-
 export class BlisAppMetaData
 {
-    @JsonProperty('botFrameworkApps')  
     public botFrameworkApps : string[];
 
     public constructor(init?:Partial<BlisAppMetaData>)
@@ -14,19 +11,10 @@ export class BlisAppMetaData
 
 export class BlisAppBase
 {
-    @JsonProperty('appName')
     public appName : string;
-
-    @JsonProperty('appId')
     public appId : string;
-
-    @JsonProperty('luisKey')
     public luisKey : string;
-
-    @JsonProperty('locale')
     public locale : string;
-
-    @JsonProperty({clazz: BlisAppMetaData, name: 'metadata'})
     public metadata : BlisAppMetaData;
 
     public constructor(init?:Partial<BlisAppBase>)

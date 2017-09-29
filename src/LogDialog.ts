@@ -1,14 +1,10 @@
-import { JsonProperty } from 'json-typescript-mapper';
 import { ScoreResponse, ScoreInput } from './Score';
 import { ExtractResponse } from './Extract';
 import { Metrics } from './Metrics';
 
 export class LogExtractorStep extends ExtractResponse
 {
-    @JsonProperty('stepBeginDatetime')
     public stepBeginDatetime : string;
-
-    @JsonProperty('stepEndDatetime')
     public stepEndDatetime : string;
 
     public constructor(init?:Partial<LogExtractorStep>)
@@ -22,22 +18,11 @@ export class LogExtractorStep extends ExtractResponse
 
 export class LogScorerStep
 {
-    @JsonProperty({clazz: ScoreInput, name: 'input'})
     public input : ScoreInput;
-
-    @JsonProperty('predictedAction')
     public predictedAction : string;
-
-    @JsonProperty({clazz: ScoreResponse, name: 'predictionDetails'})
     public predictionDetails : ScoreResponse;
-
-    @JsonProperty('stepBeginDatetime')
     public stepBeginDatetime : string;
-
-    @JsonProperty('stepEndDatetime')
     public stepEndDatetime : string;
-
-    @JsonProperty({clazz: Metrics, name: 'metrics'})
     public metrics : Metrics;
 
     public constructor(init?:Partial<LogScorerStep>)
@@ -54,10 +39,7 @@ export class LogScorerStep
 
 export class LogRound
 {
-    @JsonProperty({clazz: LogExtractorStep, name: 'extractorStep'})
     public extractorStep : LogExtractorStep;
-
-    @JsonProperty({clazz: LogScorerStep, name: 'scorerSteps'})
     public scorerSteps : LogScorerStep[];
 
     public constructor(init?:Partial<LogRound>)
@@ -70,22 +52,11 @@ export class LogRound
 
 export class LogDialog
 {
-    @JsonProperty('logDialogId')
     public logDialogId : string;
-
-    @JsonProperty('dialogBeginDatetime')
     public dialogBeginDatetime : string;
-
-    @JsonProperty('dialogEndDatetime')
     public dialogEndDatetime : string;
-
-    @JsonProperty('packageId')
     public packageId : number;
-
-    @JsonProperty('metrics')
     public metrics : string;
-
-    @JsonProperty({clazz: LogRound, name: 'rounds'})
     public rounds : LogRound[];
 
     public constructor(init?:Partial<LogDialog>)
@@ -102,7 +73,6 @@ export class LogDialog
 
 export class LogDialogList
 {
-    @JsonProperty({clazz: LogDialog, name: 'logDialogs'})
     public logDialogs : LogDialog[];
 
     public constructor(init?:Partial<LogDialogList>)

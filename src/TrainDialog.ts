@@ -1,21 +1,15 @@
-import { JsonProperty } from 'json-typescript-mapper';
 import { ScoreInput, ScoredAction } from './Score';
 
 export class LabeledEntity
 {
-    @JsonProperty('startCharIndex')
     public startCharIndex : number;
 
-    @JsonProperty('endCharIndex')
     public endCharIndex : number;
 
-    @JsonProperty('entityId')
     public entityId : string;
 
-    @JsonProperty('entityName')
     public entityName : string;
 
-    @JsonProperty('entityText')
     public entityText : string;
 
     public constructor(init?:Partial<LabeledEntity>)
@@ -31,10 +25,8 @@ export class LabeledEntity
 
 export class TextVariation
 {
-    @JsonProperty('text')
     public text : String;
 
-    @JsonProperty({clazz: LabeledEntity, name: 'labelEntities'})
     public labelEntities : LabeledEntity[];
 
     public constructor(init?:Partial<TextVariation>)
@@ -47,7 +39,6 @@ export class TextVariation
 
 export class TrainExtractorStep
 {
-    @JsonProperty({clazz: TextVariation, name: 'textVariations'})
     public textVariations : TextVariation[];
 
     public constructor(init?:Partial<TrainExtractorStep>)
@@ -59,15 +50,12 @@ export class TrainExtractorStep
 
 export class TrainScorerStep
 {
-    @JsonProperty({clazz: ScoreInput, name: 'input'})
     public input : ScoreInput;
 
     // I'd of the selected action
-    @JsonProperty('labelAction')
     public labelAction : string;
 
     // Score of the selected action
-    @JsonProperty('scoredAction')
     public scoredAction : ScoredAction;
 
     public constructor(init?:Partial<TrainScorerStep>)
@@ -81,10 +69,8 @@ export class TrainScorerStep
 
 export class TrainRound
 {
-    @JsonProperty({clazz: TrainExtractorStep, name: 'extractorStep'})
     public extractorStep : TrainExtractorStep;
 
-    @JsonProperty({clazz: TrainScorerStep, name: 'scorerSteps'})
     public scorerSteps : TrainScorerStep[];
 
     public constructor(init?:Partial<TrainRound>)
@@ -97,19 +83,10 @@ export class TrainRound
 
 export class TrainDialog
 {
-    @JsonProperty('trainDialogId')
     public trainDialogId : string;
-
-    @JsonProperty('version')
     public version : number;
-
-    @JsonProperty('packageCreationId')
     public packageCreationId : number;
-
-    @JsonProperty('packageDeletionId')
     public packageDeletionId : number;
-
-    @JsonProperty({clazz: TrainRound, name: 'rounds'})
     public rounds : TrainRound[];
 
     public constructor(init?:Partial<TrainDialog>)
@@ -125,13 +102,8 @@ export class TrainDialog
 
 export class TrainResponse
 {
-    @JsonProperty("packageId")
     public packageId : number;
-
-    @JsonProperty("trainingStatus")
     public trainingStatus : string;
-
-    @JsonProperty("trainDialogId")
     public trainDialogId : string;
 
     public constructor(init?:Partial<TrainResponse>)
@@ -145,7 +117,6 @@ export class TrainResponse
 
 export class TrainDialogList
 {
-    @JsonProperty({clazz: TrainDialog, name: 'trainDialogs'})
     public trainDialogs : TrainDialog[];
 
     public constructor(init?:Partial<TrainDialogList>)
@@ -157,7 +128,6 @@ export class TrainDialogList
 
 export class TrainDialogIdList
 {
-    @JsonProperty('trainDialogIds')  
     public trainDialogIds : string[];
 
     public constructor(init?:Partial<TrainDialogIdList>)

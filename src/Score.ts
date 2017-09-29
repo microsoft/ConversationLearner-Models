@@ -1,16 +1,10 @@
-import { JsonProperty } from 'json-typescript-mapper';
 import { Metrics } from './Metrics';
 import { ActionMetaData } from './Action';
 
 export class ScoreInput
 {
-    @JsonProperty('filledEntities')
     public filledEntities : string[];
-
-    @JsonProperty('context')
     public context : {};
-
-    @JsonProperty('maskedActions')
     public maskedActions : string[];
 
     public constructor(init?:Partial<ScoreInput>)
@@ -24,16 +18,9 @@ export class ScoreInput
 
 export class ScoredBase
 {
-    @JsonProperty('actionId')
     public actionId : string;
-
-    @JsonProperty('payload')
     public payload : string;
-
-    @JsonProperty('isTerminal')
     public isTerminal : boolean;
-
-    @JsonProperty({clazz: ActionMetaData, name: 'metadata'})
     public metadata : ActionMetaData;
 
     public constructor(init?:Partial<ScoredBase>)
@@ -49,7 +36,6 @@ export class ScoredBase
 
 export class UnscoredAction extends ScoredBase
 {
-    @JsonProperty('reason')
     public reason : string;
 
     public constructor(init?:Partial<UnscoredAction>)
@@ -62,10 +48,7 @@ export class UnscoredAction extends ScoredBase
 
 export class ScoredAction extends ScoredBase
 {
-    @JsonProperty('score')
     public score : number;
-
-    @JsonProperty({clazz: ActionMetaData, name: 'metadata'})
     public metadata : ActionMetaData;
 
     public constructor(init?:Partial<ScoredAction>)
@@ -79,13 +62,8 @@ export class ScoredAction extends ScoredBase
 
 export class ScoreResponse
 {
-    @JsonProperty({clazz: ScoredAction, name: 'scoredActions'})
     public scoredActions : ScoredAction[];
-
-    @JsonProperty({clazz: UnscoredAction, name: 'unscoredActions'})
     public unscoredActions : UnscoredAction[];
-
-    @JsonProperty({clazz: Metrics, name: 'metrics'})
     public metrics : Metrics;
 
     public constructor(init?:Partial<ScoreResponse>)

@@ -1,5 +1,3 @@
-import { JsonProperty } from 'json-typescript-mapper';
-
 export const ActionTypes =
 {
     TEXT : "TEXT",
@@ -11,10 +9,7 @@ export const ActionTypes =
 
 export class EntitySuggestion
 {
-    @JsonProperty('entityName')  
     public entityName : string;
-
-    @JsonProperty('entityId')  
     public entityId : string;
 
     public constructor(init?:Partial<EntitySuggestion>)
@@ -36,11 +31,11 @@ export class EntitySuggestion
 export class ActionMetaData
 {
     // Action Type
-    @JsonProperty('actionType')  
+  
     public actionType : string;
 
     // Entity Suggestion
-    @JsonProperty({clazz: EntitySuggestion, name: 'entitySuggestion'})  
+  
     public entitySuggestion : EntitySuggestion;
 
     public constructor(init?:Partial<ActionMetaData>)
@@ -60,31 +55,14 @@ export class ActionMetaData
 
 export class ActionBase
 {
-    @JsonProperty('actionId')
     public actionId : string;
-
-    @JsonProperty('payload')
     public payload : string;
-
-    @JsonProperty('isTerminal')
     public isTerminal : boolean;
-
-    @JsonProperty('requiredEntities')
     public requiredEntities : string[];
-
-    @JsonProperty('negativeEntities')
     public negativeEntities : string[];
-
-    @JsonProperty('version')
     public version : number;
-
-    @JsonProperty('packageCreationId')
     public packageCreationId : number;
-
-    @JsonProperty('packageDeletionId')
     public packageDeletionId : number;
-
-    @JsonProperty({clazz: ActionMetaData, name: 'metadata'})
     public metadata : ActionMetaData;
 
     public constructor(init?:Partial<ActionBase>)
@@ -104,7 +82,7 @@ export class ActionBase
 
 export class ActionList
 {
-    @JsonProperty('actions')  
+  
     public actions : ActionBase[];
 
     public constructor(init?:Partial<ActionList>)
@@ -116,7 +94,7 @@ export class ActionList
 
 export class ActionIdList
 {
-    @JsonProperty('actionIds')  
+  
     public actionIds : string[];
 
     public constructor(init?:Partial<ActionIdList>)

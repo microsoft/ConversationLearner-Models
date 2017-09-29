@@ -1,20 +1,9 @@
-import { JsonProperty } from 'json-typescript-mapper';
-
 export class Session
 {
-    @JsonProperty("sessionId")
     public sessionId : string;
-
-    @JsonProperty("createdDatetime")
     public createdDatetime : string;
-
-    @JsonProperty("lastQueryDatetime")
     public lastQueryDatetime : string;
-
-    @JsonProperty("lastQueryDatetime")
     public packageId : number;
-
-    @JsonProperty("saveToLog")
     public saveToLog : boolean;
 
     public constructor(init?:Partial<Session>)
@@ -30,7 +19,6 @@ export class Session
 
 export class SessionList
 {
-    @JsonProperty({clazz: Session, name: 'sessions'})
     public sessions : Session[];
 
     public constructor(init?:Partial<SessionList>)
