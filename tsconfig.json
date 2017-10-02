@@ -10,7 +10,6 @@
         "suppressImplicitAnyIndexErrors": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "importHelpers": true,
         "module": "commonjs",
         "target": "es5",
         "sourceMap": true,
