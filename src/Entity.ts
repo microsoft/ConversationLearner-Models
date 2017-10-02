@@ -18,10 +18,6 @@ export class EntityMetaData
 
     public constructor(init?:Partial<EntityMetaData>)
     {
-        this.isBucket = false;
-        this.isReversable = false;
-        this.negativeId = undefined;
-        this.positiveId = undefined;
         (<any>Object).assign(this, init);
     }
 
@@ -44,13 +40,6 @@ export class EntityBase {
 
     public constructor(init?:Partial<EntityBase>)
     {
-        this.entityId = undefined;
-        this.entityName = undefined;
-        this.entityType = undefined;
-        this.version = undefined;
-        this.packageCreationId = undefined;
-        this.packageDeletionId = undefined;
-        this.metadata = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -61,7 +50,6 @@ export class EntityList
 
     public constructor(init?:Partial<EntityList>)
     {
-        this.entities = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -72,7 +60,6 @@ export class EntityIdList
 
     public constructor(init?:Partial<EntityIdList>)
     {
-        this.entityIds = undefined;
         (<any>Object).assign(this, init);
     }
 }

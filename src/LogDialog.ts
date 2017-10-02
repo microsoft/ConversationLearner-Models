@@ -9,9 +9,7 @@ export class LogExtractorStep extends ExtractResponse
 
     public constructor(init?:Partial<LogExtractorStep>)
     {   
-        super();
-        this.stepBeginDatetime = undefined;
-        this.stepEndDatetime = undefined;
+        super(init);
         (<any>Object).assign(this, init);
     }
 }
@@ -27,12 +25,6 @@ export class LogScorerStep
 
     public constructor(init?:Partial<LogScorerStep>)
     {
-        this.input = undefined;
-        this.predictedAction = undefined;
-        this.predictionDetails = undefined;
-        this.stepBeginDatetime = undefined;
-        this.stepEndDatetime = undefined;
-        this.metrics = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -44,8 +36,6 @@ export class LogRound
 
     public constructor(init?:Partial<LogRound>)
     {
-        this.extractorStep = undefined;
-        this.scorerSteps = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -61,12 +51,6 @@ export class LogDialog
 
     public constructor(init?:Partial<LogDialog>)
     {
-        this.logDialogId = undefined;
-        this.dialogBeginDatetime = undefined;
-        this.dialogEndDatetime = undefined;
-        this.packageId = undefined;
-        this.metrics = undefined;
-        this.rounds = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -77,7 +61,6 @@ export class LogDialogList
 
     public constructor(init?:Partial<LogDialogList>)
     {
-        this.logDialogs = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -88,7 +71,6 @@ export class LogDialogIdList
 
     public constructor(init?:Partial<LogDialogIdList>)
     {
-        this.logDialogIds = undefined;
         (<any>Object).assign(this, init);
     }
 }

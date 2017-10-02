@@ -14,8 +14,6 @@ export class EntitySuggestion
 
     public constructor(init?:Partial<EntitySuggestion>)
     {
-        this.entityName = undefined;
-        this.entityId = undefined;
         (<any>Object).assign(this, init);
     }
 
@@ -31,17 +29,13 @@ export class EntitySuggestion
 export class ActionMetaData
 {
     // Action Type
-  
     public actionType : string;
 
     // Entity Suggestion
-  
     public entitySuggestion : EntitySuggestion;
 
     public constructor(init?:Partial<ActionMetaData>)
     {
-        this.actionType = undefined;
-        this.entitySuggestion = undefined;
         (<any>Object).assign(this, init);
     }
 
@@ -67,14 +61,6 @@ export class ActionBase
 
     public constructor(init?:Partial<ActionBase>)
     {
-        this.actionId = undefined;
-        this.payload = undefined;
-        this.isTerminal = undefined;
-        this.requiredEntities = undefined;
-        this.negativeEntities = undefined;
-        this.version = undefined;
-        this.packageCreationId = undefined;
-        this.packageDeletionId = undefined;
         this.metadata = new ActionMetaData();
         (<any>Object).assign(this, init);
     } 
@@ -87,7 +73,6 @@ export class ActionList
 
     public constructor(init?:Partial<ActionList>)
     {
-        this.actions = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -99,7 +84,6 @@ export class ActionIdList
 
     public constructor(init?:Partial<ActionIdList>)
     {
-        this.actionIds = undefined;
         (<any>Object).assign(this, init);
     }
 }

@@ -6,7 +6,6 @@ export class BotInfo
 
     public constructor(init?:Partial<BotInfo>)
     {
-        this.callbacks = undefined;
         (<any>Object).assign(this, init);
     } 
 }

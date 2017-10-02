@@ -8,11 +8,6 @@ export class Session
 
     public constructor(init?:Partial<Session>)
     {
-        this.sessionId = undefined;
-        this.createdDatetime = undefined;
-        this.lastQueryDatetime = undefined;
-        this.packageId = undefined;
-        this.saveToLog = undefined;
         (<any>Object).assign(this, init);
     } 
 }
@@ -23,7 +18,6 @@ export class SessionList
 
     public constructor(init?:Partial<SessionList>)
     {
-        this.sessions = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -34,7 +28,6 @@ export class SessionIdList
 
     public constructor(init?:Partial<SessionIdList>)
     {
-        this.sessionIds = undefined;
         (<any>Object).assign(this, init);
     }
 }

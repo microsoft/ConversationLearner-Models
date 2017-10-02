@@ -9,9 +9,6 @@ export class ScoreInput
 
     public constructor(init?:Partial<ScoreInput>)
     {
-        this.filledEntities = undefined;
-        this.context = undefined;
-        this.maskedActions = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -25,10 +22,6 @@ export class ScoredBase
 
     public constructor(init?:Partial<ScoredBase>)
     {
-        this.actionId = undefined;
-        this.payload = undefined;
-        this.isTerminal = undefined;
-        this.metadata = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -41,7 +34,6 @@ export class UnscoredAction extends ScoredBase
     public constructor(init?:Partial<UnscoredAction>)
     {
         super(init);
-        this.reason = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -54,8 +46,6 @@ export class ScoredAction extends ScoredBase
     public constructor(init?:Partial<ScoredAction>)
     {
         super(init);
-        this.score = undefined;
-        this.metadata = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -68,9 +58,6 @@ export class ScoreResponse
 
     public constructor(init?:Partial<ScoreResponse>)
     {
-        this.scoredActions = undefined;
-        this.unscoredActions = undefined;
-        this.metrics = undefined;
         (<any>Object).assign(this, init);
     }
 }

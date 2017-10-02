@@ -4,7 +4,6 @@ export class Metrics
 
     public constructor(init?:Partial<Metrics>)
     {
-        this.wallTime = undefined;
         (<any>Object).assign(this, init);
     }
 }

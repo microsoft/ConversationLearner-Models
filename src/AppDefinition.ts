@@ -8,8 +8,6 @@ export class AppDefinition
 
     public constructor(init?:Partial<AppDefinition>)
     {
-        this.entities = undefined;
-        this.actions = undefined;
         (<any>Object).assign(this, init);
     }
 }

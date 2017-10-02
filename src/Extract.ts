@@ -11,8 +11,6 @@ export class PredictedEntity extends LabeledEntity
     public constructor(init?:Partial<PredictedEntity>)
     {
         super(init);
-        this.score = undefined;
-        this.metadata = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -27,11 +25,6 @@ export class ExtractResponse
 
     public constructor(init?:Partial<ExtractResponse>)
     {
-        this.text = undefined;
-        this.predictedEntities = undefined;
-        this.metrics = undefined;
-        this.packageId = undefined;
-        this.definitions = undefined;
         (<any>Object).assign(this, init);
     }
 }

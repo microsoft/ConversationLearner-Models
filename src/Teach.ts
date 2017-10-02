@@ -7,10 +7,6 @@ export class Teach
 
     public constructor(init?:Partial<Teach>)
     {
-        this.teachId = undefined;
-        this.createdDatetime = undefined;
-        this.lastQueryDatetime = undefined;
-        this.packageId = undefined;
         (<any>Object).assign(this, init);
     } 
 }
@@ -23,9 +19,6 @@ export class TeachResponse
 
     public constructor(init?:Partial<TeachResponse>)
     {
-        this.packageId = undefined;
-        this.teachId = undefined;
-        this.trainDialogId = undefined;
         (<any>Object).assign(this, init);
     } 
 }
@@ -36,7 +29,6 @@ export class TeachList
 
     public constructor(init?:Partial<TeachList>)
     {
-        this.teaches = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -47,7 +39,6 @@ export class TeachIdList
 
     public constructor(init?:Partial<TeachIdList>)
     {
-        this.teachIds = undefined;
         (<any>Object).assign(this, init);
     }
 }

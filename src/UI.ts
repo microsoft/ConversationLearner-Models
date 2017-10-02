@@ -19,8 +19,6 @@ export class UIScoreInput
 
     public constructor(init?:Partial<UIScoreInput>)
     {
-        this.trainExtractorStep = undefined;
-        this.extractResponse = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -33,8 +31,6 @@ export class UIExtractResponse
 
     public constructor(init?:Partial<UIExtractResponse>)
     {
-        this.extractResponse = undefined;
-        this.memories = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -49,9 +45,6 @@ export class UIScoreResponse
 
     public constructor(init?:Partial<UIScoreResponse>)
     {
-        this.scoreResponse = undefined;
-        this.scoreInput = undefined;
-        this.memories = undefined;
         (<any>Object).assign(this, init);
     }
 }
@@ -64,8 +57,6 @@ export class UITrainScorerStep
 
     public constructor(init?:Partial<UITrainScorerStep>)
     {
-        this.trainScorerStep = undefined;
-        this.entities = undefined;
         (<any>Object).assign(this, init);
     }
 }
