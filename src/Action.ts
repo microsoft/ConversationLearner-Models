@@ -7,32 +7,10 @@ export const ActionTypes =
     CARD : "CARD"
 }
 
-export class EntitySuggestion
-{
-    public entityName : string;
-    public entityId : string;
-
-    public constructor(init?:Partial<EntitySuggestion>)
-    {
-        (<any>Object).assign(this, init);
-    }
-
-    public Equal(entitySuggestion : EntitySuggestion) : boolean
-    {
-        if (!entitySuggestion) return false;
-        if (this.entityName != entitySuggestion.entityName) return false;
-        if (this.entityId != entitySuggestion.entityId) return false;
-        return true;
-    }
-}
-
 export class ActionMetaData
 {
     // Action Type
     public actionType : string;
-
-    // Entity Suggestion
-    public entitySuggestion : EntitySuggestion;
 
     public constructor(init?:Partial<ActionMetaData>)
     {
@@ -41,9 +19,7 @@ export class ActionMetaData
 
     public Equal(metaData : ActionMetaData) : boolean
     {
-        if (this.actionType != metaData.actionType) return false;
-        if (!this.entitySuggestion && metaData.entitySuggestion) return false;
-        return this.entitySuggestion.Equal(metaData.entitySuggestion);
+        return (this.actionType == metaData.actionType);
     }
 }
 
@@ -54,6 +30,7 @@ export class ActionBase
     public isTerminal : boolean;
     public requiredEntities : string[];
     public negativeEntities : string[];
+    public suggestedEntity : string;
     public version : number;
     public packageCreationId : number;
     public packageDeletionId : number;

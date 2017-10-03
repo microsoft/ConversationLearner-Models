@@ -1,6 +1,6 @@
 {
   "name": "blis-models",
-  "version": "0.53.0",
+  "version": "0.54.0",
   "description": "Models for Blis",
   "main": "lib/BlisModels.js",
   "typings": "lib/BlisModels.d.ts",
@@ -14,7 +14,6 @@
   ],
   "scripts": {
     "build": "tsc",
-
     "clean": "rm -rf lib"
   },
   "author": "Microsoft",
