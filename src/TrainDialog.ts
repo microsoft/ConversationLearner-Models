@@ -20,7 +20,7 @@ export class LabeledEntity
 
 export class TextVariation
 {
-    public text : String;
+    public text : string;
 
     public labelEntities : LabeledEntity[];
 
