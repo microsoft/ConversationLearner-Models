@@ -1,3 +1,9 @@
+export enum DialogType {
+    TEACH = "teach",
+    TRAINDIALOG = "traindialog",
+    LOGDIALOG = "logdialog"
+}
+
 export class Session
 {
     public sessionId : string;
