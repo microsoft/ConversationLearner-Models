@@ -1,5 +1,10 @@
  import { ActionBase, ActionTypes } from './Action'
  import { ScoredAction } from './Score'
+ import { 
+    TextVariation, ExtractResponse,
+    PredictedEntity, LabeledEntity,
+    LogRound, TrainRound,
+    TrainExtractorStep, TrainScorerStep, LogScorerStep } from './BlisModels'
 
  export class ModelUtils  {
 
@@ -35,5 +40,114 @@
             return apiName;
         }
         return action.payload;
+    }
+
+    //====================================================================
+    // CONVERSION: LabeledEntity == PredictedEntity
+    //====================================================================
+    public static ToLabeledEntities(predictedEntities : PredictedEntity[]) : LabeledEntity[] {
+        let labeledEntities : LabeledEntity[] = [];
+        for (let predictedEntity of predictedEntities)
+        {
+            let labelEntity = new LabeledEntity({
+                startCharIndex: predictedEntity.startCharIndex,
+                endCharIndex: predictedEntity.endCharIndex,
+                entityId: predictedEntity.entityId,
+                entityName: predictedEntity.entityName,
+                entityText: predictedEntity.entityText
+            });
+            labeledEntities.push(labelEntity);
+        }
+        return labeledEntities;
+    }
+
+    public static ToPredictedEntities(labeledEntities : LabeledEntity[]) : PredictedEntity[] {
+        let predictedEntities : PredictedEntity[] = [];
+        for (let labeledEntity of labeledEntities)
+        {
+            let predictedEntity = new PredictedEntity({
+                startCharIndex: labeledEntity.startCharIndex,
+                endCharIndex: labeledEntity.endCharIndex,
+                entityId: labeledEntity.entityId,
+                entityName: labeledEntity.entityName,
+                entityText: labeledEntity.entityText
+            });
+            predictedEntities.push(predictedEntity);
+        }
+        return predictedEntities;
+    }
+
+    //====================================================================
+    // CONVERSION: ExtractResponse == TextVariation 
+    //====================================================================
+    public static ToTextVariation(extractResponse: ExtractResponse) : TextVariation {
+        let labeledEntities = this.ToLabeledEntities(extractResponse.predictedEntities);
+        let textVariation = new TextVariation({
+            text: extractResponse.text,
+            labelEntities: labeledEntities
+        });
+        return textVariation;
+    }
+
+    public static ToExtractResponses(textVariations: TextVariation[]) : ExtractResponse[] {
+        let extractResponses : ExtractResponse[] = [];
+        for (let textVariation of textVariations)
+        {
+            let predictedEntities = this.ToPredictedEntities(textVariation.labelEntities);
+            let extractResponse = new ExtractResponse({
+                text: textVariation.text,
+                predictedEntities: predictedEntities
+            });
+            extractResponses.push(extractResponse);
+        }
+        return extractResponses;
+    }
+
+    public static ToTextVariations(extractResponses: ExtractResponse[]) : TextVariation[] {
+        let textVariations : TextVariation[] = [];
+        for (let extractResponse of extractResponses)
+        {
+            let labelEntities = this.ToLabeledEntities(extractResponse.predictedEntities);
+            let textVariation = new TextVariation({
+                text: extractResponse.text,
+                labelEntities: labelEntities
+            });
+            textVariations.push(textVariation);
+        }
+        return textVariations;
+    }
+
+    //====================================================================
+    // CONVERSION: LogRoung == TrainRound
+    //====================================================================
+    public static ToTrainRound(logRound: LogRound): TrainRound {
+        return new TrainRound({
+            extractorStep: new TrainExtractorStep({
+                textVariations: [new TextVariation({
+                    // TODO: Might need to strictly convert to label entity
+                    labelEntities: logRound.extractorStep.predictedEntities,
+                    text: logRound.extractorStep.text
+                })],
+            }),
+            scorerSteps: logRound.scorerSteps.map(scorerStep => new TrainScorerStep({
+                input: scorerStep.input,
+                labelAction: scorerStep.predictedAction,
+                // TODO: What is the correct scoredAction to take?
+                // Perhaps find the scoredAction using id from predictedAction?
+                scoredAction: scorerStep.predictionDetails.scoredActions[0]
+            }))
+        })
+    }
+
+    //====================================================================
+    // CONVERSION: LogScorerStep == TrainScorerStep
+    //====================================================================
+    public static ToTrainScorerStep(logScorerStep: LogScorerStep): TrainScorerStep {
+        return new TrainScorerStep({
+            input: logScorerStep.input,
+            labelAction: logScorerStep.predictedAction,
+            // TODO: Check if this is correct?
+            scoredAction: logScorerStep.predictionDetails.scoredActions[0]
+        })
     }
 }    

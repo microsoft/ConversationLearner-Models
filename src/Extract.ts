@@ -3,12 +3,6 @@ import { EntityMetaData } from './Entity'
 import { Metrics } from './Metrics'
 import { AppDefinition } from './AppDefinition';
 
-export enum ExtractType {
-    TEACH = "teach",
-    TRAINDIALOG = "traindialog",
-    LOGDIALOG = "logdialog"
-}
-
 export class PredictedEntity extends LabeledEntity
 {
     public score : number;
