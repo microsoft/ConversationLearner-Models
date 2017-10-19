@@ -45,33 +45,48 @@
     //====================================================================
     // CONVERSION: LabeledEntity == PredictedEntity
     //====================================================================
+    public static ToLabeledEntity(predictedEntity : PredictedEntity) : LabeledEntity {
+
+        let labelEntity = new LabeledEntity({
+            startCharIndex: predictedEntity.startCharIndex,
+            endCharIndex: predictedEntity.endCharIndex,
+            entityId: predictedEntity.entityId,
+            entityName: predictedEntity.entityName,
+            entityText: predictedEntity.entityText
+        });
+
+        return labelEntity;
+    }
+
     public static ToLabeledEntities(predictedEntities : PredictedEntity[]) : LabeledEntity[] {
+
         let labeledEntities : LabeledEntity[] = [];
         for (let predictedEntity of predictedEntities)
         {
-            let labelEntity = new LabeledEntity({
-                startCharIndex: predictedEntity.startCharIndex,
-                endCharIndex: predictedEntity.endCharIndex,
-                entityId: predictedEntity.entityId,
-                entityName: predictedEntity.entityName,
-                entityText: predictedEntity.entityText
-            });
+            let labelEntity = ModelUtils.ToLabeledEntity(predictedEntity);
             labeledEntities.push(labelEntity);
         }
         return labeledEntities;
     }
 
-    public static ToPredictedEntities(labeledEntities : LabeledEntity[]) : PredictedEntity[] {
-        let predictedEntities : PredictedEntity[] = [];
-        for (let labeledEntity of labeledEntities)
-        {
-            let predictedEntity = new PredictedEntity({
+    public static ToPredictedEntity(labeledEntity : LabeledEntity) : PredictedEntity {
+
+        let predictedEntity = new PredictedEntity({
                 startCharIndex: labeledEntity.startCharIndex,
                 endCharIndex: labeledEntity.endCharIndex,
                 entityId: labeledEntity.entityId,
                 entityName: labeledEntity.entityName,
                 entityText: labeledEntity.entityText
             });
+        return predictedEntity;
+    }
+
+    public static ToPredictedEntities(labeledEntities : LabeledEntity[]) : PredictedEntity[] {
+        
+        let predictedEntities : PredictedEntity[] = [];
+        for (let labeledEntity of labeledEntities)
+        {
+            let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
             predictedEntities.push(predictedEntity);
         }
         return predictedEntities;
@@ -124,17 +139,13 @@
         return new TrainRound({
             extractorStep: new TrainExtractorStep({
                 textVariations: [new TextVariation({
-                    // TODO: Might need to strictly convert to label entity
-                    labelEntities: logRound.extractorStep.predictedEntities,
+                    labelEntities: ModelUtils.ToLabeledEntities(logRound.extractorStep.predictedEntities),
                     text: logRound.extractorStep.text
                 })],
             }),
             scorerSteps: logRound.scorerSteps.map(scorerStep => new TrainScorerStep({
                 input: scorerStep.input,
                 labelAction: scorerStep.predictedAction,
-                // TODO: What is the correct scoredAction to take?
-                // Perhaps find the scoredAction using id from predictedAction?
-                scoredAction: scorerStep.predictionDetails.scoredActions[0]
             }))
         })
     }
@@ -146,7 +157,7 @@
         return new TrainScorerStep({
             input: logScorerStep.input,
             labelAction: logScorerStep.predictedAction,
-            // TODO: Check if this is correct?
+            // TODO: Need to populate correct scored action based on label action
             scoredAction: logScorerStep.predictionDetails.scoredActions[0]
         })
     }
