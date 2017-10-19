@@ -3,7 +3,7 @@
  import { 
     TextVariation, ExtractResponse,
     PredictedEntity, LabeledEntity,
-    LogRound, TrainRound,
+    LogRound, TrainRound, LogDialog, TrainDialog,
     TrainExtractorStep, TrainScorerStep, LogScorerStep } from './BlisModels'
 
  export class ModelUtils  {
@@ -133,6 +133,23 @@
     }
 
     //====================================================================
+    // CONVERSION: LogDialog == TrainDialog
+    //====================================================================
+    public static ToTrainDialog(logDialog: LogDialog): TrainDialog {
+
+        let trainRounds : TrainRound[] = [];
+        for (let logRound of logDialog.rounds)
+        {
+            let trainRound = ModelUtils.ToTrainRound(logRound);
+            trainRounds.push(trainRound);
+        }
+
+        return new TrainDialog({
+            rounds: trainRounds
+        })
+    }
+
+    //====================================================================
     // CONVERSION: LogRoung == TrainRound
     //====================================================================
     public static ToTrainRound(logRound: LogRound): TrainRound {
@@ -157,8 +174,6 @@
         return new TrainScorerStep({
             input: logScorerStep.input,
             labelAction: logScorerStep.predictedAction,
-            // TODO: Need to populate correct scored action based on label action
-            scoredAction: logScorerStep.predictionDetails.scoredActions[0]
         })
     }
 }    
