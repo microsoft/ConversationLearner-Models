@@ -12,6 +12,10 @@ export class LabeledEntity
 
     public entityText : string;
 
+    public resolution: {};
+
+    public builtinType: string;
+
     public constructor(init?:Partial<LabeledEntity>)
     {
         (<any>Object).assign(this, init);
