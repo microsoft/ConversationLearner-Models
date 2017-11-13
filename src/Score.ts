@@ -1,9 +1,10 @@
 import { Metrics } from './Metrics';
 import { ActionMetaData } from './Action';
+import { FilledEntity } from './FilledEntity';
 
 export class ScoreInput
 {
-    public filledEntities : string[];
+    public filledEntities : FilledEntity[];
     public context : {};
     public maskedActions : string[];
 
@@ -25,7 +26,6 @@ export class ScoredBase
         (<any>Object).assign(this, init);
     }
 }
-
 
 export class UnscoredAction extends ScoredBase
 {

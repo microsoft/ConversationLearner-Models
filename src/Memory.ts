@@ -1,7 +1,8 @@
 export class MemoryValue {
 
-    public value : string = null;
-    public type : string = null;
+    public userText: string = null;
+    public displayText: string = null;
+    public builtinType : string = null;
     public resolution: {} = {};
 
     public constructor(init?:Partial<MemoryValue>)
