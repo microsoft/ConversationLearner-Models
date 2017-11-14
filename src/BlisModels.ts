@@ -4,6 +4,7 @@ export * from './BlisApp';
 export * from './BotInfo';
 export * from './Entity';
 export * from './Extract';
+export * from './FilledEntity'
 export * from './KeyGen';
 export * from './LogDialog';
 export * from './Metrics';
