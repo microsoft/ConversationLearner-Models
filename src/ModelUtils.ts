@@ -52,7 +52,9 @@
             endCharIndex: predictedEntity.endCharIndex,
             entityId: predictedEntity.entityId,
             entityName: predictedEntity.entityName,
-            entityText: predictedEntity.entityText
+            entityText: predictedEntity.entityText,
+            builtinType: predictedEntity.builtinType,
+            resolution: predictedEntity.resolution
         });
 
         return labelEntity;
@@ -76,7 +78,9 @@
                 endCharIndex: labeledEntity.endCharIndex,
                 entityId: labeledEntity.entityId,
                 entityName: labeledEntity.entityName,
-                entityText: labeledEntity.entityText
+                entityText: labeledEntity.entityText,
+                builtinType: labeledEntity.builtinType,
+                resolution: labeledEntity.resolution
             });
         return predictedEntity;
     }
