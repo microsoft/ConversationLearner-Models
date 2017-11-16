@@ -41,3 +41,20 @@ export class BlisAppIdList
         (<any>Object).assign(this, init);
     }
 }
+
+export enum TrainingStatusCode {
+    Completed = "completed",
+    Failed = "failed"
+}
+
+export interface TrainingStatusSuccess {
+    trainingStatus: TrainingStatusCode.Completed
+    sourcePackageId: number
+}
+
+export interface TrainingStatusFailed {
+    trainingStatus: TrainingStatusCode.Failed
+    trainingFailureMessage: string
+}
+
+export type TrainingStatus = TrainingStatusSuccess | TrainingStatusFailed
