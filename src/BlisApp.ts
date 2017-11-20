@@ -15,6 +15,9 @@ export class BlisAppBase
     public luisKey : string;
     public locale : string;
     public metadata : BlisAppMetaData;
+    trainingFailureMessage: string
+    trainingStatus: TrainingStatusCode
+    datetime: Date
 
     public constructor(init?:Partial<BlisAppBase>)
     {
@@ -43,18 +46,13 @@ export class BlisAppIdList
 }
 
 export enum TrainingStatusCode {
+    Queued = "queued",
+    Running = "running",
     Completed = "completed",
     Failed = "failed"
 }
 
-export interface TrainingStatusSuccess {
-    trainingStatus: TrainingStatusCode.Completed
-    sourcePackageId: number
+export interface TrainingStatus {
+    trainingStatus: TrainingStatusCode
+    trainingFailureMessage: string | null | undefined
 }
-
-export interface TrainingStatusFailed {
-    trainingStatus: TrainingStatusCode.Failed
-    trainingFailureMessage: string
-}
-
-export type TrainingStatus = TrainingStatusSuccess | TrainingStatusFailed
