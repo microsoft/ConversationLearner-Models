@@ -1,6 +1,6 @@
 {
   "name": "blis-models",
-  "version": "0.81.0",
+  "version": "0.82.0",
   "description": "Models for Blis",
   "main": "lib/BlisModels.js",
   "typings": "lib/BlisModels.d.ts",

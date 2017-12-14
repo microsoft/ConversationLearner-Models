@@ -15,7 +15,6 @@
         "sourceMap": true,
         "outDir": "lib",
         "rootDir" : "src",
-        "watch" : true,
         "declaration": true,
         "lib" : ["es2016", "dom"]
     },
