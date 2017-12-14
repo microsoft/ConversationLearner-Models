@@ -1,4 +1,5 @@
 import { ScoreInput, ScoredAction } from './Score';
+import { AppDefinition } from './AppDefinition';
 
 export class LabeledEntity
 {
@@ -101,6 +102,8 @@ export class TrainResponse
 export class TrainDialogList
 {
     public trainDialogs : TrainDialog[];
+
+    public definition : AppDefinition;
 
     public constructor(init?:Partial<TrainDialogList>)
     {
