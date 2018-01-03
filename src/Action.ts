@@ -58,23 +58,7 @@ export class ActionBase
         }
         return action.payload;
     }
-/*LARS REMOVE
-    public static GetArguments(action : ActionBase | ScoredAction) : string[]
-    {
-        if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
-            return null;
-        }
-        if (action.metadata.actionType !== ActionTypes.TEXT) {
-            let actionPayload = JSON.parse(action.payload) as ActionPayload;
-            let argString: string[] = [];
-            for (let actionArgument of actionPayload.arguments) {
-                argString.push(`${actionArgument.parameter}: ${actionArgument.value}`);
-            }
-            return argString;
-        }
-        return null;
-    }
-*/
+
     /** Return arguments for an action */
     public static GetActionArguments(action : ActionBase | ScoredAction) : ActionArgument[]
     {
@@ -84,23 +68,6 @@ export class ActionBase
         if (action.metadata.actionType !== ActionTypes.TEXT) {
             let actionPayload = JSON.parse(action.payload) as ActionPayload;
             return actionPayload.arguments;
-        }
-        return null;
-    }
-
-    /** Return arguments for an action */
-    public static GetArgumentValues(action : ActionBase | ScoredAction) : string[]
-    {
-        if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
-            return null;
-        }
-        if (action.metadata.actionType !== ActionTypes.TEXT) {
-            let actionPayload = JSON.parse(action.payload) as ActionPayload;
-            let argString: string[] = [];
-            for (let actionArgument of actionPayload.arguments) {
-                argString.push(actionArgument.value);
-            }
-            return argString;
         }
         return null;
     }
