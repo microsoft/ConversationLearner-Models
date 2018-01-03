@@ -1,5 +1,6 @@
 import { ScoredAction } from './Score';
 import { ActionPayload } from './ActionPayload';
+import { ActionArgument } from './BlisModels';
 
 export const ActionTypes =
 {
@@ -57,8 +58,7 @@ export class ActionBase
         }
         return action.payload;
     }
-
-    /** Return arguments for an action */
+/*LARS REMOVE
     public static GetArguments(action : ActionBase | ScoredAction) : string[]
     {
         if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
@@ -71,6 +71,19 @@ export class ActionBase
                 argString.push(`${actionArgument.parameter}: ${actionArgument.value}`);
             }
             return argString;
+        }
+        return null;
+    }
+*/
+    /** Return arguments for an action */
+    public static GetActionArguments(action : ActionBase | ScoredAction) : ActionArgument[]
+    {
+        if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
+            return null;
+        }
+        if (action.metadata.actionType !== ActionTypes.TEXT) {
+            let actionPayload = JSON.parse(action.payload) as ActionPayload;
+            return actionPayload.arguments;
         }
         return null;
     }

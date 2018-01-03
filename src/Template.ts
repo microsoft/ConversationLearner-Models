@@ -7,6 +7,8 @@ export class Template
 
     public body? : string;
 
+    public validationError: string;
+
     public constructor(init?:Partial<Template>)
     {
         (<any>Object).assign(this, init);

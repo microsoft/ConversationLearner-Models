@@ -1,6 +1,7 @@
 export class ActionPayload
 {
     public payload: string;
+
     public arguments: ActionArgument[];
 
     public static GetArguments(actionPayload: ActionPayload) : string[] {
