@@ -1,6 +1,4 @@
- import { ActionBase, ActionTypes } from './Action'
- import { ScoredAction } from './Score'
- import { 
+import { 
     TextVariation, ExtractResponse,
     PredictedEntity, LabeledEntity,
     LogRound, TrainRound, LogDialog, TrainDialog,
@@ -20,26 +18,6 @@
             return remaining;
         }
         return this.RemoveWords(remaining, numWords); 
-    }
-
-    /** Return arguments for an action */
-    public static GetArguments(action : ActionBase | ScoredAction) : string[]
-    {
-        if (action.metadata && action.metadata.actionType != ActionTypes.TEXT) {
-            let argString = this.RemoveWords(action.payload, 1);
-            return argString.split(',');
-        }
-        return null;
-    }
-
-    /** Return arguments for an action */
-    public static GetPrimaryPayload(action : ActionBase | ScoredAction) : string
-    {
-        if (action.metadata && action.metadata.actionType != ActionTypes.TEXT) {
-            let [apiName] = action.payload.split(' ');
-            return apiName;
-        }
-        return action.payload;
     }
 
     //====================================================================

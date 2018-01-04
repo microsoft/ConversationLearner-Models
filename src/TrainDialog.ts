@@ -1,4 +1,10 @@
 import { ScoreInput, ScoredAction } from './Score';
+import { AppDefinition } from './AppDefinition';
+
+export enum SenderType {
+    User = 0,
+    Bot = 1
+}
 
 export class LabeledEntity
 {
@@ -101,6 +107,8 @@ export class TrainResponse
 export class TrainDialogList
 {
     public trainDialogs : TrainDialog[];
+
+    public definition : AppDefinition;
 
     public constructor(init?:Partial<TrainDialogList>)
     {
