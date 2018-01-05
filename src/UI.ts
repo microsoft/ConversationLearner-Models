@@ -2,7 +2,8 @@ import { Memory } from './Memory';
 import { ScoreInput, ScoreResponse } from './Score';
 import { TrainExtractorStep, TrainScorerStep } from './TrainDialog';
 import { EntityBase } from './Entity'
-import { ExtractResponse, TeachResponse } from './BlisModels'
+import { ExtractResponse } from './Extract'
+import { TeachResponse } from './Teach'
 
 export enum ScoreReason 
 {

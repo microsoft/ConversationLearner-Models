@@ -1,6 +1,5 @@
 import { ScoredAction } from './Score';
-import { ActionPayload } from './ActionPayload';
-import { ActionArgument } from './BlisModels';
+import { ActionPayload, ActionArgument } from './ActionPayload';
 
 export const ActionTypes =
 {

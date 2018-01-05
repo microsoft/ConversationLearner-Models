@@ -1,9 +1,9 @@
 {
   "name": "blis-models",
-  "version": "0.100.0",
+  "version": "0.100.1",
   "description": "Models for Blis",
-  "main": "lib/BlisModels.js",
-  "typings": "lib/BlisModels.d.ts",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "keywords": [
     "Microsoft",
     "BLIS",
@@ -14,13 +14,14 @@
   ],
   "scripts": {
     "build": "tsc",
-    "clean": "rm -rf lib"
+    "clean": "rm -rf lib",
+    "tsc": "tsc"
   },
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "typescript": "^2.1.5"
+    "typescript": "^2.6.2"
   },
   "files": [
     "lib"

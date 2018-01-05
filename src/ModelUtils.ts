@@ -1,12 +1,8 @@
-import { 
-    TextVariation, ExtractResponse,
-    PredictedEntity, LabeledEntity,
-    LogRound, TrainRound, LogDialog, TrainDialog,
-    TrainExtractorStep, TrainScorerStep, LogScorerStep } from './BlisModels'
+import { ExtractResponse, PredictedEntity } from './Extract'
+import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, LabeledEntity } from './TrainDialog'
+import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
 
- export class ModelUtils  {
-
-
+export class ModelUtils  {
     /** Remove n words from start of string */
     public static RemoveWords(text : string, numWords : number) : string 
     {
