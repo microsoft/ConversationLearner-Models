@@ -1,6 +1,11 @@
 import { ScoreInput, ScoredAction } from './Score';
 import { AppDefinition } from './AppDefinition';
 
+export enum SenderType {
+    User = 0,
+    Bot = 1
+}
+
 export class LabeledEntity
 {
     public startCharIndex : number;
