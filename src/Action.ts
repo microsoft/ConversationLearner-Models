@@ -1,9 +1,11 @@
+import { ScoredAction } from './Score';
+import { ActionPayload, ActionArgument } from './ActionPayload';
+
 export const ActionTypes =
 {
     TEXT : "TEXT",
     API_LOCAL : "API_LOCAL",
-    API_AZURE : "API_AZURE",
-    INTENT : "INTENT",
+    // API_AZURE : "API_AZURE", TODO
     CARD : "CARD"
 }
 
@@ -41,6 +43,33 @@ export class ActionBase
         this.metadata = new ActionMetaData();
         (<any>Object).assign(this, init);
     } 
+
+
+    /** Return payload for an action */
+    public static GetPayload(action : ActionBase | ScoredAction) : string
+    {
+        if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
+            return action.payload;
+        }
+        if (action.metadata.actionType !== ActionTypes.TEXT) {
+            let actionPayload = JSON.parse(action.payload) as ActionPayload;
+            return actionPayload.payload;
+        }
+        return action.payload;
+    }
+
+    /** Return arguments for an action */
+    public static GetActionArguments(action : ActionBase | ScoredAction) : ActionArgument[]
+    {
+        if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
+            return null;
+        }
+        if (action.metadata.actionType !== ActionTypes.TEXT) {
+            let actionPayload = JSON.parse(action.payload) as ActionPayload;
+            return actionPayload.arguments;
+        }
+        return null;
+    }
 }
 
 export class ActionList

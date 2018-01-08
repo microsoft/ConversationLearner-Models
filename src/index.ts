@@ -1,7 +1,9 @@
 export * from './Action';
+export * from './ActionPayload';
 export * from './AppDefinition';
 export * from './BlisApp';
 export * from './BotInfo';
+export * from './CallbackAPI';
 export * from './Entity';
 export * from './Extract';
 export * from './FilledEntity'
@@ -13,6 +15,7 @@ export * from './ModelUtils';
 export * from './Score';
 export * from './Session';
 export * from './Teach';
+export * from './Template';
 export * from './TrainDialog';
 export * from './UserInput';
 export * from './UI';
