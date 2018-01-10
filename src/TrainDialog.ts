@@ -125,3 +125,13 @@ export class TrainDialogIdList
         (<any>Object).assign(this, init);
     }
 }
+
+export class ContextDialog
+{
+    public contextDialog : TrainRound[];
+
+    public constructor(init?:Partial<ContextDialog>)
+    {
+        (<any>Object).assign(this, init);
+    }
+}

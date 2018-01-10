@@ -1,6 +1,9 @@
 import { ExtractResponse, PredictedEntity } from './Extract'
+import { Teach, TeachResponse } from './Teach'
 import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, LabeledEntity } from './TrainDialog'
 import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
+import { EntityList } from './Entity'
+import { ContextDialog } from './index';
 
 export class ModelUtils  {
     /** Remove n words from start of string */
@@ -59,12 +62,19 @@ export class ModelUtils  {
         return predictedEntity;
     }
 
-    public static ToPredictedEntities(labeledEntities : LabeledEntity[]) : PredictedEntity[] {
+    public static ToPredictedEntities(labeledEntities : LabeledEntity[], entityList: EntityList = null) : PredictedEntity[] {
         
         let predictedEntities : PredictedEntity[] = [];
         for (let labeledEntity of labeledEntities)
         {
             let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
+            if (!predictedEntity.entityName && entityList) {
+                let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
+                if (entity) {
+                    predictedEntity.entityName = entity.entityName; 
+                    predictedEntity.metadata = entity.metadata;
+                }
+            }
             predictedEntities.push(predictedEntity);
         }
         return predictedEntities;
@@ -153,5 +163,26 @@ export class ModelUtils  {
             input: logScorerStep.input,
             labelAction: logScorerStep.predictedAction,
         })
+    }
+
+    //====================================================================
+    // CONVERSION: TrainDialog == ContextDialog 
+    //====================================================================
+    public static ToContextDialog(trainDialog: TrainDialog) : ContextDialog {
+        let contextDialog = new ContextDialog({
+            contextDialog: trainDialog.rounds
+        });
+        return contextDialog;
+    }
+
+    //====================================================================
+    // CONVERSION: TeachResponse == Teach 
+    //====================================================================
+    public static ToTeach(teachResponse: TeachResponse) : Teach {
+        let teach = new Teach({
+            teachId: teachResponse.teachId,
+            trainDialogId: teachResponse.trainDialogId
+        });
+        return teach;
     }
 }    
