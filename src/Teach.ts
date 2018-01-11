@@ -1,6 +1,9 @@
+import { Memory } from './Memory'
+
 export class Teach
 {
     public teachId : string;
+    public trainDialogId: string;
     public createdDatetime : string;
     public lastQueryDatetime : string;
     public packageId : number;
@@ -41,4 +44,16 @@ export class TeachIdList
     {
         (<any>Object).assign(this, init);
     }
+}
+
+export class TeachWithHistory
+{
+    public teach : Teach;
+    public history: any[];
+    public memories: Memory[];
+
+    public constructor(init?:Partial<TeachWithHistory>)
+    {
+        (<any>Object).assign(this, init);
+    } 
 }
