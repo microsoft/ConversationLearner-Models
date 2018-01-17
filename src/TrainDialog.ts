@@ -86,6 +86,8 @@ export class TrainDialog
     public packageDeletionId : number;
     public rounds : TrainRound[];
 
+    public definitions? : AppDefinition;
+
     public constructor(init?:Partial<TrainDialog>)
     {
         (<any>Object).assign(this, init);
@@ -108,7 +110,7 @@ export class TrainDialogList
 {
     public trainDialogs : TrainDialog[];
 
-    public definition : AppDefinition;
+    public definitions? : AppDefinition;
 
     public constructor(init?:Partial<TrainDialogList>)
     {
