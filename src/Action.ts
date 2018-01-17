@@ -44,12 +44,24 @@ export class ActionBase
         (<any>Object).assign(this, init);
     } 
 
-
     /** Return payload for an action */
     public static GetPayload(action : ActionBase | ScoredAction) : string
     {
-        if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
-            return action.payload;
+        if (!action.metadata || action.metadata.actionType === ActionTypes.TEXT) {
+            /**
+             * For backwards compatibility check if payload is of new TextPayload type
+             * Ideally we would implement schema refactor:
+             * 1. Move action type to be toplevel property
+             * 2. Make payloads discriminated unions (E.g. After checking the action.type, flow control knows the type of the payload property)
+             * This removes the need for teh GetPayload function and GetArguments which are brittle coding patterns.
+             */
+            try {
+                const textPayload = JSON.parse(action.payload) as TextPayload
+                return textPayload.text
+            }
+            catch {
+                return action.payload
+            }
         }
         if (action.metadata.actionType !== ActionTypes.TEXT) {
             let actionPayload = JSON.parse(action.payload) as ActionPayload;
@@ -92,4 +104,9 @@ export class ActionIdList
     {
         (<any>Object).assign(this, init);
     }
+}
+
+export interface TextPayload {
+    text: string
+    json: any
 }
