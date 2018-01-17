@@ -2,8 +2,9 @@ import { ExtractResponse, PredictedEntity } from './Extract'
 import { Teach, TeachResponse } from './Teach'
 import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, LabeledEntity } from './TrainDialog'
 import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
-import { EntityList } from './Entity'
-import { ContextDialog } from './index';
+import { EntityList, EntityBase } from './Entity'
+import { ActionBase } from './Action'
+import { ContextDialog, AppDefinition } from './index';
 
 export class ModelUtils  {
     /** Remove n words from start of string */
@@ -123,7 +124,7 @@ export class ModelUtils  {
     //====================================================================
     // CONVERSION: LogDialog == TrainDialog
     //====================================================================
-    public static ToTrainDialog(logDialog: LogDialog): TrainDialog {
+    public static ToTrainDialog(logDialog: LogDialog, actions: ActionBase[] = null, entities: EntityBase[] = null): TrainDialog {
 
         let trainRounds : TrainRound[] = [];
         for (let logRound of logDialog.rounds)
@@ -132,8 +133,16 @@ export class ModelUtils  {
             trainRounds.push(trainRound);
         }
 
+        let appDefinition = null;
+        if (entities != null && actions != null) {
+            appDefinition = new AppDefinition({
+                entities: entities,
+                actions: actions
+            })
+        }
         return new TrainDialog({
-            rounds: trainRounds
+            rounds: trainRounds,
+            definitions: appDefinition
         })
     }
 
