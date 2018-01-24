@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "prepublishOnly": "tsc"
   },
   "author": "Microsoft",
   "license": "MIT",
