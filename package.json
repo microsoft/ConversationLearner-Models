@@ -18,15 +18,23 @@
     "tsc": "tsc",
     "prepublishOnly": "tsc",
     "pretest": "tsc",
-    "test": "echo \"Error: no test specified\""
+    "test": "jest"
   },
   "author": "Microsoft",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@types/jest": "^22.1.0"
+  },
   "devDependencies": {
+    "jest": "^22.1.4",
     "typescript": "^2.6.2"
   },
   "files": [
     "lib"
-  ]
+  ],
+  "jest": {
+    "testMatch": [
+      "**/lib/**/?(*.)(spec|test).js?(x)"
+    ]
+  }
 }
