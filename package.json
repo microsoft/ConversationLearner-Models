@@ -1,6 +1,6 @@
 {
   "name": "blis-models",
-  "version": "0.110.0",
+  "version": "0.111.0",
   "description": "Models for Blis",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf lib",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "prepublishOnly": "tsc"
   },
   "author": "Microsoft",
   "license": "MIT",
