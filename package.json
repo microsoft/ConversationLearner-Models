@@ -16,15 +16,25 @@
     "build": "tsc",
     "clean": "rm -rf lib",
     "tsc": "tsc",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "pretest": "tsc",
+    "test": "jest"
   },
   "author": "Microsoft",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@types/jest": "^22.1.0"
+  },
   "devDependencies": {
+    "jest": "^22.1.4",
     "typescript": "^2.6.2"
   },
   "files": [
     "lib"
-  ]
+  ],
+  "jest": {
+    "testMatch": [
+      "**/lib/**/?(*.)(spec|test).js?(x)"
+    ]
+  }
 }
