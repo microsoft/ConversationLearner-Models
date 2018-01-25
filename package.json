@@ -16,7 +16,9 @@
     "build": "tsc",
     "clean": "rm -rf lib",
     "tsc": "tsc",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "pretest": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Microsoft",
   "license": "MIT",
