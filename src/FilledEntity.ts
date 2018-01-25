@@ -11,6 +11,29 @@ export class FilledEntity {
     {
         (<any>Object).assign(this, init);
     }
+
+    public static EntityValueAsString(fe: FilledEntity) : string
+    {
+        // Print out list in friendly manner
+        let group = "";
+        for (let key in fe.values)
+        {
+            let index = +key;
+            let prefix = "";
+            if (fe.values.length != 1 && index == fe.values.length-1)
+            {
+                prefix = " and ";
+            }
+            else if (index != 0)
+            {
+                prefix = ", ";
+            }
+            let value = fe.values[key];
+            let text = value.displayText ? value.displayText : value.userText;
+            group += `${prefix}${text}`;
+        }
+        return group;  
+    }
 }
 
 export class FilledEntityMap {
@@ -38,24 +61,7 @@ export class FilledEntityMap {
         }
         
         // Print out list in friendly manner
-        let group = "";
-        for (let key in this.map[entityName].values)
-        {
-            let index = +key;
-            let prefix = "";
-            if (this.map[entityName].values.length != 1 && index == this.map[entityName].values.length-1)
-            {
-                prefix = " and ";
-            }
-            else if (index != 0)
-            {
-                prefix = ", ";
-            }
-            let value = this.map[entityName].values[key];
-            let text = value.displayText ? value.displayText : value.userText;
-            group += `${prefix}${text}`;
-        }
-        return group;  
+        return FilledEntity.EntityValueAsString(this.map[entityName]);  
     }
 
     public Split(action : string) : string[] {
