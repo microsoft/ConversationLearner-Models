@@ -69,7 +69,7 @@ export class ModelUtils  {
         for (let labeledEntity of labeledEntities)
         {
             let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
-            if (!predictedEntity.entityName && entityList) {
+            if ((!predictedEntity.entityName || !predictedEntity.metadata) && entityList) {
                 let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
                 if (entity) {
                     predictedEntity.entityName = entity.entityName; 
