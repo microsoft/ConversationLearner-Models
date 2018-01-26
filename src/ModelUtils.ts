@@ -63,7 +63,7 @@ export class ModelUtils  {
         return predictedEntity;
     }
 
-    public static ToPredictedEntities(labeledEntities : LabeledEntity[], entityList: EntityList = null) : PredictedEntity[] {
+    public static ToPredictedEntities(labeledEntities : LabeledEntity[], entityList: EntityList | null = null) : PredictedEntity[] {
         
         let predictedEntities : PredictedEntity[] = [];
         for (let labeledEntity of labeledEntities)
@@ -124,7 +124,7 @@ export class ModelUtils  {
     //====================================================================
     // CONVERSION: LogDialog == TrainDialog
     //====================================================================
-    public static ToTrainDialog(logDialog: LogDialog, actions: ActionBase[] = null, entities: EntityBase[] = null): TrainDialog {
+    public static ToTrainDialog(logDialog: LogDialog, actions: ActionBase[] | null = null, entities: EntityBase[] | null = null): TrainDialog {
 
         let trainRounds : TrainRound[] = [];
         for (let logRound of logDialog.rounds)

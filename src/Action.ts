@@ -71,7 +71,7 @@ export class ActionBase
     }
 
     /** Return arguments for an action */
-    public static GetActionArguments(action : ActionBase | ScoredAction) : ActionArgument[]
+    public static GetActionArguments(action : ActionBase | ScoredAction) : ActionArgument[] | null
     {
         if (!action.metadata || action.metadata.actionType == ActionTypes.TEXT) {
             return null;
