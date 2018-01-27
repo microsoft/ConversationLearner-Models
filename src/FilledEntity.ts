@@ -4,7 +4,7 @@ const SUBSTITUTE_PREFIX = "$";
 
 export class FilledEntity {
 
-    public entityId : string = null;
+    public entityId : string | null = null;
     public values : MemoryValue[] = [];
 
     public constructor(init?:Partial<FilledEntity>)
@@ -45,7 +45,7 @@ export class FilledEntityMap {
         (<any>Object).assign(this, init);
     }
 
-    public EntityValueAsList(entityName : string) : string[]
+    public EntityValueAsList(entityName : string) : (string | null)[]
     {
         if (!this.map[entityName]) {
             return [];
@@ -54,7 +54,7 @@ export class FilledEntityMap {
         return this.map[entityName].values.map(v => v.userText);  
     }
 
-    public EntityValueAsString(entityName : string) : string
+    public EntityValueAsString(entityName : string) : string | null
     {
         if (!this.map[entityName]) {
             return null;

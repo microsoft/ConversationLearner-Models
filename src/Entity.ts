@@ -11,10 +11,10 @@ export class EntityMetaData
     public isReversable : boolean;
 
     /** If Negatable, the Id of negative entity associates with this Entity */
-    public negativeId : string;
+    public negativeId : string | null;
 
     /** If a Negative, Id of positive entity associated with this Entity */
-    public positiveId : string;
+    public positiveId : string | null;
 
     public constructor(init?:Partial<EntityMetaData>)
     {

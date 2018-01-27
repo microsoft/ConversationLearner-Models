@@ -16,15 +16,29 @@
     "build": "tsc",
     "clean": "rm -rf lib",
     "tsc": "tsc",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "pretest": "tsc",
+    "test": "jest"
   },
   "author": "Microsoft",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
+    "@types/jest": "^22.1.0",
+    "jest": "^22.1.4",
     "typescript": "^2.6.2"
   },
   "files": [
     "lib"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/blis-models"
+  },
+  "jest": {
+    "testMatch": [
+      "**/lib/**/?(*.)(spec|test).js?(x)"
+    ]
+  }
 }
