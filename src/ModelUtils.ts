@@ -181,6 +181,17 @@ export class ModelUtils  {
         let contextDialog = new ContextDialog({
             contextDialog: trainDialog.rounds
         });
+
+        // Strip out "entityType" (*sigh*)
+        for (let round of contextDialog.contextDialog)
+        {
+            for (let textVariation of round.extractorStep.textVariations)
+            {
+                for (let labeledEntity of textVariation.labelEntities) {
+                    delete (labeledEntity as any).entityType;
+                }
+            }
+        }
         return contextDialog;
     }
 
