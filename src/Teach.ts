@@ -51,6 +51,7 @@ export class TeachWithHistory
     public teach : Teach;
     public history: any[];
     public memories: Memory[];
+    public prevMemories: Memory[];
     public discrepancies: string[];
 
     public constructor(init?:Partial<TeachWithHistory>)

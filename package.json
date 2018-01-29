@@ -1,6 +1,6 @@
 {
   "name": "blis-models",
-  "version": "0.113.0",
+  "version": "0.114.0",
   "description": "Models for Blis",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -22,8 +22,7 @@
   },
   "author": "Microsoft",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^22.1.0",
     "jest": "^22.1.4",
