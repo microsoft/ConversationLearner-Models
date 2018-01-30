@@ -69,7 +69,7 @@ export class ModelUtils  {
         for (let labeledEntity of labeledEntities)
         {
             let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
-            if (!predictedEntity.entityName && entityList) {
+            if ((!predictedEntity.entityName || !predictedEntity.metadata) && entityList) {
                 let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
                 if (entity) {
                     predictedEntity.entityName = entity.entityName; 
@@ -181,6 +181,17 @@ export class ModelUtils  {
         let contextDialog = new ContextDialog({
             contextDialog: trainDialog.rounds
         });
+
+        // Strip out "entityType" (*sigh*)
+        for (let round of contextDialog.contextDialog)
+        {
+            for (let textVariation of round.extractorStep.textVariations)
+            {
+                for (let labeledEntity of textVariation.labelEntities) {
+                    delete (labeledEntity as any).entityType;
+                }
+            }
+        }
         return contextDialog;
     }
 
