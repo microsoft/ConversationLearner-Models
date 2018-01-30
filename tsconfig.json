@@ -3,6 +3,7 @@
     "compilerOptions": { 
         "noUnusedLocals": true,
         "forceConsistentCasingInFileNames": true,
+        "strict": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "noImplicitAny": true,
