@@ -13,3 +13,4 @@ deploy:
     tags: true
     repo: Microsoft/BLIS-MODELS
     branch: master
+  skip_cleanup: true
