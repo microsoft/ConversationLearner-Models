@@ -1,4 +1,11 @@
 import { Memory } from './Memory'
+import { ScoreResponse, ScoreInput } from './Score'
+
+export enum DialogMode {
+    Extractor = "Extract",    // Waiting for Extractor feedback
+    Scorer = "Score",        // Waiting for Scorer feedback
+    Wait = "Wait"           // Waiting for user input
+}
 
 export class Teach
 {
@@ -52,6 +59,9 @@ export class TeachWithHistory
     public history: any[];
     public memories: Memory[];
     public prevMemories: Memory[];
+    public dialogMode: DialogMode;
+    public scoreResponse: ScoreResponse;
+    public scoreInput: ScoreInput;
     public discrepancies: string[];
 
     public constructor(init?:Partial<TeachWithHistory>)
