@@ -9,6 +9,6 @@ export class BotInfo {
   public templates: Template[]
 
   public constructor(init?: Partial<BotInfo>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

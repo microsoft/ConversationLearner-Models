@@ -24,19 +24,19 @@ export class ActionBase {
   public metadata: ActionMetaData
 
   public constructor(init?: Partial<ActionBase>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 
   /** Return payload for an action */
   public static GetPayload(action: ActionBase | ScoredAction): string {
     if (!action.metadata || action.metadata.actionType === ActionTypes.TEXT) {
       /**
-             * For backwards compatibility check if payload is of new TextPayload type
-             * Ideally we would implement schema refactor:
-             * 1. Move action type to be toplevel property
-             * 2. Make payloads discriminated unions (E.g. After checking the action.type, flow control knows the type of the payload property)
-             * This removes the need for teh GetPayload function and GetArguments which are brittle coding patterns.
-             */
+       * For backwards compatibility check if payload is of new TextPayload type
+       * Ideally we would implement schema refactor:
+       * 1. Move action type to be toplevel property
+       * 2. Make payloads discriminated unions (E.g. After checking the action.type, flow control knows the type of the payload property)
+       * This removes the need for teh GetPayload function and GetArguments which are brittle coding patterns.
+       */
       try {
         const textPayload = JSON.parse(action.payload) as TextPayload
         return textPayload.text
@@ -85,7 +85,7 @@ export class ActionList {
   public actions: ActionBase[]
 
   public constructor(init?: Partial<ActionList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -93,7 +93,7 @@ export class ActionIdList {
   public actionIds: string[]
 
   public constructor(init?: Partial<ActionIdList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 

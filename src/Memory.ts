@@ -5,7 +5,7 @@ export class MemoryValue {
   public resolution: {} = {}
 
   public constructor(init?: Partial<MemoryValue>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -14,6 +14,6 @@ export class Memory {
   public entityValues: MemoryValue[]
 
   public constructor(init?: Partial<Memory>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

@@ -8,7 +8,7 @@ export class ScoreInput {
   public maskedActions: string[]
 
   public constructor(init?: Partial<ScoreInput>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -19,7 +19,7 @@ export class ScoredBase {
   public metadata: ActionMetaData
 
   public constructor(init?: Partial<ScoredBase>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -28,7 +28,7 @@ export class UnscoredAction extends ScoredBase {
 
   public constructor(init?: Partial<UnscoredAction>) {
     super(init)
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -38,7 +38,7 @@ export class ScoredAction extends ScoredBase {
 
   public constructor(init?: Partial<ScoredAction>) {
     super(init)
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -48,6 +48,6 @@ export class ScoreResponse {
   public metrics: Metrics
 
   public constructor(init?: Partial<ScoreResponse>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

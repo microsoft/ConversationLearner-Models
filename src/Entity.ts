@@ -16,7 +16,7 @@ export class EntityMetaData {
   public positiveId: string | null
 
   public constructor(init?: Partial<EntityMetaData>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 
   /** Make negate of given metadata */
@@ -39,7 +39,7 @@ export class EntityBase {
   public metadata: EntityMetaData
 
   public constructor(init?: Partial<EntityBase>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -47,7 +47,7 @@ export class EntityList {
   public entities: EntityBase[]
 
   public constructor(init?: Partial<EntityList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -55,6 +55,6 @@ export class EntityIdList {
   public entityIds: string[]
 
   public constructor(init?: Partial<EntityIdList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

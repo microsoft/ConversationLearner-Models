@@ -4,9 +4,10 @@ export class KeyGen {
   }
 
   private static HashCode(text: string): number {
-    var hash = 0,
-      i,
-      chr
+    let hash = 0
+    let i = undefined
+    let chr = undefined
+
     if (text.length === 0) return hash
     for (i = 0; i < text.length; i++) {
       chr = text.charCodeAt(i)

@@ -9,7 +9,7 @@ export class Template {
   public validationError: string
 
   public constructor(init?: Partial<Template>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -18,6 +18,6 @@ export class TemplateVariable {
   public type: string
 
   public constructor(init?: Partial<TemplateVariable>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

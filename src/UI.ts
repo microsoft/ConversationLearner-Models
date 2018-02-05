@@ -22,7 +22,7 @@ export class UIScoreInput {
   public extractResponse: ExtractResponse
 
   public constructor(init?: Partial<UIScoreInput>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -32,7 +32,7 @@ export class UIExtractResponse {
   public memories: Memory[]
 
   public constructor(init?: Partial<UIExtractResponse>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -42,7 +42,7 @@ export class UITeachResponse {
   public memories: Memory[]
 
   public constructor(init?: Partial<UITeachResponse>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -54,7 +54,7 @@ export class UIScoreResponse {
   public memories: Memory[]
 
   public constructor(init?: Partial<UIScoreResponse>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -64,6 +64,6 @@ export class UITrainScorerStep {
   public entities: EntityBase[]
 
   public constructor(init?: Partial<UITrainScorerStep>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

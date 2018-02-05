@@ -7,7 +7,7 @@ export class FilledEntity {
   public values: MemoryValue[] = []
 
   public constructor(init?: Partial<FilledEntity>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 
   public static EntityValueAsString(fe: FilledEntity): string {
@@ -16,9 +16,9 @@ export class FilledEntity {
     for (let key in fe.values) {
       let index = +key
       let prefix = ''
-      if (fe.values.length != 1 && index == fe.values.length - 1) {
+      if (fe.values.length !== 1 && index === fe.values.length - 1) {
         prefix = ' and '
-      } else if (index != 0) {
+      } else if (index !== 0) {
         prefix = ', '
       }
       let value = fe.values[key]
@@ -33,7 +33,7 @@ export class FilledEntityMap {
   public map: { [key: string]: FilledEntity } = {}
 
   public constructor(init?: Partial<FilledEntityMap>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 
   public EntityValueAsList(entityName: string): (string | null)[] {
@@ -98,7 +98,7 @@ export class FilledEntityMap {
 
   public async Substitute(text: string): Promise<string> {
     // First replace all entities
-    text = <string>await this.SubstituteEntities(text)
+    text = await this.SubstituteEntities(text)
 
     // Remove contingent entities
     text = this.SubstituteBrackets(text)

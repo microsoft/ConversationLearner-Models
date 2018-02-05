@@ -5,6 +5,6 @@ export class CallbackAPI {
   public arguments: string[]
 
   public constructor(init?: Partial<CallbackAPI>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

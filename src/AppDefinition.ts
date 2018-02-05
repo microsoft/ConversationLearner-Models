@@ -8,6 +8,6 @@ export class AppDefinition {
   public trainDialogs: TrainDialog[]
 
   public constructor(init?: Partial<AppDefinition>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

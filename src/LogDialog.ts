@@ -8,7 +8,7 @@ export class LogExtractorStep extends ExtractResponse {
 
   public constructor(init?: Partial<LogExtractorStep>) {
     super(init)
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -21,7 +21,7 @@ export class LogScorerStep {
   public metrics: Metrics
 
   public constructor(init?: Partial<LogScorerStep>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -30,7 +30,7 @@ export class LogRound {
   public scorerSteps: LogScorerStep[]
 
   public constructor(init?: Partial<LogRound>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -43,7 +43,7 @@ export class LogDialog {
   public rounds: LogRound[]
 
   public constructor(init?: Partial<LogDialog>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -51,7 +51,7 @@ export class LogDialogList {
   public logDialogs: LogDialog[]
 
   public constructor(init?: Partial<LogDialogList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -59,6 +59,6 @@ export class LogDialogIdList {
   public logDialogIds: string[]
 
   public constructor(init?: Partial<LogDialogIdList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

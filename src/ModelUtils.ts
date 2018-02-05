@@ -20,7 +20,7 @@ export class ModelUtils {
     let firstSpace = text.indexOf(' ')
     let remaining = firstSpace > 0 ? text.slice(firstSpace + 1) : ''
     numWords--
-    if (numWords == 0) {
+    if (numWords === 0) {
       return remaining
     }
     return this.RemoveWords(remaining, numWords)

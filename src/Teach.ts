@@ -15,7 +15,7 @@ export class Teach {
   public packageId: number
 
   public constructor(init?: Partial<Teach>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -25,7 +25,7 @@ export class TeachResponse {
   public trainDialogId: string
 
   public constructor(init?: Partial<TeachResponse>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -33,7 +33,7 @@ export class TeachList {
   public teaches: Teach[]
 
   public constructor(init?: Partial<TeachList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -41,7 +41,7 @@ export class TeachIdList {
   public teachIds: string[]
 
   public constructor(init?: Partial<TeachIdList>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -56,6 +56,6 @@ export class TeachWithHistory {
   public discrepancies: string[]
 
   public constructor(init?: Partial<TeachWithHistory>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }

@@ -9,7 +9,7 @@ export class PredictedEntity extends LabeledEntity {
 
   public constructor(init?: Partial<PredictedEntity>) {
     super(init)
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
 
@@ -21,6 +21,6 @@ export class ExtractResponse {
   public definitions: AppDefinition
 
   public constructor(init?: Partial<ExtractResponse>) {
-    ;(<any>Object).assign(this, init)
+    Object.assign(this, init)
   }
 }
