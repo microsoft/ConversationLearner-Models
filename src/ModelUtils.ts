@@ -1,16 +1,8 @@
-import { ExtractResponse, PredictedEntity } from './Extract'
+import { ExtractResponse } from './Extract'
 import { Teach, TeachResponse } from './Teach'
-import {
-  ContextDialog,
-  TrainRound,
-  TrainDialog,
-  TrainExtractorStep,
-  TrainScorerStep,
-  TextVariation,
-  LabeledEntity
-} from './TrainDialog'
+import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, ContextDialog } from './TrainDialog'
 import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
-import { EntityList, EntityBase } from './Entity'
+import { EntityList, EntityBase, LabeledEntity, PredictedEntity } from './Entity'
 import { ActionBase } from './Action'
 import { AppDefinition } from './AppDefinition'
 
@@ -71,28 +63,22 @@ export class ModelUtils {
     return predictedEntity
   }
 
-  public static ToPredictedEntities(
-    labeledEntities: LabeledEntity[],
-    entityList: EntityList | null = null
-  ): PredictedEntity[] {
-    let predictedEntities: PredictedEntity[] = []
-    for (let labeledEntity of labeledEntities) {
-      let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity)
-      if (
-        (!predictedEntity.entityName || !predictedEntity.metadata) &&
-        entityList
-      ) {
-        let entity = entityList.entities.filter(
-          a => a.entityId === predictedEntity.entityId
-        )[0]
-        if (entity) {
-          predictedEntity.entityName = entity.entityName
-          predictedEntity.metadata = entity.metadata
+  public static ToPredictedEntities(labeledEntities : LabeledEntity[], entityList: EntityList | null = null) : PredictedEntity[] {
+        
+    let predictedEntities : PredictedEntity[] = [];
+    for (let labeledEntity of labeledEntities)
+    {
+        let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
+        if (!predictedEntity.entityName && entityList) {
+            let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
+            if (entity) {
+                predictedEntity.entityName = entity.entityName; 
+               // LARS depricated predictedEntity.metadata = entity.metadata;
+            }
         }
-      }
-      predictedEntities.push(predictedEntity)
+        predictedEntities.push(predictedEntity);
     }
-    return predictedEntities
+    return predictedEntities;
   }
 
   //====================================================================
@@ -144,6 +130,7 @@ export class ModelUtils {
     }
     return textVariations
   }
+
 
   //====================================================================
   // CONVERSION: LogDialog == TrainDialog
