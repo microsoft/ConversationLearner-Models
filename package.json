@@ -2,17 +2,24 @@
   "name": "blis-models",
   "version": "0.0.0",
   "description": "",
-  "keywords": [],
+  "keywords": [
+    "Microsoft",
+    "BLIS",
+    "LUIS",
+    "Bot",
+    "bot framework",
+    "models"
+  ],
   "main": "dist/blis-models.umd.js",
   "module": "dist/blis-models.es5.js",
   "typings": "dist/types/blis-models.d.ts",
   "files": [
     "dist"
   ],
-  "author": "Matt Mazzola <mattm@microsoft.com>",
+  "author": "Microsoft BLIS Team <blis-support@service.microsoft.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Microsoft/blis-models.git"
   },
   "license": "MIT",
   "engines": {
