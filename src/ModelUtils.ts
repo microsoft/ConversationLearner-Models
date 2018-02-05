@@ -1,8 +1,8 @@
-import { ExtractResponse, PredictedEntity } from './Extract'
+import { ExtractResponse } from './Extract'
 import { Teach, TeachResponse } from './Teach'
-import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, LabeledEntity } from './TrainDialog'
+import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation } from './TrainDialog'
 import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
-import { EntityList, EntityBase } from './Entity'
+import { EntityList, EntityBase, LabeledEntity, PredictedEntity } from './Entity'
 import { ActionBase } from './Action'
 import { ContextDialog, AppDefinition } from './index';
 
@@ -69,11 +69,11 @@ export class ModelUtils  {
         for (let labeledEntity of labeledEntities)
         {
             let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
-            if ((!predictedEntity.entityName || !predictedEntity.metadata) && entityList) {
+            if (!predictedEntity.entityName && entityList) {
                 let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
                 if (entity) {
                     predictedEntity.entityName = entity.entityName; 
-                    predictedEntity.metadata = entity.metadata;
+                   // LARS depricated predictedEntity.metadata = entity.metadata;
                 }
             }
             predictedEntities.push(predictedEntity);

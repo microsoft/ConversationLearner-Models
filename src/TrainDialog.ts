@@ -1,31 +1,10 @@
 import { ScoreInput, ScoredAction } from './Score';
+import { LabeledEntity } from './Entity';
 import { AppDefinition } from './AppDefinition';
 
 export enum SenderType {
     User = 0,
     Bot = 1
-}
-
-export class LabeledEntity
-{
-    public startCharIndex : number;
-
-    public endCharIndex : number;
-
-    public entityId : string;
-
-    public entityName : string;
-
-    public entityText : string;
-
-    public resolution: {};
-
-    public builtinType: string;
-
-    public constructor(init?:Partial<LabeledEntity>)
-    {
-        (<any>Object).assign(this, init);
-    }
 }
 
 export class TextVariation

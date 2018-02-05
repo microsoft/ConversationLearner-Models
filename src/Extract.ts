@@ -1,19 +1,6 @@
-import { LabeledEntity } from './TrainDialog';
-import { EntityMetaData } from './Entity'
+import { PredictedEntity } from './Entity'
 import { Metrics } from './Metrics'
 import { AppDefinition } from './AppDefinition';
-
-export class PredictedEntity extends LabeledEntity
-{
-    public score : number;
-    public metadata : EntityMetaData;
-
-    public constructor(init?:Partial<PredictedEntity>)
-    {
-        super(init);
-        (<any>Object).assign(this, init);
-    }
-}
 
 export class ExtractResponse
 {
