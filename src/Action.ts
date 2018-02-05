@@ -24,10 +24,9 @@ export class ActionBase {
     public packageDeletionId: number;
     public metadata: ActionMetaData;
 
-    public constructor(init?:Partial<ActionBase>)
-    {
+    public constructor(init?: Partial<ActionBase>) {
         (<any>Object).assign(this, init);
-    } 
+    }
 
     /** Return payload for an action */
     public static GetPayload(action: ActionBase | ScoredAction): string {
@@ -72,7 +71,7 @@ export class ActionBase {
         }
         if (action.metadata.actionType !== ActionTypes.TEXT) {
             let actionPayload = JSON.parse(action.payload) as ActionPayload
-            return getActionArgumentValuesAsPlainText(actionPayload.arguments)
+            return actionPayload.arguments.map(a => getActionArgumentValueAsPlainText(a))
         }
         return []
     }
@@ -111,8 +110,7 @@ export interface ActionArgument {
     value: TextPayload | string
 }
 
-export const getActionArgumentValuesAsPlainText = (actionArguments: ActionArgument[]): string[] =>
-    actionArguments
-        .map(aa => typeof aa.value === 'string'
-            ? aa.value
-            : aa.value.text)
+export const getActionArgumentValueAsPlainText = (actionArgument: ActionArgument): string =>
+    typeof actionArgument.value === 'string'
+        ? actionArgument.value
+        : actionArgument.value.text
