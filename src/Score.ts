@@ -1,5 +1,4 @@
 import { Metrics } from './Metrics';
-import { ActionMetaData } from './Action';
 import { FilledEntity } from './FilledEntity';
 
 export class ScoreInput
@@ -19,7 +18,7 @@ export class ScoredBase
     public actionId : string;
     public payload : string;
     public isTerminal : boolean;
-    public metadata : ActionMetaData;
+    public actionType : string;
 
     public constructor(init?:Partial<ScoredBase>)
     {
@@ -41,7 +40,6 @@ export class UnscoredAction extends ScoredBase
 export class ScoredAction extends ScoredBase
 {
     public score : number;
-    public metadata : ActionMetaData;
 
     public constructor(init?:Partial<ScoredAction>)
     {

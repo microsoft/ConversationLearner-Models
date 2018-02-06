@@ -8,12 +8,9 @@ export const ActionTypes =
         CARD: "CARD"
     }
 
-export interface ActionMetaData {
-    actionType: string
-}
-
 export class ActionBase {
     public actionId: string;
+    public actionType: string
     public payload: string;
     public isTerminal: boolean;
     public requiredEntities: string[];
@@ -22,7 +19,6 @@ export class ActionBase {
     public version: number;
     public packageCreationId: number;
     public packageDeletionId: number;
-    public metadata: ActionMetaData;
 
     public constructor(init?: Partial<ActionBase>) {
         (<any>Object).assign(this, init);
@@ -30,7 +26,7 @@ export class ActionBase {
 
     /** Return payload for an action */
     public static GetPayload(action: ActionBase | ScoredAction): string {
-        if (!action.metadata || action.metadata.actionType === ActionTypes.TEXT) {
+        if (action.actionType === ActionTypes.TEXT) {
             /**
              * For backwards compatibility check if payload is of new TextPayload type
              * Ideally we would implement schema refactor:
@@ -46,7 +42,7 @@ export class ActionBase {
                 return action.payload
             }
         }
-        if (action.metadata.actionType !== ActionTypes.TEXT) {
+        if (action.actionType !== ActionTypes.TEXT) {
             let actionPayload = JSON.parse(action.payload) as ActionPayload;
             return actionPayload.payload;
         }
@@ -55,10 +51,10 @@ export class ActionBase {
 
     /** Return arguments for an action */
     public static GetActionArguments(action: ActionBase | ScoredAction): ActionArgument[] {
-        if (!action.metadata || action.metadata.actionType === ActionTypes.TEXT) {
+        if (action.actionType === ActionTypes.TEXT) {
             return []
         }
-        if (action.metadata.actionType !== ActionTypes.TEXT) {
+        if (action.actionType !== ActionTypes.TEXT) {
             let actionPayload = JSON.parse(action.payload) as ActionPayload
             return actionPayload.arguments
         }
@@ -66,10 +62,10 @@ export class ActionBase {
     }
 
     public static GetActionArgumentValuesAsPlainText(action: ActionBase | ScoredAction): string[] {
-        if (!action.metadata || action.metadata.actionType === ActionTypes.TEXT) {
+        if (action.actionType === ActionTypes.TEXT) {
             return []
         }
-        if (action.metadata.actionType !== ActionTypes.TEXT) {
+        if (action.actionType !== ActionTypes.TEXT) {
             let actionPayload = JSON.parse(action.payload) as ActionPayload
             return actionPayload.arguments.map(a => getActionArgumentValueAsPlainText(a))
         }
