@@ -1,4 +1,11 @@
-import { ActionTypes, ActionBase, ActionPayload, TextPayload } from './Action'
+import {
+  ActionTypes,
+  ActionBase,
+  ActionPayload,
+  TextPayload,
+  getActionArgumentValueAsPlainText
+} from './Action'
+import { ActionArgument } from './blis-models'
 
 const createEmptyAction = (): ActionBase => ({
   actionId: '',
@@ -54,6 +61,33 @@ const cardAction: ActionBase = {
   } as ActionPayload)
 }
 
+const expectedApiPayloadValue = 'myCallback'
+const apiAction: ActionBase = {
+  ...createEmptyAction(),
+  metadata: {
+    actionType: ActionTypes.API_LOCAL
+  },
+  payload: JSON.stringify({
+    payload: expectedApiPayloadValue,
+    arguments: [
+      {
+        parameter: 'p1',
+        value: {
+          text: 'p1.text',
+          json: {}
+        }
+      },
+      {
+        parameter: 'p2',
+        value: {
+          text: 'p2.text',
+          json: {}
+        }
+      }
+    ]
+  } as ActionPayload)
+}
+
 describe('Action', () => {
   describe('ActionPayload', () => {
     test('GetPayload should return string of text for text payloads even though they are complext json objects', () => {
@@ -75,9 +109,19 @@ describe('Action', () => {
       // Assert
       expect(actualCardPayloadValue).toEqual(expectedCardPayloadValue)
     })
+
+    test('GetPayload should return callback name for API actions', () => {
+      // Arrange
+
+      // Act
+      const actualApiPayloadValue = ActionBase.GetPayload(apiAction)
+
+      // Assert
+      expect(actualApiPayloadValue).toEqual(expectedApiPayloadValue)
+    })
   })
 
-  describe('getActionArgumentValuesAsPlainText', () => {
+  describe('GetActionArgumentValuesAsPlainText', () => {
     test('should return list of values', () => {
       // Arrange
 
@@ -88,6 +132,34 @@ describe('Action', () => {
 
       // Assert
       expect(actualCardValues).toEqual(['p1.text', 'p2.text'])
+    })
+  })
+
+  describe('getActionArgumentValueAsPlainText', () => {
+    test('should return list of values', () => {
+      // Arrange
+      const actionArgumentLegacy: ActionArgument = {
+        parameter: 'p1',
+        value: 'p1value'
+      }
+
+      const actionArgumentNew: ActionArgument = {
+        parameter: 'p1',
+        value: {
+          text: 'p1text',
+          json: {}
+        }
+      }
+
+      // Act
+      const legacyTextValue = getActionArgumentValueAsPlainText(
+        actionArgumentLegacy
+      )
+      const newTextValue = getActionArgumentValueAsPlainText(actionArgumentNew)
+
+      // Assert
+      expect(legacyTextValue).toEqual('p1value')
+      expect(newTextValue).toEqual('p1text')
     })
   })
 })
