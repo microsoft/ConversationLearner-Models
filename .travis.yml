@@ -1,13 +1,19 @@
 language: node_js
+branches:
+  only:
+    - master
+    - /^greenkeeper/.*$/
+cache:
+  yarn: true
+  directories:
+    - node_modules
+notifications:
+  email: false
 node_js:
-- node
-deploy:
-  provider: npm
-  email: mattm@microsoft.com
-  api_key:
-    secure: HEAaqRwuFZR3emosUFsrKpXAKQqyKT07PZlgo9TtEDqN7MFXUx6vO5hOp51t7l9uqvV6sUb2ujcfCJd6Vsr9bO0e2EzsLEJkQcPDKly/5LX7jmh3RaA3PoXzK+cqPVWwAM4k2ma+IK6QVZYAl2ygC6bCDSHExTGG9pXCRDRdiATntzWXXj2RKzsjebsC4feqP7rN7G/u0PuR7puCbIlHmYjuDFuS7gNmEQ08oldybWmsGfTGIGbz96S1A8O+vFuLwV2QIJUyfoucUPAF9hyRlc8j+FcPtHghTsbQllTYBZLbFN5gaNSHU5bn4t5+VjWTuXSAP0PU/nleScjiGiVmp8COh34tGinSybidgW9DhmE3iTuRxUwD4Neh6WbEBDP6EO8+UzSgPdTq2NVNo2UAq55FHc1WJzqpxCM9m2aQWCre5v6acSYJExK3q3WQb6eaLp3gVnS2eKY54nf2/T69qoA++fVHp26z5y9YC+OqsCWu+H8azlUFNrHs7uxegNWu66ItBxdp4cG+vIepStMzVHhQ7tArgGpD8yl8+q60GdhlGP3k+NOAM37Jf/oKxN9qh6ZnyheSem+gV63R/2j9HCT4V52R34VHr/7G76TsKE6iV80vfa+rwolrErKy3QyIhM6dvrgggMhpIeom+YBOkTWIOI2fVvwQhRtjRUE1Gfo=
-  on:
-    tags: true
-    repo: Microsoft/BLIS-MODELS
-    branch: master
-  skip_cleanup: true
+  - node
+script:
+  - npm run test:prod && npm run build
+after_success:
+  - npm run report-coverage
+  - npm run deploy-docs
+  - npm run semantic-release

@@ -1,27 +1,23 @@
 /** Information about the running bot */
-export class Template
-{
-    public name : string;
+export class Template {
+  public name: string
 
-    public variables : TemplateVariable[];
+  public variables: TemplateVariable[]
 
-    public body? : string;
+  public body?: string
 
-    public validationError: string;
+  public validationError: string
 
-    public constructor(init?:Partial<Template>)
-    {
-        (<any>Object).assign(this, init);
-    } 
+  public constructor(init?: Partial<Template>) {
+    Object.assign(this, init)
+  }
 }
 
-export class TemplateVariable
-{
-    public key: string;
-    public type: string;
+export class TemplateVariable {
+  public key: string
+  public type: string
 
-    public constructor(init?:Partial<TemplateVariable>)
-    {
-        (<any>Object).assign(this, init);
-    }
+  public constructor(init?: Partial<TemplateVariable>) {
+    Object.assign(this, init)
+  }
 }

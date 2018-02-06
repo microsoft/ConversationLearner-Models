@@ -1,9 +1,7 @@
-export class UserInput
-{
-    public text : string;
+export class UserInput {
+  public text: string
 
-    public constructor(init?:Partial<UserInput>)
-    {
-        (<any>Object).assign(this, init);
-    } 
+  public constructor(init?: Partial<UserInput>) {
+    Object.assign(this, init)
+  }
 }
