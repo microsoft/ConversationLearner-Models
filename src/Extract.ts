@@ -1,6 +1,6 @@
 import { PredictedEntity } from './Entity'
 import { Metrics } from './Metrics'
-import { AppDefinition } from './AppDefinition'
+import { AppDefinition } from './AppDefinition';
 
 export class ExtractResponse
 {

@@ -1,11 +1,12 @@
 import { ScoredAction } from './Score'
 
-export const ActionTypes = {
-  TEXT: 'TEXT',
-  API_LOCAL: 'API_LOCAL',
-  // API_AZURE : "API_AZURE", TODO
-  CARD: 'CARD'
-}
+export const ActionTypes =
+    {
+        TEXT: "TEXT",
+        API_LOCAL: "API_LOCAL",
+        // API_AZURE : "API_AZURE", TODO
+        CARD: "CARD"
+    }
 
 export class ActionBase {
     public actionId: string;

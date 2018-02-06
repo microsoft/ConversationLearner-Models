@@ -65,19 +65,18 @@ export class ModelUtils {
 
   public static ToPredictedEntities(labeledEntities : LabeledEntity[], entityList: EntityList | null = null) : PredictedEntity[] {
         
-    let predictedEntities : PredictedEntity[] = [];
-    for (let labeledEntity of labeledEntities)
-    {
-        let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
-        if (!predictedEntity.entityName && entityList) {
-            let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
-            if (entity) {
-                predictedEntity.entityName = entity.entityName; 
-               // LARS depricated predictedEntity.metadata = entity.metadata;
+        let predictedEntities : PredictedEntity[] = [];
+        for (let labeledEntity of labeledEntities)
+        {
+            let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
+            if (!predictedEntity.entityName && entityList) {
+                let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
+                if (entity) {
+                    predictedEntity.entityName = entity.entityName; 
+                }
             }
+            predictedEntities.push(predictedEntity);
         }
-        predictedEntities.push(predictedEntity);
-    }
     return predictedEntities;
   }
 

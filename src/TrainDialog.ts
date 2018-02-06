@@ -3,8 +3,8 @@ import { LabeledEntity } from './Entity';
 import { AppDefinition } from './AppDefinition';
 
 export enum SenderType {
-  User = 0,
-  Bot = 1
+    User = 0,
+    Bot = 1
 }
 
 export class TextVariation
