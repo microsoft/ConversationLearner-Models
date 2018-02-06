@@ -52,9 +52,7 @@ export class ActionBase {
   }
 
   /** Return arguments for an action */
-  public static GetActionArguments(
-    action: ActionBase | ScoredAction
-  ): ActionArgument[] {
+  public static GetActionArguments(action: ActionBase | ScoredAction): ActionArgument[] {
     if (!action.metadata || action.metadata.actionType === ActionTypes.TEXT) {
       return []
     }
@@ -65,17 +63,13 @@ export class ActionBase {
     return []
   }
 
-  public static GetActionArgumentValuesAsPlainText(
-    action: ActionBase | ScoredAction
-  ): string[] {
+  public static GetActionArgumentValuesAsPlainText(action: ActionBase | ScoredAction): string[] {
     if (!action.metadata || action.metadata.actionType === ActionTypes.TEXT) {
       return []
     }
     if (action.metadata.actionType !== ActionTypes.TEXT) {
       let actionPayload = JSON.parse(action.payload) as ActionPayload
-      return actionPayload.arguments.map(a =>
-        getActionArgumentValueAsPlainText(a)
-      )
+      return actionPayload.arguments.map(a => getActionArgumentValueAsPlainText(a))
     }
     return []
   }
@@ -112,9 +106,5 @@ export interface ActionArgument {
   value: TextPayload | string
 }
 
-export const getActionArgumentValueAsPlainText = (
-  actionArgument: ActionArgument
-): string =>
-  typeof actionArgument.value === 'string'
-    ? actionArgument.value
-    : actionArgument.value.text
+export const getActionArgumentValueAsPlainText = (actionArgument: ActionArgument): string =>
+  typeof actionArgument.value === 'string' ? actionArgument.value : actionArgument.value.text
