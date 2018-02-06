@@ -112,6 +112,5 @@
     "validate-commit-msg": "^2.12.2"
   },
   "publishConfig": {
-    "access": "restricted"
   }
 }
