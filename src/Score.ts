@@ -1,26 +1,29 @@
-import { Metrics } from './Metrics'
-import { ActionMetaData } from './Action'
-import { FilledEntity } from './FilledEntity'
+import { Metrics } from './Metrics';
+import { FilledEntity } from './FilledEntity';
 
-export class ScoreInput {
-  public filledEntities: FilledEntity[]
-  public context: {}
-  public maskedActions: string[]
+export class ScoreInput
+{
+    public filledEntities : FilledEntity[];
+    public context : {};
+    public maskedActions : string[];
 
-  public constructor(init?: Partial<ScoreInput>) {
-    Object.assign(this, init)
-  }
+    public constructor(init?:Partial<ScoreInput>)
+    {
+        (<any>Object).assign(this, init);
+    }
 }
 
-export class ScoredBase {
-  public actionId: string
-  public payload: string
-  public isTerminal: boolean
-  public metadata: ActionMetaData
+export class ScoredBase
+{
+    public actionId : string;
+    public payload : string;
+    public isTerminal : boolean;
+    public actionType : string;
 
-  public constructor(init?: Partial<ScoredBase>) {
-    Object.assign(this, init)
-  }
+    public constructor(init?:Partial<ScoredBase>)
+    {
+        (<any>Object).assign(this, init);
+    }
 }
 
 export class UnscoredAction extends ScoredBase {
@@ -32,9 +35,9 @@ export class UnscoredAction extends ScoredBase {
   }
 }
 
-export class ScoredAction extends ScoredBase {
-  public score: number
-  public metadata: ActionMetaData
+export class ScoredAction extends ScoredBase
+{
+    public score : number;
 
   public constructor(init?: Partial<ScoredAction>) {
     super(init)
