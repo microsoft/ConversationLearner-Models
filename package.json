@@ -1,9 +1,7 @@
 {
   "name": "blis-models",
-  "version": "0.117.0",
-  "description": "Models for Blis",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "version": "0.0.0-development",
+  "description": "",
   "keywords": [
     "Microsoft",
     "BLIS",
@@ -12,35 +10,107 @@
     "bot framework",
     "models"
   ],
-  "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf lib",
-    "tsc": "tsc",
-    "prepublishOnly": "tsc",
-    "pretest": "tsc",
-    "test": "jest"
-  },
-  "author": "Microsoft",
-  "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
-    "@types/jest": "^22.1.0",
-    "jest": "^22.1.4",
-    "typescript": "^2.6.2"
-  },
+  "main": "dist/blis-models.umd.js",
+  "module": "dist/blis-models.es5.js",
+  "typings": "dist/types/blis-models.d.ts",
   "files": [
-    "lib"
+    "dist"
   ],
+  "author": "Microsoft BLIS Team <blis-support@service.microsoft.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/blis-models"
+    "url": "https://github.com/Microsoft/blis-models.git"
   },
-  "jest": {
-    "testMatch": [
-      "**/lib/**/?(*.)(spec|test).js?(x)"
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",
+    "start": "rollup -c rollup.config.ts -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "prettier --write --no-semi --single-quote",
+      "git add"
     ]
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "validate-commit-msg": {
+      "types": "conventional-commit-types",
+      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+    }
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+    },
+    "collectCoverage": true,
+    "mapCoverage": true
+  },
+  "devDependencies": {
+    "@types/jest": "^22.0.0",
+    "@types/node": "^8.0.0",
+    "colors": "^1.1.2",
+    "commitizen": "^2.9.6",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.0.1",
+    "cz-conventional-changelog": "^2.0.0",
+    "husky": "^0.14.0",
+    "jest": "^22.0.2",
+    "lint-staged": "^6.0.0",
+    "lodash.camelcase": "^4.3.0",
+    "prettier": "^1.4.4",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^3.0.0-beta.2",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.53.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.9.0",
+    "semantic-release": "^13.1.3",
+    "ts-jest": "^22.0.0",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.8.0",
+    "tslint-config-prettier": "^1.1.0",
+    "tslint-config-standard": "^7.0.0",
+    "typedoc": "^0.9.0",
+    "typescript": "2.6.2",
+    "validate-commit-msg": "^2.12.2"
+  },
   "publishConfig": {
-    "tag": "beta"
   }
 }
