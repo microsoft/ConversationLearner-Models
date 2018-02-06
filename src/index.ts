@@ -1,5 +1,4 @@
 export * from './Action';
-export * from './ActionPayload';
 export * from './AppDefinition';
 export * from './BlisApp';
 export * from './BotInfo';
