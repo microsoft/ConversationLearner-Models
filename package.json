@@ -12,7 +12,7 @@
   ],
   "main": "dist/blis-models.umd.js",
   "module": "dist/blis-models.es5.js",
-  "typings": "dist/types/blis-models.d.ts",
+  "typings": "dist/blis-models.d.ts",
   "files": [
     "dist"
   ],
