@@ -12,7 +12,7 @@
   ],
   "main": "dist/blis-models.umd.js",
   "module": "dist/blis-models.es5.js",
-  "typings": "dist/types/blis-models.d.ts",
+  "typings": "dist/blis-models.d.ts",
   "files": [
     "dist"
   ],
@@ -28,7 +28,7 @@
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist && rimraf docs",
-    "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts",
+    "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && rimraf dist/lib && rimraf dist/types",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
