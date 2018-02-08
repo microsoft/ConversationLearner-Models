@@ -39,6 +39,7 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "setpackageversion": "tsc -p ./scripts/tsconfig.json && node ./scripts/setpackageversion.js",
     "precommit": "lint-staged",
     "watch": "rollup -c rollup.config.ts --watch"
   },
