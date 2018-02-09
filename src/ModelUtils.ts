@@ -21,9 +21,7 @@ export class ModelUtils {
   //====================================================================
   // CONVERSION: LabeledEntity == PredictedEntity
   //====================================================================
-  public static ToLabeledEntity(
-    predictedEntity: PredictedEntity
-  ): LabeledEntity {
+  public static ToLabeledEntity(predictedEntity: PredictedEntity): LabeledEntity {
     let labelEntity = new LabeledEntity({
       startCharIndex: predictedEntity.startCharIndex,
       endCharIndex: predictedEntity.endCharIndex,
@@ -37,9 +35,7 @@ export class ModelUtils {
     return labelEntity
   }
 
-  public static ToLabeledEntities(
-    predictedEntities: PredictedEntity[]
-  ): LabeledEntity[] {
+  public static ToLabeledEntities(predictedEntities: PredictedEntity[]): LabeledEntity[] {
     let labeledEntities: LabeledEntity[] = []
     for (let predictedEntity of predictedEntities) {
       let labelEntity = ModelUtils.ToLabeledEntity(predictedEntity)
@@ -48,9 +44,7 @@ export class ModelUtils {
     return labeledEntities
   }
 
-  public static ToPredictedEntity(
-    labeledEntity: LabeledEntity
-  ): PredictedEntity {
+  public static ToPredictedEntity(labeledEntity: LabeledEntity): PredictedEntity {
     let predictedEntity = new PredictedEntity({
       startCharIndex: labeledEntity.startCharIndex,
       endCharIndex: labeledEntity.endCharIndex,
@@ -63,32 +57,26 @@ export class ModelUtils {
     return predictedEntity
   }
 
-  public static ToPredictedEntities(labeledEntities : LabeledEntity[], entityList: EntityList | null = null) : PredictedEntity[] {
-        
-        let predictedEntities : PredictedEntity[] = [];
-        for (let labeledEntity of labeledEntities)
-        {
-            let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity);
-            if (!predictedEntity.entityName && entityList) {
-                let entity = entityList.entities.filter((a) => a.entityId === predictedEntity.entityId)[0];
-                if (entity) {
-                    predictedEntity.entityName = entity.entityName; 
-                }
-            }
-            predictedEntities.push(predictedEntity);
+  public static ToPredictedEntities(labeledEntities: LabeledEntity[], entityList: EntityList | null = null): PredictedEntity[] {
+    let predictedEntities: PredictedEntity[] = []
+    for (let labeledEntity of labeledEntities) {
+      let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity)
+      if (!predictedEntity.entityName && entityList) {
+        let entity = entityList.entities.filter(a => a.entityId === predictedEntity.entityId)[0]
+        if (entity) {
+          predictedEntity.entityName = entity.entityName
         }
-    return predictedEntities;
+      }
+      predictedEntities.push(predictedEntity)
+    }
+    return predictedEntities
   }
 
   //====================================================================
   // CONVERSION: ExtractResponse == TextVariation
   //====================================================================
-  public static ToTextVariation(
-    extractResponse: ExtractResponse
-  ): TextVariation {
-    let labeledEntities = this.ToLabeledEntities(
-      extractResponse.predictedEntities
-    )
+  public static ToTextVariation(extractResponse: ExtractResponse): TextVariation {
+    let labeledEntities = this.ToLabeledEntities(extractResponse.predictedEntities)
     let textVariation = new TextVariation({
       text: extractResponse.text,
       labelEntities: labeledEntities
@@ -96,14 +84,10 @@ export class ModelUtils {
     return textVariation
   }
 
-  public static ToExtractResponses(
-    textVariations: TextVariation[]
-  ): ExtractResponse[] {
+  public static ToExtractResponses(textVariations: TextVariation[]): ExtractResponse[] {
     let extractResponses: ExtractResponse[] = []
     for (let textVariation of textVariations) {
-      let predictedEntities = this.ToPredictedEntities(
-        textVariation.labelEntities
-      )
+      let predictedEntities = this.ToPredictedEntities(textVariation.labelEntities)
       let extractResponse = new ExtractResponse({
         text: textVariation.text,
         predictedEntities: predictedEntities
@@ -113,14 +97,10 @@ export class ModelUtils {
     return extractResponses
   }
 
-  public static ToTextVariations(
-    extractResponses: ExtractResponse[]
-  ): TextVariation[] {
+  public static ToTextVariations(extractResponses: ExtractResponse[]): TextVariation[] {
     let textVariations: TextVariation[] = []
     for (let extractResponse of extractResponses) {
-      let labelEntities = this.ToLabeledEntities(
-        extractResponse.predictedEntities
-      )
+      let labelEntities = this.ToLabeledEntities(extractResponse.predictedEntities)
       let textVariation = new TextVariation({
         text: extractResponse.text,
         labelEntities: labelEntities
@@ -129,7 +109,6 @@ export class ModelUtils {
     }
     return textVariations
   }
-
 
   //====================================================================
   // CONVERSION: LogDialog == TrainDialog
@@ -166,9 +145,7 @@ export class ModelUtils {
       extractorStep: new TrainExtractorStep({
         textVariations: [
           new TextVariation({
-            labelEntities: ModelUtils.ToLabeledEntities(
-              logRound.extractorStep.predictedEntities
-            ),
+            labelEntities: ModelUtils.ToLabeledEntities(logRound.extractorStep.predictedEntities),
             text: logRound.extractorStep.text
           })
         ]
@@ -186,9 +163,7 @@ export class ModelUtils {
   //====================================================================
   // CONVERSION: LogScorerStep == TrainScorerStep
   //====================================================================
-  public static ToTrainScorerStep(
-    logScorerStep: LogScorerStep
-  ): TrainScorerStep {
+  public static ToTrainScorerStep(logScorerStep: LogScorerStep): TrainScorerStep {
     return new TrainScorerStep({
       input: logScorerStep.input,
       labelAction: logScorerStep.predictedAction

@@ -12,7 +12,7 @@
   ],
   "main": "dist/blis-models.umd.js",
   "module": "dist/blis-models.es5.js",
-  "typings": "dist/types/blis-models.d.ts",
+  "typings": "dist/blis-models.d.ts",
   "files": [
     "dist"
   ],
@@ -27,18 +27,20 @@
   },
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",
+    "prebuild": "rimraf dist && rimraf docs",
+    "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && rimraf dist/lib && rimraf dist/types",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
-    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "tsc": "tsc",
+    "deploy-docs": "typedoc --out dist/docs --target es6 --theme minimal --mode file src && ts-node tools/gh-pages-publish",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "watch": "rollup -c rollup.config.ts --watch"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -111,6 +113,8 @@
     "typescript": "2.6.2",
     "validate-commit-msg": "^2.12.2"
   },
-  "publishConfig": {
+  "publishConfig": {},
+  "prettier": {
+    "printWidth": 140
   }
 }
