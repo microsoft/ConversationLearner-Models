@@ -39,6 +39,7 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "setpackageversion": "tsc -p ./scripts/tsconfig.json && node ./scripts/setpackageversion.js",
     "precommit": "lint-staged",
     "watch": "rollup -c rollup.config.ts --watch"
   },
@@ -83,6 +84,8 @@
     "mapCoverage": true
   },
   "devDependencies": {
+    "@types/execa": "^0.8.1",
+    "@types/fs-extra": "^5.0.0",
     "@types/jest": "^22.0.0",
     "@types/node": "^8.0.0",
     "colors": "^1.1.2",
@@ -90,6 +93,8 @@
     "coveralls": "^3.0.0",
     "cross-env": "^5.0.1",
     "cz-conventional-changelog": "^2.0.0",
+    "execa": "^0.9.0",
+    "fs-extra": "^5.0.0",
     "husky": "^0.14.0",
     "jest": "^22.0.2",
     "lint-staged": "^6.0.0",
