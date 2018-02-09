@@ -34,8 +34,8 @@ async function main() {
 
     // TODO: Actually sort by max breaking, feature, patch since it's not clear that git will sort correctly be default
     const highestTag = tagVersions[tagVersions.length - 1]
-    const { breaking, feature, patch } = highestTag
-    const nextVersion = `${breaking}.${feature + 1}.${patch}`
+    const { breaking, feature } = highestTag
+    const nextVersion = `${breaking}.${feature + 1}.0`
     console.log(`Last Release: `, highestTag.original)
     console.log(`Next Version: `, nextVersion)
 
