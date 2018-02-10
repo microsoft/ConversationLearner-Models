@@ -7,55 +7,35 @@ export enum DialogMode {
   Wait = 'Wait' // Waiting for user input
 }
 
-export class Teach {
-  public teachId: string
-  public trainDialogId: string
-  public createdDatetime: string
-  public lastQueryDatetime: string
-  public packageId: number
-
-  public constructor(init?: Partial<Teach>) {
-    Object.assign(this, init)
-  }
+export interface Teach {
+  teachId: string
+  trainDialogId: string
+  createdDatetime: string | undefined
+  lastQueryDatetime: string | undefined
+  packageId: number | undefined
 }
 
-export class TeachResponse {
-  public packageId: number
-  public teachId: string
-  public trainDialogId: string
-
-  public constructor(init?: Partial<TeachResponse>) {
-    Object.assign(this, init)
-  }
+export interface TeachResponse {
+  packageId: number
+  teachId: string
+  trainDialogId: string
 }
 
-export class TeachList {
-  public teaches: Teach[]
-
-  public constructor(init?: Partial<TeachList>) {
-    Object.assign(this, init)
-  }
+export interface TeachList {
+  teaches: Teach[]
 }
 
-export class TeachIdList {
-  public teachIds: string[]
-
-  public constructor(init?: Partial<TeachIdList>) {
-    Object.assign(this, init)
-  }
+export interface TeachIdList {
+  teachIds: string[]
 }
 
-export class TeachWithHistory {
-  public teach: Teach
-  public history: any[]
-  public memories: Memory[]
-  public prevMemories: Memory[]
-  public dialogMode: DialogMode
-  public scoreResponse: ScoreResponse
-  public scoreInput: ScoreInput
-  public discrepancies: string[]
-
-  public constructor(init?: Partial<TeachWithHistory>) {
-    Object.assign(this, init)
-  }
+export interface TeachWithHistory {
+  teach: Teach
+  history: any[]
+  memories: Memory[]
+  prevMemories: Memory[]
+  dialogMode: DialogMode
+  scoreResponse: ScoreResponse
+  scoreInput: ScoreInput
+  discrepancies: string[]
 }

@@ -75,20 +75,12 @@ export class ActionBase {
   }
 }
 
-export class ActionList {
-  public actions: ActionBase[]
-
-  public constructor(init?: Partial<ActionList>) {
-    Object.assign(this, init)
-  }
+export interface ActionList {
+  actions: ActionBase[]
 }
 
-export class ActionIdList {
-  public actionIds: string[]
-
-  public constructor(init?: Partial<ActionIdList>) {
-    Object.assign(this, init)
-  }
+export interface ActionIdList {
+  actionIds: string[]
 }
 
 export interface TextPayload {

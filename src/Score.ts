@@ -2,52 +2,30 @@ import { Metrics } from './Metrics'
 import { ActionMetaData } from './Action'
 import { FilledEntity } from './FilledEntity'
 
-export class ScoreInput {
-  public filledEntities: FilledEntity[]
-  public context: {}
-  public maskedActions: string[]
-
-  public constructor(init?: Partial<ScoreInput>) {
-    Object.assign(this, init)
-  }
+export interface ScoreInput {
+  filledEntities: FilledEntity[]
+  context: {}
+  maskedActions: string[]
 }
 
-export class ScoredBase {
-  public actionId: string
-  public payload: string
-  public isTerminal: boolean
-  public metadata: ActionMetaData
-
-  public constructor(init?: Partial<ScoredBase>) {
-    Object.assign(this, init)
-  }
+export interface ScoredBase {
+  actionId: string
+  payload: string
+  isTerminal: boolean
+  metadata: ActionMetaData
 }
 
-export class UnscoredAction extends ScoredBase {
-  public reason: string
-
-  public constructor(init?: Partial<UnscoredAction>) {
-    super(init)
-    Object.assign(this, init)
-  }
+export interface UnscoredAction extends ScoredBase {
+  reason: string
 }
 
-export class ScoredAction extends ScoredBase {
-  public score: number
-  public metadata: ActionMetaData
-
-  public constructor(init?: Partial<ScoredAction>) {
-    super(init)
-    Object.assign(this, init)
-  }
+export interface ScoredAction extends ScoredBase {
+  score: number
+  metadata: ActionMetaData
 }
 
-export class ScoreResponse {
-  public scoredActions: ScoredAction[]
-  public unscoredActions: UnscoredAction[]
-  public metrics: Metrics
-
-  public constructor(init?: Partial<ScoreResponse>) {
-    Object.assign(this, init)
-  }
+export interface ScoreResponse {
+  scoredActions: ScoredAction[]
+  unscoredActions: UnscoredAction[]
+  metrics: Metrics
 }

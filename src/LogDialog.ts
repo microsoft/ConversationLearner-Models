@@ -2,63 +2,38 @@ import { ScoreResponse, ScoreInput } from './Score'
 import { ExtractResponse } from './Extract'
 import { Metrics } from './Metrics'
 
-export class LogExtractorStep extends ExtractResponse {
-  public stepBeginDatetime: string
-  public stepEndDatetime: string
-
-  public constructor(init?: Partial<LogExtractorStep>) {
-    super(init)
-    Object.assign(this, init)
-  }
+export interface LogExtractorStep extends ExtractResponse {
+  stepBeginDatetime: string
+  stepEndDatetime: string
 }
 
-export class LogScorerStep {
-  public input: ScoreInput
-  public predictedAction: string
-  public predictionDetails: ScoreResponse
-  public stepBeginDatetime: string
-  public stepEndDatetime: string
-  public metrics: Metrics
-
-  public constructor(init?: Partial<LogScorerStep>) {
-    Object.assign(this, init)
-  }
+export interface LogScorerStep {
+  input: ScoreInput
+  predictedAction: string
+  predictionDetails: ScoreResponse
+  stepBeginDatetime: string
+  stepEndDatetime: string
+  metrics: Metrics
 }
 
-export class LogRound {
-  public extractorStep: LogExtractorStep
-  public scorerSteps: LogScorerStep[]
-
-  public constructor(init?: Partial<LogRound>) {
-    Object.assign(this, init)
-  }
+export interface LogRound {
+  extractorStep: LogExtractorStep
+  scorerSteps: LogScorerStep[]
 }
 
-export class LogDialog {
-  public logDialogId: string
-  public dialogBeginDatetime: string
-  public dialogEndDatetime: string
-  public packageId: number
-  public metrics: string
-  public rounds: LogRound[]
-
-  public constructor(init?: Partial<LogDialog>) {
-    Object.assign(this, init)
-  }
+export interface LogDialog {
+  logDialogId: string
+  dialogBeginDatetime: string
+  dialogEndDatetime: string
+  packageId: number
+  metrics: string
+  rounds: LogRound[]
 }
 
-export class LogDialogList {
-  public logDialogs: LogDialog[]
-
-  public constructor(init?: Partial<LogDialogList>) {
-    Object.assign(this, init)
-  }
+export interface LogDialogList {
+  logDialogs: LogDialog[]
 }
 
-export class LogDialogIdList {
-  public logDialogIds: string[]
-
-  public constructor(init?: Partial<LogDialogIdList>) {
-    Object.assign(this, init)
-  }
+export interface LogDialogIdList {
+  logDialogIds: string[]
 }
