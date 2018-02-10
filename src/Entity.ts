@@ -16,11 +16,11 @@ export class EntityBase {
     /** If set, has a negative and positive version */
     public isNegatible : boolean;
 
-  /** If set, has a negative and positive version */
-  public isReversable: boolean
+    /** If Negatable, the Id of negative entity associates with this Entity */
+    public negativeId: string | null
 
-  /** If Negatable, the Id of negative entity associates with this Entity */
-  public negativeId: string | null
+    /** If a Negative, Id of positive entity associated with this Entity */
+    public positiveId: string | null
 
     public constructor(init?:Partial<EntityBase>)
     {
