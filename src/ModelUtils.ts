@@ -9,12 +9,14 @@ import { AppDefinition } from './AppDefinition'
 export class ModelUtils {
   /** Remove n words from start of string */
   public static RemoveWords(text: string, numWords: number): string {
-    let firstSpace = text.indexOf(' ')
-    let remaining = firstSpace > 0 ? text.slice(firstSpace + 1) : ''
-    numWords--
-    if (numWords === 0) {
-      return remaining
+    if (text.length === 0 || numWords === 0) {
+      return text
     }
+
+    const firstSpace = text.indexOf(' ')
+    const remaining = firstSpace > 0 ? text.slice(firstSpace + 1) : ''
+    numWords--
+
     return this.RemoveWords(remaining, numWords)
   }
 
