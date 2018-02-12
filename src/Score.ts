@@ -9,7 +9,7 @@ export class ScoreInput
 
     public constructor(init?:Partial<ScoreInput>)
     {
-        (<any>Object).assign(this, init);
+      Object.assign(this, init);
     }
 }
 
@@ -22,7 +22,7 @@ export class ScoredBase
 
     public constructor(init?:Partial<ScoredBase>)
     {
-        (<any>Object).assign(this, init);
+      Object.assign(this, init);
     }
 }
 
@@ -31,7 +31,7 @@ export class UnscoredAction extends ScoredBase {
 
   public constructor(init?: Partial<UnscoredAction>) {
     super(init)
-    Object.assign(this, init)
+    Object.assign(this, init);
   }
 }
 
@@ -41,7 +41,7 @@ export class ScoredAction extends ScoredBase
 
   public constructor(init?: Partial<ScoredAction>) {
     super(init)
-    Object.assign(this, init)
+    Object.assign(this, init);
   }
 }
 
@@ -51,6 +51,6 @@ export class ScoreResponse {
   public metrics: Metrics
 
   public constructor(init?: Partial<ScoreResponse>) {
-    Object.assign(this, init)
+    Object.assign(this, init);
   }
 }
