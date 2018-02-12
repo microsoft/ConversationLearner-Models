@@ -3,17 +3,6 @@ export enum EntityType {
   LUIS = 'LUIS'
 }
 
-export interface EntityMetaData {
-  isBucket: boolean
-  /** If set, has a negative and positive version */
-  isReversable: boolean
-  /** If Negatable, the Id of negative entity associates with this Entity */
-  negativeId: string | null
-  /** If a Negative, Id of positive entity associated with this Entity */
-  positiveId: string | null
-  /** Make negate of given metadata */
-}
-
 export const makeNegative = (entityMetadata: EntityMetaData, posId: string): EntityMetaData => ({
   ...entityMetadata,
   negativeId: null,
@@ -27,7 +16,29 @@ export interface EntityBase {
   version: number
   packageCreationId: number
   packageDeletionId: number
-  metadata: EntityMetaData
+
+  isMultivalue: boolean
+
+  /** If set, has a negative and positive version */
+  isNegatible: boolean
+
+  /** If Negatable, the Id of negative entity associates with this Entity */
+  negativeId: string | null
+
+  /** If a Negative, Id of positive entity associated with this Entity */
+  positiveId: string | null
+}
+
+export interface LabeledEntity extends EntityBase {
+  startCharIndex: number
+  endCharIndex: number
+  entityText: string
+  resolution: {}
+  builtinType: string
+}
+
+export interface PredictedEntity extends LabeledEntity {
+  score: number
 }
 
 export interface EntityList {

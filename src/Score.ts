@@ -1,5 +1,4 @@
 import { Metrics } from './Metrics'
-import { ActionMetaData } from './Action'
 import { FilledEntity } from './FilledEntity'
 
 export interface ScoreInput {
@@ -12,7 +11,7 @@ export interface ScoredBase {
   actionId: string
   payload: string
   isTerminal: boolean
-  metadata: ActionMetaData
+  actionType: string
 }
 
 export interface UnscoredAction extends ScoredBase {
@@ -21,7 +20,6 @@ export interface UnscoredAction extends ScoredBase {
 
 export interface ScoredAction extends ScoredBase {
   score: number
-  metadata: ActionMetaData
 }
 
 export interface ScoreResponse {

@@ -1,19 +1,10 @@
 import { ScoreInput, ScoredAction } from './Score'
+import { LabeledEntity } from './Entity'
 import { AppDefinition } from './AppDefinition'
 
 export enum SenderType {
   User = 0,
   Bot = 1
-}
-
-export interface LabeledEntity {
-  startCharIndex: number
-  endCharIndex: number
-  entityId: string
-  entityName: string
-  entityText: string
-  resolution: {}
-  builtinType: string
 }
 
 export interface TextVariation {
