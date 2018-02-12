@@ -24,7 +24,7 @@ export class EntityBase {
 
     public constructor(init?:Partial<EntityBase>)
     {
-        (<any>Object).assign(this, init);
+      Object.assign(this, init);
     }
 }
 
@@ -42,8 +42,8 @@ export class LabeledEntity extends EntityBase
 
     public constructor(init?:Partial<LabeledEntity>)
     {
-        super(init);
-        (<any>Object).assign(this, init);
+      super(init);
+      Object.assign(this, init);
     }
 }
 
@@ -53,8 +53,8 @@ export class PredictedEntity extends LabeledEntity
 
     public constructor(init?:Partial<PredictedEntity>)
     {
-        super(init);
-        (<any>Object).assign(this, init);
+      super(init);
+      Object.assign(this, init);
     }
 }
 
@@ -71,6 +71,6 @@ export class EntityIdList {
 
     public constructor(init?:Partial<EntityIdList>)
     {
-        (<any>Object).assign(this, init);
+      Object.assign(this, init);
     }
 }
