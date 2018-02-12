@@ -17,17 +17,13 @@ const createEmptyAction = (): ActionBase => ({
   version: 0,
   packageCreationId: 0,
   packageDeletionId: 0,
-  metadata: {
-    actionType: ActionTypes.TEXT
-  }
+  actionType: ActionTypes.TEXT
 })
 
 const expectedTextPayloadValue = 'expectedvalue'
 const textAction: ActionBase = {
   ...createEmptyAction(),
-  metadata: {
-    actionType: ActionTypes.TEXT
-  },
+  actionType: ActionTypes.TEXT,
   payload: JSON.stringify({
     text: expectedTextPayloadValue,
     json: {}
@@ -37,9 +33,7 @@ const textAction: ActionBase = {
 const expectedCardPayloadValue = 'customTemplateName'
 const cardAction: ActionBase = {
   ...createEmptyAction(),
-  metadata: {
-    actionType: ActionTypes.CARD
-  },
+  actionType: ActionTypes.CARD,
   payload: JSON.stringify({
     payload: expectedCardPayloadValue,
     arguments: [
@@ -64,9 +58,7 @@ const cardAction: ActionBase = {
 const expectedApiPayloadValue = 'myCallback'
 const apiAction: ActionBase = {
   ...createEmptyAction(),
-  metadata: {
-    actionType: ActionTypes.API_LOCAL
-  },
+  actionType: ActionTypes.API_LOCAL,
   payload: JSON.stringify({
     payload: expectedApiPayloadValue,
     arguments: [
