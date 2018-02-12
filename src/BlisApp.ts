@@ -1,5 +1,7 @@
 export class BlisAppMetaData {
   public botFrameworkApps: string[]
+  public markdown: string
+  public video: string
 
   public constructor(init?: Partial<BlisAppMetaData>) {
     Object.assign(this, init)
