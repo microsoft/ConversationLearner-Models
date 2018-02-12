@@ -1,5 +1,7 @@
 export interface BlisAppMetaData {
   botFrameworkApps: string[]
+  markdown: string
+  video: string
 }
 
 export interface BlisAppBase {
