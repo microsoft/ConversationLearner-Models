@@ -4,58 +4,54 @@ export enum EntityType {
 }
 
 export class EntityBase {
-    public entityId : string;
-    public entityName : string;
-    public entityType : string;
-    public version : number;
-    public packageCreationId : number;
-    public packageDeletionId : number;
+  public entityId: string
+  public entityName: string
+  public entityType: string
+  public version: number
+  public packageCreationId: number
+  public packageDeletionId: number
 
-    public isMultivalue : boolean;
-        
-    /** If set, has a negative and positive version */
-    public isNegatible : boolean;
+  public isMultivalue: boolean
 
-    /** If Negatable, the Id of negative entity associates with this Entity */
-    public negativeId: string | null
+  /** If set, has a negative and positive version */
+  public isNegatible: boolean
 
-    /** If a Negative, Id of positive entity associated with this Entity */
-    public positiveId: string | null
+  /** If Negatable, the Id of negative entity associates with this Entity */
+  public negativeId: string | null
 
-    public constructor(init?:Partial<EntityBase>)
-    {
-      Object.assign(this, init);
-    }
+  /** If a Negative, Id of positive entity associated with this Entity */
+  public positiveId: string | null
+
+  public constructor(init?: Partial<EntityBase>) {
+    Object.assign(this, init)
+  }
 }
 
-export class LabeledEntity extends EntityBase
-{
-    public startCharIndex : number;
+export class LabeledEntity {
+  public entityId: string
 
-    public endCharIndex : number;
+  public startCharIndex: number
 
-    public entityText : string;
+  public endCharIndex: number
 
-    public resolution: {};
+  public entityText: string
 
-    public builtinType: string;
+  public resolution: {}
 
-    public constructor(init?:Partial<LabeledEntity>)
-    {
-      super(init);
-      Object.assign(this, init);
-    }
+  public builtinType: string
+
+  public constructor(init?: Partial<LabeledEntity>) {
+    Object.assign(this, init)
+  }
 }
 
-export class PredictedEntity extends LabeledEntity
-{
-    public score : number;
+export class PredictedEntity extends LabeledEntity {
+  public score: number
 
-    public constructor(init?:Partial<PredictedEntity>)
-    {
-      super(init);
-      Object.assign(this, init);
-    }
+  public constructor(init?: Partial<PredictedEntity>) {
+    super(init)
+    Object.assign(this, init)
+  }
 }
 
 export class EntityList {
@@ -69,8 +65,7 @@ export class EntityList {
 export class EntityIdList {
   public entityIds: string[]
 
-    public constructor(init?:Partial<EntityIdList>)
-    {
-      Object.assign(this, init);
-    }
+  public constructor(init?: Partial<EntityIdList>) {
+    Object.assign(this, init)
+  }
 }

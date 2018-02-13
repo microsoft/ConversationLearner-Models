@@ -26,7 +26,6 @@ export class ModelUtils {
       startCharIndex: predictedEntity.startCharIndex,
       endCharIndex: predictedEntity.endCharIndex,
       entityId: predictedEntity.entityId,
-      entityName: predictedEntity.entityName,
       entityText: predictedEntity.entityText,
       builtinType: predictedEntity.builtinType,
       resolution: predictedEntity.resolution
@@ -49,7 +48,6 @@ export class ModelUtils {
       startCharIndex: labeledEntity.startCharIndex,
       endCharIndex: labeledEntity.endCharIndex,
       entityId: labeledEntity.entityId,
-      entityName: labeledEntity.entityName,
       entityText: labeledEntity.entityText,
       builtinType: labeledEntity.builtinType,
       resolution: labeledEntity.resolution
@@ -57,16 +55,10 @@ export class ModelUtils {
     return predictedEntity
   }
 
-  public static ToPredictedEntities(labeledEntities: LabeledEntity[], entityList: EntityList | null = null): PredictedEntity[] {
+  public static ToPredictedEntities(labeledEntities: LabeledEntity[]): PredictedEntity[] {
     let predictedEntities: PredictedEntity[] = []
     for (let labeledEntity of labeledEntities) {
       let predictedEntity = ModelUtils.ToPredictedEntity(labeledEntity)
-      if (!predictedEntity.entityName && entityList) {
-        let entity = entityList.entities.filter(a => a.entityId === predictedEntity.entityId)[0]
-        if (entity) {
-          predictedEntity.entityName = entity.entityName
-        }
-      }
       predictedEntities.push(predictedEntity)
     }
     return predictedEntities
