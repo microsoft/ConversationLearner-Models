@@ -29,7 +29,8 @@ export interface EntityBase {
   positiveId: string | null
 }
 
-export interface LabeledEntity extends EntityBase {
+export interface LabeledEntity {
+  entityId: string
   startCharIndex: number
   endCharIndex: number
   entityText: string
