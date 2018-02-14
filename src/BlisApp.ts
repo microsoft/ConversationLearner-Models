@@ -1,42 +1,26 @@
-export class BlisAppMetaData {
-  public botFrameworkApps: string[]
-  public markdown: string
-  public video: string
-
-  public constructor(init?: Partial<BlisAppMetaData>) {
-    Object.assign(this, init)
-  }
+export interface BlisAppMetaData {
+  botFrameworkApps: string[]
+  markdown: string
+  video: string
 }
 
-export class BlisAppBase {
-  public appName: string
-  public appId: string
-  public luisKey: string
-  public locale: string
-  public metadata: BlisAppMetaData
+export interface BlisAppBase {
+  appName: string
+  appId: string
+  luisKey: string
+  locale: string
+  metadata: BlisAppMetaData
   trainingFailureMessage: string
   trainingStatus: TrainingStatusCode
   datetime: Date
-
-  public constructor(init?: Partial<BlisAppBase>) {
-    Object.assign(this, init)
-  }
 }
 
-export class BlisAppList {
-  public apps: BlisAppBase[]
-
-  public constructor(init?: Partial<BlisAppList>) {
-    Object.assign(this, init)
-  }
+export interface BlisAppList {
+  apps: BlisAppBase[]
 }
 
-export class BlisAppIdList {
-  public appIds: string[]
-
-  public constructor(init?: Partial<BlisAppIdList>) {
-    Object.assign(this, init)
-  }
+export interface BlisAppIdList {
+  appIds: string[]
 }
 
 export enum TrainingStatusCode {

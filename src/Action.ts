@@ -20,7 +20,7 @@ export class ActionBase {
   public packageDeletionId: number
 
   public constructor(init?: Partial<ActionBase>) {
-    Object.assign(this, init);
+    Object.assign(this, init)
   }
 
   /** Return payload for an action */
@@ -71,20 +71,12 @@ export class ActionBase {
   }
 }
 
-export class ActionList {
-  public actions: ActionBase[]
-
-  public constructor(init?: Partial<ActionList>) {
-    Object.assign(this, init)
-  }
+export interface ActionList {
+  actions: ActionBase[]
 }
 
-export class ActionIdList {
-  public actionIds: string[]
-
-  public constructor(init?: Partial<ActionIdList>) {
-    Object.assign(this, init)
-  }
+export interface ActionIdList {
+  actionIds: string[]
 }
 
 export interface TextPayload {

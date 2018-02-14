@@ -16,54 +16,28 @@ export enum ScoreReason {
   NotCalculated = 'notCalculated'
 }
 
-export class UIScoreInput {
-  public trainExtractorStep: TrainExtractorStep
-
-  public extractResponse: ExtractResponse
-
-  public constructor(init?: Partial<UIScoreInput>) {
-    Object.assign(this, init)
-  }
+export interface UIScoreInput {
+  trainExtractorStep: TrainExtractorStep
+  extractResponse: ExtractResponse
 }
 
-export class UIExtractResponse {
-  public extractResponse: ExtractResponse
-
-  public memories: Memory[]
-
-  public constructor(init?: Partial<UIExtractResponse>) {
-    Object.assign(this, init)
-  }
+export interface UIExtractResponse {
+  extractResponse: ExtractResponse
+  memories: Memory[]
 }
 
-export class UITeachResponse {
-  public teachResponse: TeachResponse
-
-  public memories: Memory[]
-
-  public constructor(init?: Partial<UITeachResponse>) {
-    Object.assign(this, init)
-  }
+export interface UITeachResponse {
+  teachResponse: TeachResponse
+  memories: Memory[]
 }
 
-export class UIScoreResponse {
-  public scoreResponse: ScoreResponse
-
-  public scoreInput: ScoreInput
-
-  public memories: Memory[]
-
-  public constructor(init?: Partial<UIScoreResponse>) {
-    Object.assign(this, init)
-  }
+export interface UIScoreResponse {
+  scoreResponse: ScoreResponse
+  scoreInput: ScoreInput
+  memories: Memory[]
 }
 
-export class UITrainScorerStep {
-  public trainScorerStep: TrainScorerStep
-
-  public entities: EntityBase[]
-
-  public constructor(init?: Partial<UITrainScorerStep>) {
-    Object.assign(this, init)
-  }
+export interface UITrainScorerStep {
+  trainScorerStep: TrainScorerStep
+  entities: EntityBase[]
 }

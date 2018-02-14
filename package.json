@@ -119,7 +119,9 @@
     "typescript": "2.6.2",
     "validate-commit-msg": "^2.12.2"
   },
-  "publishConfig": {},
+  "publishConfig": {
+    "tag": "next"
+  },
   "prettier": {
     "printWidth": 140
   }

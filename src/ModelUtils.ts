@@ -9,12 +9,14 @@ import { AppDefinition } from './AppDefinition'
 export class ModelUtils {
   /** Remove n words from start of string */
   public static RemoveWords(text: string, numWords: number): string {
-    let firstSpace = text.indexOf(' ')
-    let remaining = firstSpace > 0 ? text.slice(firstSpace + 1) : ''
-    numWords--
-    if (numWords === 0) {
-      return remaining
+    if (text.length === 0 || numWords === 0) {
+      return text
     }
+
+    const firstSpace = text.indexOf(' ')
+    const remaining = firstSpace > 0 ? text.slice(firstSpace + 1) : ''
+    numWords--
+
     return this.RemoveWords(remaining, numWords)
   }
 
@@ -22,16 +24,8 @@ export class ModelUtils {
   // CONVERSION: LabeledEntity == PredictedEntity
   //====================================================================
   public static ToLabeledEntity(predictedEntity: PredictedEntity): LabeledEntity {
-    let labelEntity = new LabeledEntity({
-      startCharIndex: predictedEntity.startCharIndex,
-      endCharIndex: predictedEntity.endCharIndex,
-      entityId: predictedEntity.entityId,
-      entityText: predictedEntity.entityText,
-      builtinType: predictedEntity.builtinType,
-      resolution: predictedEntity.resolution
-    })
-
-    return labelEntity
+    const { score, ...labeledEntity } = predictedEntity
+    return predictedEntity
   }
 
   public static ToLabeledEntities(predictedEntities: PredictedEntity[]): LabeledEntity[] {
@@ -44,15 +38,10 @@ export class ModelUtils {
   }
 
   public static ToPredictedEntity(labeledEntity: LabeledEntity): PredictedEntity {
-    let predictedEntity = new PredictedEntity({
-      startCharIndex: labeledEntity.startCharIndex,
-      endCharIndex: labeledEntity.endCharIndex,
-      entityId: labeledEntity.entityId,
-      entityText: labeledEntity.entityText,
-      builtinType: labeledEntity.builtinType,
-      resolution: labeledEntity.resolution
-    })
-    return predictedEntity
+    return {
+      ...labeledEntity,
+      score: undefined
+    }
   }
 
   public static ToPredictedEntities(labeledEntities: LabeledEntity[]): PredictedEntity[] {
@@ -69,10 +58,10 @@ export class ModelUtils {
   //====================================================================
   public static ToTextVariation(extractResponse: ExtractResponse): TextVariation {
     let labeledEntities = this.ToLabeledEntities(extractResponse.predictedEntities)
-    let textVariation = new TextVariation({
+    let textVariation = {
       text: extractResponse.text,
       labelEntities: labeledEntities
-    })
+    }
     return textVariation
   }
 
@@ -80,10 +69,19 @@ export class ModelUtils {
     let extractResponses: ExtractResponse[] = []
     for (let textVariation of textVariations) {
       let predictedEntities = this.ToPredictedEntities(textVariation.labelEntities)
-      let extractResponse = new ExtractResponse({
+      let extractResponse: ExtractResponse = {
+        definitions: {
+          entities: [],
+          actions: [],
+          trainDialogs: []
+        },
+        packageId: '',
+        metrics: {
+          wallTime: 0
+        },
         text: textVariation.text,
         predictedEntities: predictedEntities
-      })
+      }
       extractResponses.push(extractResponse)
     }
     return extractResponses
@@ -93,10 +91,10 @@ export class ModelUtils {
     let textVariations: TextVariation[] = []
     for (let extractResponse of extractResponses) {
       let labelEntities = this.ToLabeledEntities(extractResponse.predictedEntities)
-      let textVariation = new TextVariation({
+      let textVariation: TextVariation = {
         text: extractResponse.text,
         labelEntities: labelEntities
-      })
+      }
       textVariations.push(textVariation)
     }
     return textVariations
@@ -116,60 +114,66 @@ export class ModelUtils {
       trainRounds.push(trainRound)
     }
 
-    let appDefinition = null
+    let appDefinition: AppDefinition | null = null
     if (entities != null && actions != null) {
-      appDefinition = new AppDefinition({
-        entities: entities,
-        actions: actions
-      })
+      appDefinition = {
+        entities,
+        actions,
+        trainDialogs: []
+      }
     }
-    return new TrainDialog({
+
+    return {
+      packageCreationId: 0,
+      packageDeletionId: 0,
+      trainDialogId: '',
+      version: 0,
       rounds: trainRounds,
       definitions: appDefinition
-    })
+    }
   }
 
   //====================================================================
   // CONVERSION: LogRoung == TrainRound
   //====================================================================
   public static ToTrainRound(logRound: LogRound): TrainRound {
-    return new TrainRound({
-      extractorStep: new TrainExtractorStep({
+    return {
+      extractorStep: {
         textVariations: [
-          new TextVariation({
+          {
             labelEntities: ModelUtils.ToLabeledEntities(logRound.extractorStep.predictedEntities),
             text: logRound.extractorStep.text
-          })
+          }
         ]
-      }),
-      scorerSteps: logRound.scorerSteps.map(
-        scorerStep =>
-          new TrainScorerStep({
-            input: scorerStep.input,
-            labelAction: scorerStep.predictedAction
-          })
-      )
-    })
+      },
+      scorerSteps: logRound.scorerSteps.map<TrainScorerStep>(logScorerStep => ({
+        input: logScorerStep.input,
+        labelAction: logScorerStep.predictedAction,
+        scoredAction: undefined
+      }))
+    }
   }
 
   //====================================================================
   // CONVERSION: LogScorerStep == TrainScorerStep
   //====================================================================
   public static ToTrainScorerStep(logScorerStep: LogScorerStep): TrainScorerStep {
-    return new TrainScorerStep({
+    return {
       input: logScorerStep.input,
-      labelAction: logScorerStep.predictedAction
-    })
+      labelAction: logScorerStep.predictedAction,
+      scoredAction: undefined
+    }
   }
 
   //====================================================================
   // CONVERSION: TrainDialog == ContextDialog
   //====================================================================
   public static ToContextDialog(trainDialog: TrainDialog): ContextDialog {
-    let contextDialog = new ContextDialog({
+    let contextDialog: ContextDialog = {
       contextDialog: trainDialog.rounds
-    })
+    }
 
+    // TODO: Change to non destructive operation
     // Strip out "entityType" (*sigh*)
     for (let round of contextDialog.contextDialog) {
       for (let textVariation of round.extractorStep.textVariations) {
@@ -185,10 +189,12 @@ export class ModelUtils {
   // CONVERSION: TeachResponse == Teach
   //====================================================================
   public static ToTeach(teachResponse: TeachResponse): Teach {
-    let teach = new Teach({
+    return {
       teachId: teachResponse.teachId,
-      trainDialogId: teachResponse.trainDialogId
-    })
-    return teach
+      trainDialogId: teachResponse.trainDialogId,
+      createdDatetime: undefined,
+      lastQueryDatetime: undefined,
+      packageId: undefined
+    }
   }
 }

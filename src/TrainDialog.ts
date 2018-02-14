@@ -1,101 +1,58 @@
-import { ScoreInput, ScoredAction } from './Score';
-import { LabeledEntity } from './Entity';
-import { AppDefinition } from './AppDefinition';
+import { ScoreInput, ScoredAction } from './Score'
+import { LabeledEntity } from './Entity'
+import { AppDefinition } from './AppDefinition'
 
 export enum SenderType {
-    User = 0,
-    Bot = 1
+  User = 0,
+  Bot = 1
 }
 
-export class TextVariation
-{
-    public text : string;
-
-  public labelEntities: LabeledEntity[]
-
-  public constructor(init?: Partial<TextVariation>) {
-    Object.assign(this, init)
-  }
+export interface TextVariation {
+  text: string
+  labelEntities: LabeledEntity[]
 }
 
-export class TrainExtractorStep {
-  public textVariations: TextVariation[]
-
-  public constructor(init?: Partial<TrainExtractorStep>) {
-    Object.assign(this, init)
-  }
+export interface TrainExtractorStep {
+  textVariations: TextVariation[]
 }
 
-export class TrainScorerStep {
-  public input: ScoreInput
-
+export interface TrainScorerStep {
+  input: ScoreInput
   // I'd of the selected action
-  public labelAction: string
-
+  labelAction: string
   // Score of the selected action
-  public scoredAction: ScoredAction
-
-  public constructor(init?: Partial<TrainScorerStep>) {
-    Object.assign(this, init)
-  }
+  scoredAction: ScoredAction | undefined
 }
 
-export class TrainRound {
-  public extractorStep: TrainExtractorStep
-
-  public scorerSteps: TrainScorerStep[]
-
-  public constructor(init?: Partial<TrainRound>) {
-    Object.assign(this, init)
-  }
+export interface TrainRound {
+  extractorStep: TrainExtractorStep
+  scorerSteps: TrainScorerStep[]
 }
 
-export class TrainDialog {
-  public trainDialogId: string
-  public version: number
-  public packageCreationId: number
-  public packageDeletionId: number
-  public rounds: TrainRound[]
-
-  public definitions?: AppDefinition | null
-
-  public constructor(init?: Partial<TrainDialog>) {
-    Object.assign(this, init)
-  }
+export interface TrainDialog {
+  trainDialogId: string
+  version: number
+  packageCreationId: number
+  packageDeletionId: number
+  rounds: TrainRound[]
+  definitions?: AppDefinition | null
 }
 
-export class TrainResponse {
-  public packageId: number
-  public trainingStatus: string
-  public trainDialogId: string
-
-  public constructor(init?: Partial<TrainResponse>) {
-    Object.assign(this, init)
-  }
+export interface TrainResponse {
+  packageId: number
+  trainingStatus: string
+  trainDialogId: string
 }
 
-export class TrainDialogList {
-  public trainDialogs: TrainDialog[]
-
-  public definitions?: AppDefinition
-
-  public constructor(init?: Partial<TrainDialogList>) {
-    Object.assign(this, init)
-  }
+export interface TrainDialogList {
+  trainDialogs: TrainDialog[]
+  definitions?: AppDefinition
 }
 
-export class TrainDialogIdList {
-  public trainDialogIds: string[]
-
-  public constructor(init?: Partial<TrainDialogIdList>) {
-    Object.assign(this, init)
-  }
+export interface TrainDialogIdList {
+  trainDialogIds: string[]
 }
 
-export class ContextDialog {
-  public contextDialog: TrainRound[]
-
-  public constructor(init?: Partial<ContextDialog>) {
-    Object.assign(this, init)
-  }
+export interface ContextDialog {
+  contextDialog: TrainRound[]
 }
