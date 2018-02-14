@@ -3,19 +3,19 @@ export enum EntityType {
   LUIS = 'LUIS'
 }
 
-export const makeNegative = (entityMetadata: EntityMetaData, posId: string): EntityMetaData => ({
-  ...entityMetadata,
+export const makeNegative = (entity: EntityBase, positiveId: string): EntityBase => ({
+  ...entity,
   negativeId: null,
-  positiveId: posId
+  positiveId
 })
 
 export interface EntityBase {
   entityId: string
   entityName: string
   entityType: string
-  version: number
-  packageCreationId: number
-  packageDeletionId: number
+  version: number | null
+  packageCreationId: number | null
+  packageDeletionId: number | null
 
   isMultivalue: boolean
 
@@ -38,7 +38,7 @@ export interface LabeledEntity extends EntityBase {
 }
 
 export interface PredictedEntity extends LabeledEntity {
-  score: number
+  score: number | undefined
 }
 
 export interface EntityList {

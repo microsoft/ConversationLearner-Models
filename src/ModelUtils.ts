@@ -24,15 +24,8 @@ export class ModelUtils {
   // CONVERSION: LabeledEntity == PredictedEntity
   //====================================================================
   public static ToLabeledEntity(predictedEntity: PredictedEntity): LabeledEntity {
-    return {
-      startCharIndex: predictedEntity.startCharIndex,
-      endCharIndex: predictedEntity.endCharIndex,
-      entityId: predictedEntity.entityId,
-      entityName: predictedEntity.entityName,
-      entityText: predictedEntity.entityText,
-      builtinType: predictedEntity.builtinType,
-      resolution: predictedEntity.resolution
-    }
+    const { score, ...labeledEntity } = predictedEntity
+    return predictedEntity
   }
 
   public static ToLabeledEntities(predictedEntities: PredictedEntity[]): LabeledEntity[] {
@@ -46,15 +39,8 @@ export class ModelUtils {
 
   public static ToPredictedEntity(labeledEntity: LabeledEntity): PredictedEntity {
     return {
-      score: undefined,
-      metadata: undefined,
-      startCharIndex: labeledEntity.startCharIndex,
-      endCharIndex: labeledEntity.endCharIndex,
-      entityId: labeledEntity.entityId,
-      entityName: labeledEntity.entityName,
-      entityText: labeledEntity.entityText,
-      builtinType: labeledEntity.builtinType,
-      resolution: labeledEntity.resolution
+      ...labeledEntity,
+      score: undefined
     }
   }
 
