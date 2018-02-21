@@ -3,7 +3,7 @@ export interface Template {
   name: string
   variables: TemplateVariable[]
   body?: string
-  validationError: string
+  validationError: string | null
 }
 
 export interface TemplateVariable {
