@@ -30,12 +30,12 @@ export interface TeachIdList {
 }
 
 export interface TeachWithHistory {
-  teach: Teach
+  teach: Teach | undefined
   history: any[]
   memories: Memory[]
   prevMemories: Memory[]
   dialogMode: DialogMode
-  scoreResponse: ScoreResponse
-  scoreInput: ScoreInput
+  scoreResponse: ScoreResponse | undefined
+  scoreInput: ScoreInput | undefined
   discrepancies: string[]
 }
