@@ -2,6 +2,7 @@ export interface BlisAppMetaData {
   botFrameworkApps: string[]
   markdown: string
   video: string
+  isLoggingOn: boolean
 }
 
 export interface BlisAppBase {
