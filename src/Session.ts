@@ -1,3 +1,5 @@
+import { LogRound } from './LogDialog'
+
 export enum DialogType {
   TEACH = 'teach',
   TRAINDIALOG = 'traindialog',
@@ -18,4 +20,10 @@ export interface SessionList {
 
 export interface SessionIdList {
   sessionIds: string[]
+}
+
+export interface SessionCreateParams {
+  contextDialog?: LogRound[]
+  packageId?: number
+  saveToLog: boolean
 }
