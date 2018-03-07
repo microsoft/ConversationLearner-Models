@@ -1,3 +1,5 @@
+import EntityIdSerializer from './slateSerializer'
+
 export * from './Action'
 export * from './AppDefinition'
 export * from './BlisApp'
@@ -18,3 +20,4 @@ export * from './Template'
 export * from './TrainDialog'
 export * from './UserInput'
 export * from './UI'
+export { EntityIdSerializer }

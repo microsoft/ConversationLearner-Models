@@ -25,6 +25,22 @@ export const filledEntityValueAsString = (fe: FilledEntity): string => {
   return group
 }
 
+// In future will refactor to remove FilledEntityMap, but this method provides abstraction
+// or isolation to methods that would normally consume filledEntityMap to reduce coupling
+// and make code more flexible
+export const getEntityDisplayValueMap = (filledEntityMap: FilledEntityMap): Map<string, string> => {
+  return Object.keys(filledEntityMap.map).reduce((m, key) => {
+    const entityDisplayValue = filledEntityMap.EntityValueAsString(key)
+
+    // TODO: Required check because poor API from filledEntityMap which can return null
+    if (entityDisplayValue) {
+      m.set(key, entityDisplayValue)
+    }
+
+    return m
+  }, new Map<string, string>())
+}
+
 // TODO: Refactor to native Map
 export class FilledEntityMap {
   public map: { [key: string]: FilledEntity } = {}
