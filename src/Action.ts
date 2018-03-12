@@ -73,6 +73,8 @@ export interface ActionIdList {
   actionIds: string[]
 }
 
+// TODO: Remove was originally storing two properties text/json
+// but now text is removed and this is only here for backwards compatibility
 export interface TextPayload {
   json: any
 }
@@ -90,4 +92,52 @@ export interface ActionArgument {
 export interface RenderedActionArgument {
   parameter: string
   value: string
+}
+
+export class TextAction extends ActionBase {
+  value: any // json slate value
+
+  constructor(action: ActionBase) {
+    super(action)
+
+    if (action.actionType !== ActionTypes.TEXT) {
+      throw new Error(`You attempted to create text action from action of type: ${action.actionType}`)
+    }
+
+    this.value = JSON.parse(this.payload).json
+  }
+}
+
+export class ApiAction extends ActionBase {
+  name: string
+  arguments: ActionArgument[]
+
+  constructor(action: ActionBase) {
+    super(action)
+
+    if (action.actionType !== ActionTypes.API_LOCAL) {
+      throw new Error(`You attempted to create api action from action of type: ${action.actionType}`)
+    }
+
+    const actionPayload: ActionPayload = JSON.parse(this.payload)
+    this.name = actionPayload.payload
+    this.arguments = actionPayload.arguments
+  }
+}
+
+export class CardAction extends ActionBase {
+  templateName: string
+  arguments: ActionArgument[]
+
+  constructor(action: ActionBase) {
+    super(action)
+
+    if (action.actionType !== ActionTypes.CARD) {
+      throw new Error(`You attempted to create card action from action of type: ${action.actionType}`)
+    }
+
+    const actionPayload: ActionPayload = JSON.parse(this.payload)
+    this.templateName = actionPayload.payload
+    this.arguments = actionPayload.arguments
+  }
 }
