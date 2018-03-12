@@ -1,4 +1,4 @@
-import { ActionArgument, ActionTypes, ActionBase, ActionPayload, TextPayload, getActionArgumentValueAsPlainText } from './Action'
+import { ActionArgument, ActionTypes, ActionBase, ActionPayload, TextPayload } from './Action'
 
 const createEmptyAction = (): ActionBase => ({
   actionId: '',
@@ -13,14 +13,235 @@ const createEmptyAction = (): ActionBase => ({
   actionType: ActionTypes.TEXT
 })
 
-const expectedTextPayloadValue = 'expectedvalue'
-const textAction: ActionBase = {
+const textPayloadWithNoEntities: TextPayload = {
+  json: {
+    kind: 'value',
+    document: {
+      kind: 'document',
+      data: {},
+      nodes: [
+        {
+          kind: 'block',
+          type: 'line',
+          isVoid: false,
+          data: {},
+          nodes: [
+            {
+              kind: 'text',
+              leaves: [
+                {
+                  kind: 'leaf',
+                  text: 'simple text payload',
+                  marks: []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
+const textPayloadWithRequiredEntity: TextPayload = {
+  json: {
+    kind: 'value',
+    document: {
+      kind: 'document',
+      data: {},
+      nodes: [
+        {
+          kind: 'block',
+          type: 'line',
+          isVoid: false,
+          data: {},
+          nodes: [
+            {
+              kind: 'text',
+              leaves: [
+                {
+                  kind: 'leaf',
+                  text: 'The value of custom is: ',
+                  marks: []
+                }
+              ]
+            },
+            {
+              kind: 'inline',
+              type: 'mention-inline-node',
+              isVoid: false,
+              data: {
+                completed: true,
+                option: {
+                  id: '627a43be-4675-4b98-84a7-537262561be6',
+                  name: 'custom'
+                }
+              },
+              nodes: [
+                {
+                  kind: 'text',
+                  leaves: [
+                    {
+                      kind: 'leaf',
+                      text: '$custom',
+                      marks: []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              kind: 'text',
+              leaves: [
+                {
+                  kind: 'leaf',
+                  text: '',
+                  marks: []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
+const textPayloadWithRequiredEntityAndOptionalEntity: TextPayload = {
+  json: {
+    kind: 'value',
+    document: {
+      kind: 'document',
+      data: {},
+      nodes: [
+        {
+          kind: 'block',
+          type: 'line',
+          isVoid: false,
+          data: {},
+          nodes: [
+            {
+              kind: 'text',
+              leaves: [
+                {
+                  kind: 'leaf',
+                  text: 'Action with required ',
+                  marks: []
+                }
+              ]
+            },
+            {
+              kind: 'inline',
+              type: 'mention-inline-node',
+              isVoid: false,
+              data: {
+                completed: true,
+                option: {
+                  id: '627a43be-4675-4b98-84a7-537262561be6',
+                  name: 'custom'
+                }
+              },
+              nodes: [
+                {
+                  kind: 'text',
+                  leaves: [
+                    {
+                      kind: 'leaf',
+                      text: '$custom',
+                      marks: []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              kind: 'text',
+              leaves: [
+                {
+                  kind: 'leaf',
+                  text: ' entity and ',
+                  marks: []
+                }
+              ]
+            },
+            {
+              kind: 'inline',
+              type: 'optional-inline-node',
+              isVoid: false,
+              data: {},
+              nodes: [
+                {
+                  kind: 'text',
+                  leaves: [
+                    {
+                      kind: 'leaf',
+                      text: '[ optional ',
+                      marks: []
+                    }
+                  ]
+                },
+                {
+                  kind: 'inline',
+                  type: 'mention-inline-node',
+                  isVoid: false,
+                  data: {
+                    completed: true,
+                    option: {
+                      id: '5745fcb3-93ef-405a-b587-8edfb9f0a6a4',
+                      name: 'name'
+                    }
+                  },
+                  nodes: [
+                    {
+                      kind: 'text',
+                      leaves: [
+                        {
+                          kind: 'leaf',
+                          text: '$name',
+                          marks: []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  kind: 'text',
+                  leaves: [
+                    {
+                      kind: 'leaf',
+                      text: ' entity]',
+                      marks: []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              kind: 'text',
+              leaves: [
+                {
+                  kind: 'leaf',
+                  text: '',
+                  marks: []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+const textAction1: ActionBase = {
   ...createEmptyAction(),
   actionType: ActionTypes.TEXT,
-  payload: JSON.stringify({
-    text: expectedTextPayloadValue,
-    json: {}
-  } as TextPayload)
+  payload: JSON.stringify(textPayloadWithNoEntities)
+}
+
+const textAction2: ActionBase = {
+  ...createEmptyAction(),
+  actionType: ActionTypes.TEXT,
+  payload: JSON.stringify(textPayloadWithRequiredEntity)
 }
 
 const expectedCardPayloadValue = 'customTemplateName'
@@ -28,14 +249,12 @@ const cardActionArguments: ActionArgument[] = [
   {
     parameter: 'p1',
     value: {
-      text: 'p1.text',
       json: {}
     }
   },
   {
     parameter: 'p2',
     value: {
-      text: 'p2.text',
       json: {}
     }
   }
@@ -59,14 +278,12 @@ const apiAction: ActionBase = {
       {
         parameter: 'p1',
         value: {
-          text: 'p1.text',
           json: {}
         }
       },
       {
         parameter: 'p2',
         value: {
-          text: 'p2.text',
           json: {}
         }
       }
@@ -78,15 +295,26 @@ describe('Action', () => {
   describe('GetPayload', () => {
     test('given text action should return the plain text string', () => {
       // Act
-      const actualTextPayloadValue = ActionBase.GetPayload(textAction)
+      const actualTextPayloadValue = ActionBase.GetPayload(textAction1, new Map<string, string>())
 
       // Assert
-      expect(actualTextPayloadValue).toEqual(expectedTextPayloadValue)
+      expect(actualTextPayloadValue).toEqual('simple text payload')
+    })
+
+    test('given text action containing entity reference should return the plain text string with value replaced', () => {
+      // Act
+      const actualTextPayloadValue = ActionBase.GetPayload(
+        textAction2,
+        new Map<string, string>([['627a43be-4675-4b98-84a7-537262561be6', 'customValue']])
+      )
+
+      // Assert
+      expect(actualTextPayloadValue).toEqual('The value of custom is: customValue')
     })
 
     test('given card action should return card template name', () => {
       // Act
-      const actualCardPayloadValue = ActionBase.GetPayload(cardAction)
+      const actualCardPayloadValue = ActionBase.GetPayload(cardAction, new Map<string, string>())
 
       // Assert
       expect(actualCardPayloadValue).toEqual(expectedCardPayloadValue)
@@ -94,7 +322,7 @@ describe('Action', () => {
 
     test('given api action should return callback name', () => {
       // Act
-      const actualApiPayloadValue = ActionBase.GetPayload(apiAction)
+      const actualApiPayloadValue = ActionBase.GetPayload(apiAction, new Map<string, string>())
 
       // Assert
       expect(actualApiPayloadValue).toEqual(expectedApiPayloadValue)
@@ -104,7 +332,7 @@ describe('Action', () => {
   describe('GetActionArguments', () => {
     test('given text action should return empty array because text actions do not have arguments', () => {
       // Act
-      const actionArguments = ActionBase.GetActionArguments(textAction)
+      const actionArguments = ActionBase.GetActionArguments(textAction1)
 
       // Assert
       expect(actionArguments).toEqual([])
@@ -116,42 +344,6 @@ describe('Action', () => {
 
       // Assert
       expect(actionArguments).toEqual(cardActionArguments)
-    })
-  })
-
-  describe('GetActionArgumentValuesAsPlainText', () => {
-    test('given action with arguments such as card action should return list of values', () => {
-      // Act
-      const actualCardValues = ActionBase.GetActionArgumentValuesAsPlainText(cardAction)
-
-      // Assert
-      expect(actualCardValues).toEqual(['p1.text', 'p2.text'])
-    })
-  })
-
-  describe('getActionArgumentValueAsPlainText', () => {
-    test('given legacy or new action argument both should return list of values', () => {
-      // Arrange
-      const actionArgumentLegacy: ActionArgument = {
-        parameter: 'p1',
-        value: 'p1value'
-      }
-
-      const actionArgumentNew: ActionArgument = {
-        parameter: 'p1',
-        value: {
-          text: 'p1text',
-          json: {}
-        }
-      }
-
-      // Act
-      const legacyTextValue = getActionArgumentValueAsPlainText(actionArgumentLegacy)
-      const newTextValue = getActionArgumentValueAsPlainText(actionArgumentNew)
-
-      // Assert
-      expect(legacyTextValue).toEqual('p1value')
-      expect(newTextValue).toEqual('p1text')
     })
   })
 })
