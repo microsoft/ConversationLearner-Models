@@ -1,4 +1,4 @@
-import { ActionArgument, ActionTypes, ActionBase, ActionPayload, TextPayload } from './Action'
+import { ActionArgument, ActionTypes, ActionBase, ActionPayload, TextPayload, IActionArgument } from './Action'
 
 const createEmptyAction = (): ActionBase => ({
   actionId: '',
@@ -245,7 +245,7 @@ const textAction2: ActionBase = {
 }
 
 const expectedCardPayloadValue = 'customTemplateName'
-const cardActionArguments: ActionArgument[] = [
+const cardActionArguments: IActionArgument[] = [
   {
     parameter: 'p1',
     value: {
@@ -259,6 +259,8 @@ const cardActionArguments: ActionArgument[] = [
     }
   }
 ]
+
+const expectedCardActionArguments = cardActionArguments.map(aa => new ActionArgument(aa))
 const cardAction: ActionBase = {
   ...createEmptyAction(),
   actionType: ActionTypes.CARD,
@@ -343,7 +345,7 @@ describe('Action', () => {
       const actionArguments = ActionBase.GetActionArguments(cardAction)
 
       // Assert
-      expect(actionArguments).toEqual(cardActionArguments)
+      expect(actionArguments).toEqual(expectedCardActionArguments)
     })
   })
 })
