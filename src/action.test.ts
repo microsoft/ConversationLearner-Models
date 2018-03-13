@@ -1,4 +1,4 @@
-import { ActionArgument, ActionTypes, ActionBase, ActionPayload, TextPayload } from './Action'
+import { IActionArgument, ActionTypes, ActionBase, ActionPayload, TextPayload } from './Action'
 
 const createEmptyAction = (): ActionBase => ({
   actionId: '',
@@ -245,7 +245,7 @@ const textAction2: ActionBase = {
 }
 
 const expectedCardPayloadValue = 'customTemplateName'
-const cardActionArguments: ActionArgument[] = [
+const cardActionArguments: IActionArgument[] = [
   {
     parameter: 'p1',
     value: {

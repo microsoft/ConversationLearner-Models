@@ -58,7 +58,7 @@ export class ActionBase {
   public static GetActionArguments(action: ActionBase | ScoredAction): ActionArgument[] {
     if (action.actionType !== ActionTypes.TEXT) {
       let actionPayload = JSON.parse(action.payload) as ActionPayload
-      return actionPayload.arguments
+      return actionPayload.arguments.map(aa => new ActionArgument(aa))
     }
 
     return []
@@ -76,17 +76,31 @@ export interface ActionIdList {
 // TODO: Remove was originally storing two properties text/json
 // but now text is removed and this is only here for backwards compatibility
 export interface TextPayload {
-  json: any
+  json: object
 }
 
 export interface ActionPayload {
   payload: string
-  arguments: ActionArgument[]
+  arguments: IActionArgument[]
 }
 
-export interface ActionArgument {
+export interface IActionArgument {
   parameter: string
   value: TextPayload
+}
+
+export class ActionArgument {
+  parameter: string
+  value: object
+
+  constructor(actionArgument: IActionArgument) {
+    this.parameter = actionArgument.parameter
+    this.value = actionArgument.value.json
+  }
+
+  renderValue(entityValues: Map<string, string>): string {
+    return EntityIdSerializer.serialize(this.value, entityValues)
+  }
 }
 
 export interface RenderedActionArgument {
@@ -95,7 +109,7 @@ export interface RenderedActionArgument {
 }
 
 export class TextAction extends ActionBase {
-  value: any // json slate value
+  value: object // json slate value
 
   constructor(action: ActionBase) {
     super(action)
@@ -105,6 +119,10 @@ export class TextAction extends ActionBase {
     }
 
     this.value = JSON.parse(this.payload).json
+  }
+
+  renderValue(entityValues: Map<string, string>): string {
+    return EntityIdSerializer.serialize(this.value, entityValues)
   }
 }
 
@@ -121,7 +139,14 @@ export class ApiAction extends ActionBase {
 
     const actionPayload: ActionPayload = JSON.parse(this.payload)
     this.name = actionPayload.payload
-    this.arguments = actionPayload.arguments
+    this.arguments = actionPayload.arguments.map(aa => new ActionArgument(aa))
+  }
+
+  renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
+    return this.arguments.map(aa => ({
+      ...aa,
+      value: EntityIdSerializer.serialize(aa.value, entityValues)
+    }))
   }
 }
 
@@ -138,6 +163,13 @@ export class CardAction extends ActionBase {
 
     const actionPayload: ActionPayload = JSON.parse(this.payload)
     this.templateName = actionPayload.payload
-    this.arguments = actionPayload.arguments
+    this.arguments = actionPayload.arguments.map(aa => new ActionArgument(aa))
+  }
+
+  renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
+    return this.arguments.map(aa => ({
+      ...aa,
+      value: EntityIdSerializer.serialize(aa.value, entityValues)
+    }))
   }
 }
