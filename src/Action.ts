@@ -1,3 +1,4 @@
+import EntityIdSerializer from './slateSerializer'
 import { ScoredAction } from './Score'
 
 export const ActionTypes = {
@@ -23,21 +24,27 @@ export class ActionBase {
     Object.assign(this, init)
   }
 
-  /** Return payload for an action */
-  public static GetPayload(action: ActionBase | ScoredAction): string {
+  // TODO: Refactor away from generic GetPayload for different action types
+  // They all return strings but the strings are very different (Text is the substituted values, but other actions dont)
+  // This causes issue of having to pass in entityValueMap even when it's not required, but making it optional ruins
+  // safety for those places which should require it.
+  // TODO: Remove ScoredAction since it doesn't have payload
+  public static GetPayload(action: ActionBase | ScoredAction, entityValues: Map<string, string>): string {
     if (action.actionType === ActionTypes.TEXT) {
       /**
        * For backwards compatibility check if payload is of new TextPayload type
        * Ideally we would implement schema refactor:
-       * 1. Move action type to be toplevel property
-       * 2. Make payloads discriminated unions (E.g. After checking the action.type, flow control knows the type of the payload property)
-       * This removes the need for teh GetPayload function and GetArguments which are brittle coding patterns.
+       * 1. Make payloads discriminated unions (E.g. After checking the action.type, flow control knows the type of the payload property)
+       * This removes the need for the GetPayload function and GetArguments which are brittle coding patterns.
        */
       try {
         const textPayload = JSON.parse(action.payload) as TextPayload
-        return textPayload.text
-      } catch {
-        return action.payload
+        return EntityIdSerializer.serialize(textPayload.json, entityValues)
+      } catch (e) {
+        const error = e as Error
+        throw new Error(
+          `Error when attempting to parse text action payload. This might be an old action which was saved as a string.  Please create a new action. ${error.message}`
+        )
       }
     }
     if (action.actionType !== ActionTypes.TEXT) {
@@ -49,24 +56,11 @@ export class ActionBase {
 
   /** Return arguments for an action */
   public static GetActionArguments(action: ActionBase | ScoredAction): ActionArgument[] {
-    if (action.actionType === ActionTypes.TEXT) {
-      return []
-    }
     if (action.actionType !== ActionTypes.TEXT) {
       let actionPayload = JSON.parse(action.payload) as ActionPayload
-      return actionPayload.arguments
+      return actionPayload.arguments.map(aa => new ActionArgument(aa))
     }
-    return []
-  }
 
-  public static GetActionArgumentValuesAsPlainText(action: ActionBase | ScoredAction): string[] {
-    if (action.actionType === ActionTypes.TEXT) {
-      return []
-    }
-    if (action.actionType !== ActionTypes.TEXT) {
-      let actionPayload = JSON.parse(action.payload) as ActionPayload
-      return actionPayload.arguments.map(a => getActionArgumentValueAsPlainText(a))
-    }
     return []
   }
 }
@@ -79,20 +73,103 @@ export interface ActionIdList {
   actionIds: string[]
 }
 
+// TODO: Remove was originally storing two properties text/json
+// but now text is removed and this is only here for backwards compatibility
 export interface TextPayload {
-  text: string
-  json: any
+  json: object
 }
 
 export interface ActionPayload {
   payload: string
-  arguments: ActionArgument[]
+  arguments: IActionArgument[]
 }
 
-export interface ActionArgument {
+export interface IActionArgument {
   parameter: string
-  value: TextPayload | string
+  value: TextPayload
 }
 
-export const getActionArgumentValueAsPlainText = (actionArgument: ActionArgument): string =>
-  typeof actionArgument.value === 'string' ? actionArgument.value : actionArgument.value.text
+export class ActionArgument {
+  parameter: string
+  value: object
+
+  constructor(actionArgument: IActionArgument) {
+    this.parameter = actionArgument.parameter
+    this.value = actionArgument.value.json
+  }
+
+  renderValue(entityValues: Map<string, string>): string {
+    return EntityIdSerializer.serialize(this.value, entityValues)
+  }
+}
+
+export interface RenderedActionArgument {
+  parameter: string
+  value: string
+}
+
+export class TextAction extends ActionBase {
+  value: object // json slate value
+
+  constructor(action: ActionBase) {
+    super(action)
+
+    if (action.actionType !== ActionTypes.TEXT) {
+      throw new Error(`You attempted to create text action from action of type: ${action.actionType}`)
+    }
+
+    this.value = JSON.parse(this.payload).json
+  }
+
+  renderValue(entityValues: Map<string, string>): string {
+    return EntityIdSerializer.serialize(this.value, entityValues)
+  }
+}
+
+export class ApiAction extends ActionBase {
+  name: string
+  arguments: ActionArgument[]
+
+  constructor(action: ActionBase) {
+    super(action)
+
+    if (action.actionType !== ActionTypes.API_LOCAL) {
+      throw new Error(`You attempted to create api action from action of type: ${action.actionType}`)
+    }
+
+    const actionPayload: ActionPayload = JSON.parse(this.payload)
+    this.name = actionPayload.payload
+    this.arguments = actionPayload.arguments.map(aa => new ActionArgument(aa))
+  }
+
+  renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
+    return this.arguments.map(aa => ({
+      ...aa,
+      value: EntityIdSerializer.serialize(aa.value, entityValues)
+    }))
+  }
+}
+
+export class CardAction extends ActionBase {
+  templateName: string
+  arguments: ActionArgument[]
+
+  constructor(action: ActionBase) {
+    super(action)
+
+    if (action.actionType !== ActionTypes.CARD) {
+      throw new Error(`You attempted to create card action from action of type: ${action.actionType}`)
+    }
+
+    const actionPayload: ActionPayload = JSON.parse(this.payload)
+    this.templateName = actionPayload.payload
+    this.arguments = actionPayload.arguments.map(aa => new ActionArgument(aa))
+  }
+
+  renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
+    return this.arguments.map(aa => ({
+      ...aa,
+      value: EntityIdSerializer.serialize(aa.value, entityValues)
+    }))
+  }
+}
