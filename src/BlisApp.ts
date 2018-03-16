@@ -14,6 +14,9 @@ export interface BlisAppBase {
   trainingFailureMessage: string
   trainingStatus: TrainingStatusCode
   datetime: Date
+  packageVersions?: PackageReference[]
+  livePackageId?: string
+  devPackageId?: string
 }
 
 export interface BlisAppList {
@@ -34,4 +37,9 @@ export enum TrainingStatusCode {
 export interface TrainingStatus {
   trainingStatus: TrainingStatusCode
   trainingFailureMessage: string | null | undefined
+}
+
+export interface PackageReference {
+  packageId: string
+  packageVersion: string
 }

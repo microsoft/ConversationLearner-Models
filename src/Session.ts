@@ -24,6 +24,6 @@ export interface SessionIdList {
 
 export interface SessionCreateParams {
   contextDialog?: LogRound[]
-  packageId?: number
+  packageId?: string
   saveToLog: boolean
 }

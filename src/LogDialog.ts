@@ -25,7 +25,7 @@ export interface LogDialog {
   logDialogId: string
   dialogBeginDatetime: string
   dialogEndDatetime: string
-  packageId: number
+  packageId: string
   metrics: string
   rounds: LogRound[]
 }
