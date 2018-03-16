@@ -37,5 +37,6 @@ export interface TeachWithHistory {
   dialogMode: DialogMode
   scoreResponse: ScoreResponse | undefined
   scoreInput: ScoreInput | undefined
-  discrepancies: string[]
+  replayDiscrepancies: string[]
+  validationErrors: string[]
 }
