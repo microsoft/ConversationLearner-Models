@@ -1,5 +1,6 @@
 import { Memory } from './Memory'
 import { ScoreResponse, ScoreInput } from './Score'
+import { ReplayError } from './ReplayError'
 
 export enum DialogMode {
   Extractor = 'Extract', // Waiting for Extractor feedback
@@ -37,5 +38,5 @@ export interface TeachWithHistory {
   dialogMode: DialogMode
   scoreResponse: ScoreResponse | undefined
   scoreInput: ScoreInput | undefined
-  discrepancies: string[]
+  replayErrors: ReplayError[]
 }
