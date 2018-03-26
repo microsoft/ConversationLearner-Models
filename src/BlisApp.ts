@@ -8,7 +8,6 @@ export interface BlisAppMetaData {
 export interface BlisAppBase {
   appName: string
   appId: string
-  luisKey: string
   locale: string
   metadata: BlisAppMetaData
   trainingFailureMessage: string
