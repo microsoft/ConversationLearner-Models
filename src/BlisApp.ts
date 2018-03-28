@@ -9,6 +9,7 @@ export interface BlisAppBase {
   appName: string
   appId: string
   locale: string
+  luisAppId: string
   metadata: BlisAppMetaData
   trainingFailureMessage: string
   trainingStatus: TrainingStatusCode
