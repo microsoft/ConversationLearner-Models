@@ -36,6 +36,7 @@ export interface TrainDialog {
   packageDeletionId: number
   rounds: TrainRound[]
   definitions?: AppDefinition | null
+  invalid?: boolean
 }
 
 export interface TrainResponse {
