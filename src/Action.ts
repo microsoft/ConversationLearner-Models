@@ -105,7 +105,7 @@ export class ActionArgument {
 
 export interface RenderedActionArgument {
   parameter: string
-  value: string
+  value: string | null
 }
 
 export class TextAction extends ActionBase {
@@ -143,10 +143,19 @@ export class ApiAction extends ActionBase {
   }
 
   renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
-    return this.arguments.map(aa => ({
-      ...aa,
-      value: EntityIdSerializer.serialize(aa.value, entityValues)
-    }))
+    return this.arguments.map(aa => {
+      let value = null
+      try {
+        value = EntityIdSerializer.serialize(aa.value, entityValues)
+      } catch (error) {
+        // Just return null if argument doesn't have a value
+      }
+
+      return {
+        ...aa,
+        value: value
+      }
+    })
   }
 }
 
@@ -167,9 +176,18 @@ export class CardAction extends ActionBase {
   }
 
   renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
-    return this.arguments.map(aa => ({
-      ...aa,
-      value: EntityIdSerializer.serialize(aa.value, entityValues)
-    }))
+    return this.arguments.map(aa => {
+      let value = null
+      try {
+        value = EntityIdSerializer.serialize(aa.value, entityValues)
+      } catch (error) {
+        // Just return null if argument doesn't have a value
+      }
+
+      return {
+        ...aa,
+        value: value
+      }
+    })
   }
 }
