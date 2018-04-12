@@ -1,4 +1,4 @@
-import { FilledEntity, FilledEntityMap, filledEntityValueAsString, MemoryValue } from './blis-models'
+import { FilledEntity, FilledEntityMap, filledEntityValueAsString, MemoryValue } from './ConversationLearner-Models'
 
 const createFilledEntity = (values: string[]): FilledEntity => {
   return {

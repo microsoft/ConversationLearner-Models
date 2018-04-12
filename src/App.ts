@@ -1,16 +1,16 @@
-export interface BlisAppMetaData {
+export interface AppMetaData {
   botFrameworkApps: string[]
   markdown: string
   video: string
   isLoggingOn: boolean
 }
 
-export interface BlisAppBase {
+export interface AppBase {
   appName: string
   appId: string
   locale: string
   luisAppId: string
-  metadata: BlisAppMetaData
+  metadata: AppMetaData
   trainingFailureMessage: string
   trainingStatus: TrainingStatusCode
   datetime: Date
@@ -19,11 +19,11 @@ export interface BlisAppBase {
   devPackageId?: string
 }
 
-export interface BlisAppList {
-  apps: BlisAppBase[]
+export interface AppList {
+  apps: AppBase[]
 }
 
-export interface BlisAppIdList {
+export interface AppIdList {
   appIds: string[]
 }
 

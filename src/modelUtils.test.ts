@@ -1,4 +1,4 @@
-import { ModelUtils } from './blis-models'
+import { ModelUtils } from './ConversationLearner-Models'
 
 describe('ModelUtils', () => {
   describe('RemoveWords', () => {

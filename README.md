@@ -1,6 +1,6 @@
-# blis-models
+# ConversationLearner-Models
 
-Models for BLIS (Bot Learning Intelligent Service)
+Models for ConversationLearner
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Microsoft/blis-models.svg)](https://greenkeeper.io/)
@@ -10,7 +10,7 @@ Models for BLIS (Bot Learning Intelligent Service)
 
 ### Usage
 
-This library is a collection of types, interfaces, and utilities shared across other blis repositories:
+This library is a collection of types, interfaces, and utilities shared across other ConversationLearner repositories:
 
 ```bash
 git clone https://github.com/Microsoft/blis-models.git blis-models
@@ -23,7 +23,7 @@ npm test
 ### Importing library
 
 ```typescript
-import * as models from 'blis-models'
+import * as models from 'ConversationLearner-Models'
 ```
 
 ### NPM scripts
