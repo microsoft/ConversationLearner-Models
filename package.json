@@ -19,7 +19,7 @@
   "author": "Microsoft Conversation Learner Team",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/blis-models.git"
+    "url": "https://github.com/Microsoft/conversationlearner-models.git"
   },
   "license": "MIT",
   "engines": {
