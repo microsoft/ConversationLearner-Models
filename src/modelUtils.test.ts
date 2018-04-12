@@ -1,4 +1,4 @@
-import { ModelUtils } from './ConversationLearner-Models'
+import { ModelUtils } from './conversationlearner-models'
 
 describe('ModelUtils', () => {
   describe('RemoveWords', () => {

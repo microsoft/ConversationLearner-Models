@@ -6,7 +6,7 @@ import typescript from 'rollup-plugin-typescript2'
 
 const pkg = require('./package.json')
 
-const libraryName = 'ConversationLearner-Models'
+const libraryName = 'conversationlearner-models'
 
 export default {
   input: `src/${libraryName}.ts`,
