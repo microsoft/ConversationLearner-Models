@@ -9,7 +9,7 @@ export interface IUser {
 /** Information about the running bot */
 export interface BotInfo {
   user: IUser
-  /** APICallbacks available to BLIS */
+  /** APICallbacks available to the Conversation Learner App */
   callbacks: CallbackAPI[]
   templates: Template[]
 }

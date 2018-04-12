@@ -1,10 +1,10 @@
-// TODO: Copied from BLIS-UI Need to improve Action design to find out how to consolidate knowledge to single layer
-// Originally blis-models was intended to know have to understand the tree structure which is why we added the
+// TODO: Copied from ConversationLearner-UI. Need to improve Action design to find out how to consolidate knowledge to single layer
+// Originally ConversationLearner-models was intended to know have to understand the tree structure which is why we added the
 // pre-serialized 'text' field; however, now can't use the text field becuase it includes entity id's instead of human-readable names
 // Instead of having to decide wether to perform substitutions from the serialized text or from the tree it's better to
 // just have single method used everywhere
 
-// Can't import because it's from blis-ui
+// Can't import because it's from ConversationLearner-UI
 //import { NodeTypes } from "./models";
 enum NodeTypes {
   Mention = 'mention-inline-node',

@@ -4,7 +4,9 @@ import { TrainExtractorStep, TrainScorerStep } from './TrainDialog'
 import { EntityBase } from './Entity'
 import { ExtractResponse } from './Extract'
 import { TeachResponse } from './Teach'
-import { BlisAppIdList, BlisAppList } from './BlisApp'
+import { AppIdList, AppList } from './App'
+
+export const CL_USER_NAME_ID = 'CLTrainer'
 
 export enum ScoreReason {
   // Action has been masked
@@ -44,6 +46,6 @@ export interface UITrainScorerStep {
 }
 
 export interface UIAppList {
-  appList: BlisAppList
+  appList: AppList
   activeApps: { [appId: string]: string } // appId: packageId
 }
