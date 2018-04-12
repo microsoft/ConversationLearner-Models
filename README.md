@@ -13,8 +13,8 @@ Models for ConversationLearner
 This library is a collection of types, interfaces, and utilities shared across other ConversationLearner repositories:
 
 ```bash
-git clone https://github.com/Microsoft/blis-models.git blis-models
-cd blis-models
+git clone https://github.com/Microsoft/conversationlearner-models.git blis-models
+cd conversationlearner-models
 npm install
 npm run build
 npm test
@@ -23,7 +23,7 @@ npm test
 ### Importing library
 
 ```typescript
-import * as models from 'ConversationLearner-Models'
+import * as models from 'conversationlearner-models'
 ```
 
 ### NPM scripts
