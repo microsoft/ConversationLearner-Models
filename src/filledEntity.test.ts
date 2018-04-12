@@ -1,4 +1,4 @@
-import { FilledEntity, FilledEntityMap, filledEntityValueAsString, MemoryValue } from './conversationLearner-models'
+import { FilledEntity, FilledEntityMap, filledEntityValueAsString, MemoryValue } from './conversationlearner-models'
 
 const createFilledEntity = (values: string[]): FilledEntity => {
   return {
