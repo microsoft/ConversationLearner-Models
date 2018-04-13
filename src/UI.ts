@@ -7,6 +7,7 @@ import { TeachResponse } from './Teach'
 import { AppIdList, AppList } from './App'
 
 export const CL_USER_NAME_ID = 'CLTrainer'
+export const MEMORY_KEY_HEADER_NAME = 'x-conversationlearner-memory-key'
 
 export enum ScoreReason {
   // Action has been masked
