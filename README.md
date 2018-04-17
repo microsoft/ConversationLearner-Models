@@ -3,10 +3,7 @@
 Models for ConversationLearner
 
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Greenkeeper badge](https://badges.greenkeeper.io/Microsoft/blis-models.svg)](https://greenkeeper.io/)
-[![Travis](https://img.shields.io/travis/Microsoft/blis-models.svg)](https://travis-ci.org/Microsoft/blis-models)
-[![Coveralls](https://img.shields.io/coveralls/Microsoft/blis-models.svg)](https://coveralls.io/github/Microsoft/blis-models)
-[![Dev Dependencies](https://david-dm.org/Microsoft/blis-models/dev-status.svg)](https://david-dm.org/Microsoft/blis-models?type=dev)
+[![Travis](https://api.travis-ci.com/Microsoft/ConversationLearner-Models.svg?token=x6vFsyYxGQbhsxY6ztLP&branch=master)](https://travis-ci.com/Microsoft/ConversationLearner-Models)
 
 ### Usage
 
