@@ -82,8 +82,11 @@ function serializeNode(node: any, entityValues: Map<string, string>, fallbackToO
     // This check is required becuase when input is Slate Value node is Immutable.Map object
     // but it could also be a node from value.toJSON()
     const data = typeof node.data.toJS === 'function' ? node.data.toJS() : node.data
-    const option = data.option
+    if (!data.completed) {
+      return serializedChildNodes.join('')
+    }
 
+    const option = data.option
     if (!option) {
       throw new Error(`Attempting to serialize inline node but it did not have option`)
     }
