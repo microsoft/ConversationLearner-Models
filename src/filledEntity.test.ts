@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { FilledEntity, FilledEntityMap, filledEntityValueAsString, MemoryValue } from './conversationlearner-models'
 
 const createFilledEntity = (values: string[]): FilledEntity => {

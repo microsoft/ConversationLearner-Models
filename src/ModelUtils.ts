@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { ExtractResponse } from './Extract'
 import { Teach, TeachResponse } from './Teach'
 import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, ContextDialog } from './TrainDialog'

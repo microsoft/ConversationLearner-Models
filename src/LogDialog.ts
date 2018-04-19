@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { ScoreResponse, ScoreInput } from './Score'
 import { ExtractResponse } from './Extract'
 import { Metrics } from './Metrics'

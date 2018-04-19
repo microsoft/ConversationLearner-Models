@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 // TODO: Copied from ConversationLearner-UI. Need to improve Action design to find out how to consolidate knowledge to single layer
 // Originally ConversationLearner-models was intended to know have to understand the tree structure which is why we added the
 // pre-serialized 'text' field; however, now can't use the text field becuase it includes entity id's instead of human-readable names
