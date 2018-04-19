@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { Memory } from './Memory'
 import { ScoreInput, ScoreResponse } from './Score'
 import { TrainExtractorStep, TrainScorerStep } from './TrainDialog'

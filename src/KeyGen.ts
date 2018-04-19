@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 export class KeyGen {
   public static MakeKey(address: string) {
     return this.HashCode(address).toString()

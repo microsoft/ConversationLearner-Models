@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { MemoryValue } from './Memory'
 
 const SUBSTITUTE_PREFIX = '$'

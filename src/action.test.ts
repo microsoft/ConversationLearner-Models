@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { ActionArgument, ActionTypes, ActionBase, ActionPayload, TextPayload, IActionArgument } from './Action'
 
 const createEmptyAction = (): ActionBase => ({

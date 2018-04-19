@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { Memory } from './Memory'
 import { ScoreResponse, ScoreInput } from './Score'
 import { ReplayError } from './ReplayError'

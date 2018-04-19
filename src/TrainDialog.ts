@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Licensed under the MIT License.
+ */
 import { ScoreInput, ScoredAction } from './Score'
 import { LabeledEntity } from './Entity'
 import { AppDefinition } from './AppDefinition'
