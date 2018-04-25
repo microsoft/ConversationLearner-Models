@@ -16,4 +16,5 @@ export interface BotInfo {
   /** APICallbacks available to the Conversation Learner App */
   callbacks: CallbackAPI[]
   templates: Template[]
+  validationErrors: string[]
 }
