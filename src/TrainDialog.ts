@@ -35,6 +35,7 @@ export interface TrainRound {
 
 export interface TrainDialog {
   trainDialogId: string
+  sourceLogDialogId: string
   version: number
   packageCreationId: number
   packageDeletionId: number
@@ -58,6 +59,7 @@ export interface TrainDialogIdList {
   trainDialogIds: string[]
 }
 
-export interface ContextDialog {
+export interface CreateTeachParams {
   contextDialog: TrainRound[]
+  sourceLogDialogId?: string
 }

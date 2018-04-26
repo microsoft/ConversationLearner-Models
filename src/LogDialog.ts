@@ -27,6 +27,7 @@ export interface LogRound {
 
 export interface LogDialog {
   logDialogId: string
+  targetTrainDialogIds: string[]
   dialogBeginDatetime: string
   dialogEndDatetime: string
   packageId: string
