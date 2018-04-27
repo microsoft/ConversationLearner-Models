@@ -4,7 +4,7 @@
  */
 import { ExtractResponse } from './Extract'
 import { Teach, TeachResponse } from './Teach'
-import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, ContextDialog } from './TrainDialog'
+import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, CreateTeachParams } from './TrainDialog'
 import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
 import { EntityList, EntityBase, LabeledEntity, PredictedEntity } from './Entity'
 import { ActionBase } from './Action'
@@ -131,6 +131,7 @@ export class ModelUtils {
       packageCreationId: 0,
       packageDeletionId: 0,
       trainDialogId: '',
+      sourceLogDialogId: logDialog.logDialogId,
       version: 0,
       rounds: trainRounds,
       definitions: appDefinition
@@ -170,23 +171,24 @@ export class ModelUtils {
   }
 
   //====================================================================
-  // CONVERSION: TrainDialog == ContextDialog
+  // CONVERSION: TrainDialog == CreateTeachParams
   //====================================================================
-  public static ToContextDialog(trainDialog: TrainDialog): ContextDialog {
-    let contextDialog: ContextDialog = {
-      contextDialog: trainDialog.rounds
+  public static ToCreateTeachParams(trainDialog: TrainDialog): CreateTeachParams {
+    let createTeachParams: CreateTeachParams = {
+      contextDialog: trainDialog.rounds,
+      sourceLogDialogId: trainDialog.sourceLogDialogId
     }
 
     // TODO: Change to non destructive operation
     // Strip out "entityType" (*sigh*)
-    for (let round of contextDialog.contextDialog) {
+    for (let round of createTeachParams.contextDialog) {
       for (let textVariation of round.extractorStep.textVariations) {
         for (let labeledEntity of textVariation.labelEntities) {
           delete (labeledEntity as any).entityType
         }
       }
     }
-    return contextDialog
+    return createTeachParams
   }
 
   //====================================================================
