@@ -1,5 +1,5 @@
 /**
- * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
 import EntityIdSerializer from './slateSerializer'
@@ -47,11 +47,14 @@ export class ActionBase {
       } catch (e) {
         const error = e as Error
         throw new Error(
-          `Error when attempting to parse text action payload. This might be an old action which was saved as a string.  Please create a new action. ${error.message}`
+          `Error when attempting to parse text action payload. This might be an old action which was saved as a string.  Please create a new action. ${
+            error.message
+          }`
         )
       }
     }
-    if (action.actionType !== ActionTypes.TEXT) {
+    // For API or CARD the payload field of the outer payload is the name of API or the filename of the card template without extension
+    else if ([ActionTypes.CARD, ActionTypes.API_LOCAL].includes(action.actionType)) {
       let actionPayload = JSON.parse(action.payload) as ActionPayload
       return actionPayload.payload
     }
