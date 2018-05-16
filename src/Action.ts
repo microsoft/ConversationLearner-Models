@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-import EntityIdSerializer from './slateSerializer'
+import EntityIdSerializer, { IOptions } from './slateSerializer'
 import { ScoredAction } from './Score'
 
 export const ActionTypes = {
@@ -105,8 +105,8 @@ export class ActionArgument {
     this.value = actionArgument.value.json
   }
 
-  renderValue(entityValues: Map<string, string>): string {
-    return EntityIdSerializer.serialize(this.value, entityValues)
+  renderValue(entityValues: Map<string, string>, serializerOptions: Partial<IOptions> = {}): string {
+    return EntityIdSerializer.serialize(this.value, entityValues, serializerOptions)
   }
 }
 
@@ -128,8 +128,8 @@ export class TextAction extends ActionBase {
     this.value = JSON.parse(this.payload).json
   }
 
-  renderValue(entityValues: Map<string, string>): string {
-    return EntityIdSerializer.serialize(this.value, entityValues)
+  renderValue(entityValues: Map<string, string>, serializerOptions: Partial<IOptions> = {}): string {
+    return EntityIdSerializer.serialize(this.value, entityValues, serializerOptions)
   }
 }
 
@@ -149,11 +149,11 @@ export class ApiAction extends ActionBase {
     this.arguments = actionPayload.arguments.map(aa => new ActionArgument(aa))
   }
 
-  renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
+  renderArguments(entityValues: Map<string, string>, serializerOptions: Partial<IOptions> = {}): RenderedActionArgument[] {
     return this.arguments.map(aa => {
       let value = null
       try {
-        value = EntityIdSerializer.serialize(aa.value, entityValues)
+        value = EntityIdSerializer.serialize(aa.value, entityValues, serializerOptions)
       } catch (error) {
         // Just return null if argument doesn't have a value
       }
@@ -182,11 +182,11 @@ export class CardAction extends ActionBase {
     this.arguments = actionPayload.arguments.map(aa => new ActionArgument(aa))
   }
 
-  renderArguments(entityValues: Map<string, string>): RenderedActionArgument[] {
+  renderArguments(entityValues: Map<string, string>, serializerOptions: Partial<IOptions> = {}): RenderedActionArgument[] {
     return this.arguments.map(aa => {
       let value = null
       try {
-        value = EntityIdSerializer.serialize(aa.value, entityValues)
+        value = EntityIdSerializer.serialize(aa.value, entityValues, serializerOptions)
       } catch (error) {
         // Just return null if argument doesn't have a value
       }
