@@ -18,9 +18,7 @@ describe('ModelUtils', () => {
       expect(ModelUtils.RemoveWords('test1 test2', 1)).toEqual('test2')
     })
   })
-})
 
-describe('ModelUtils', () => {
   describe('PrebuiltDisplayText', () => {
     test('given prebuilt type starts with encyclopediea should return entityText', () => {
       // Arrange
