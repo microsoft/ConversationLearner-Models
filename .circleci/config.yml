@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
       - image: circleci/node:8.11.2-browsers
     steps:
@@ -29,7 +26,7 @@ jobs:
       - run: npm run build
       - run:
           name: release
-          command: npm run semantic-release || true
+          command: if [ $CIRCLE_BRANCH = 'master' ]; then npm run semantic-release || true;
 
 workflows:
   version: 2
