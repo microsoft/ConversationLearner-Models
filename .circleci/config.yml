@@ -24,9 +24,6 @@ jobs:
 
       - run: npm run test:prod 
       - run: npm run build
-      - run:
-          name: release
-          command: if [ $CIRCLE_BRANCH = 'master' ]; then npm run semantic-release || true;
 
 workflows:
   version: 2
