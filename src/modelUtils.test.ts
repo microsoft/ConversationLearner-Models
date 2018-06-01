@@ -76,7 +76,7 @@ describe('ModelUtils', () => {
     test(`given prebuilt with type datetimeV2.daterange return start and end values from resolution`, () => {
       expect(
         ModelUtils.PrebuiltDisplayText(
-          'builtin.,datetimeV2.daterange',
+          'builtin.datetimeV2.daterange',
           {
             values: [
               {
@@ -93,7 +93,7 @@ describe('ModelUtils', () => {
     test(`given prebuilt with type datetimeV2.daterange return start and end values from resolution`, () => {
       expect(
         ModelUtils.PrebuiltDisplayText(
-          'builtin.,datetimeV2.duration',
+          'builtin.datetimeV2.duration',
           {
             values: [
               {
@@ -138,6 +138,9 @@ describe('ModelUtils', () => {
 
     const createTeachParams = ModelUtils.ToCreateTeachParams(trainDialog)
 
-    expect(createTeachParams).toEqual(trainDialog)
+    expect(createTeachParams).toEqual({
+      contextDialog: trainDialog.rounds,
+      sourceLogDialogId: trainDialog.sourceLogDialogId
+    })
   })
 })

@@ -123,7 +123,7 @@ describe('filledEntity', () => {
       })
 
       test('given filled entity number value return number', () => {
-        const filledEntityMap = new FilledEntityMap({
+        const filledEntityMapWithNumber = new FilledEntityMap({
           map: {
             entityName1: {
               entityId: 'entityId1',
@@ -139,7 +139,7 @@ describe('filledEntity', () => {
           }
         })
 
-        expect(filledEntityMap.ValueAsNumber('entityName1')).toEqual(3)
+        expect(filledEntityMapWithNumber.ValueAsNumber('entityName1')).toEqual(3)
       })
     })
 
