@@ -5,17 +5,17 @@
 import EntityIdSerializer, { IOptions } from './slateSerializer'
 import { ScoredAction } from './Score'
 
-export const ActionTypes = {
-  TEXT: 'TEXT',
-  API_LOCAL: 'API_LOCAL',
-  CARD: 'CARD',
-  END_SESSION: 'END_SESSION',
-  RENDER: 'RENDER'
+export enum ActionTypes {
+  TEXT = 'TEXT',
+  API_LOCAL = 'API_LOCAL',
+  CARD = 'CARD',
+  END_SESSION = 'END_SESSION',
+  RENDER = 'RENDER'
 }
 
 export class ActionBase {
   actionId: string
-  actionType: string
+  actionType: ActionTypes
   payload: string
   isTerminal: boolean
   requiredEntitiesFromPayload: string[]
