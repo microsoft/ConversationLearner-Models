@@ -10,7 +10,9 @@ export enum ReplayErrorType {
   /* Action in Score Rounds after Wait action */
   ActionAfterWait = 'ActionAfterWait',
   /* Two consecutive user inputs */
-  TwoUserInputs = 'TwoUserInputs'
+  TwoUserInputs = 'TwoUserInputs',
+  /* User input after non-wait */
+  InputAfterNonWait = 'InputAfterNonWait'
 }
 
 export class ReplayError {
@@ -50,5 +52,11 @@ export class ReplayErrorActionAfterWait extends ReplayError {
 export class ReplayErrorTwoUserInputs extends ReplayError {
   constructor() {
     super(ReplayErrorType.TwoUserInputs)
+  }
+}
+
+export class ReplayErrorInputAfterNonWait extends ReplayError {
+  constructor() {
+    super(ReplayErrorType.InputAfterNonWait)
   }
 }

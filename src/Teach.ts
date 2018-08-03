@@ -7,6 +7,7 @@ import { ScoreResponse, ScoreInput } from './Score'
 import { ReplayError } from './ReplayError'
 import { UIScoreInput } from './UI'
 import { ActionBase } from './Action'
+import { ExtractResponse } from './Extract'
 
 export enum DialogMode {
   Extractor = 'Extract', // Waiting for Extractor feedback
@@ -37,6 +38,15 @@ export interface TeachIdList {
   teachIds: string[]
 }
 
+export enum HistoryMode {
+  /** Only return next Score, abandoning TeachSession */
+  SCORE_ONLY = 'SCORE_ONLY',
+  /** Only return extraction, abandoning TeachSession */
+  EXTRACT_ONLY = 'EXTRACT_ONLY',
+  /** Keep TeachSession Open */
+  CONTINUE = 'CONTINUE' // Waiting for user input,
+}
+
 export interface TeachWithHistory {
   teach: Teach | undefined
   history: any[]
@@ -45,6 +55,7 @@ export interface TeachWithHistory {
   dialogMode: DialogMode
   scoreResponse: ScoreResponse | undefined
   scoreInput: ScoreInput | undefined
+  extractResponse: ExtractResponse | undefined
   uiScoreInput: UIScoreInput | undefined
   lastAction: ActionBase | null
   replayErrors: ReplayError[]
