@@ -17,8 +17,7 @@ import {
 
 const createEmptyAction = (): ActionBase => ({
   actionId: '',
-  createdDateTime: new Date().toJSON(),
-  lastModifiedDateTime: new Date().toJSON(),
+  createdDateTime: '',
   payload: '',
   isTerminal: false,
   requiredEntitiesFromPayload: [],
@@ -328,7 +327,6 @@ describe('Action', () => {
         actionId: 'fake-action-id',
         actionType: ActionTypes.TEXT,
         createdDateTime: new Date().toJSON(),
-        lastModifiedDateTime: new Date().toJSON(),
         payload: 'fake-action-payload',
         isTerminal: false,
         requiredEntitiesFromPayload: [],
@@ -355,7 +353,6 @@ describe('Action', () => {
         actionId: 'fake-action-id',
         actionType: ActionTypes.TEXT,
         createdDateTime: new Date().toJSON(),
-        lastModifiedDateTime: new Date().toJSON(),
         payload: 'fake-action-payload',
         isTerminal: false,
         requiredEntitiesFromPayload: [],
@@ -380,7 +377,6 @@ describe('Action', () => {
         actionId: 'fake-action-id',
         actionType: 'fake-action-type' as ActionTypes,
         createdDateTime: new Date().toJSON(),
-        lastModifiedDateTime: new Date().toJSON(),
         payload: 'fake-action-payload',
         isTerminal: false,
         requiredEntitiesFromPayload: [],
