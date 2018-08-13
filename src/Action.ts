@@ -16,6 +16,7 @@ export class ActionBase {
   actionId: string
   actionType: ActionTypes
   createdDateTime: string
+  lastModifiedDateTime: string
   payload: string
   isTerminal: boolean
   requiredEntitiesFromPayload: string[]
@@ -30,6 +31,7 @@ export class ActionBase {
     this.actionId = action.actionId
     this.actionType = action.actionType
     this.createdDateTime = action.createdDateTime
+    this.lastModifiedDateTime = action.lastModifiedDateTime
     this.payload = action.payload
     this.isTerminal = action.isTerminal
     this.requiredEntitiesFromPayload = action.requiredEntitiesFromPayload || []

@@ -18,6 +18,7 @@ export interface EntityBase {
   entityName: string
   entityType: string
   createdDateTime: string
+  lastModifiedDateTime: string
   version: number | null
   packageCreationId: number | null
   packageDeletionId: number | null
