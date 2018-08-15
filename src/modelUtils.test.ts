@@ -109,6 +109,8 @@ describe('ModelUtils', () => {
 
   describe('ToCreateTeachParams', () => {
     const trainDialog: TrainDialog = {
+      createdDateTime: new Date().toJSON(),
+      lastModifiedDateTime: new Date().toJSON(),
       trainDialogId: 'trainDialogId',
       sourceLogDialogId: 'sourceLogDialogId',
       version: 1,
@@ -128,6 +130,7 @@ describe('ModelUtils', () => {
                 context: {},
                 maskedActions: []
               },
+              logicResult: undefined,
               labelAction: 'test',
               scoredAction: undefined
             }

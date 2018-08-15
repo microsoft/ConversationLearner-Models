@@ -128,6 +128,8 @@ export class ModelUtils {
     }
 
     return {
+      createdDateTime: logDialog.createdDateTime,
+      lastModifiedDateTime: logDialog.lastModifiedDateTime,
       packageCreationId: 0,
       packageDeletionId: 0,
       trainDialogId: '',
@@ -154,6 +156,7 @@ export class ModelUtils {
       scorerSteps: logRound.scorerSteps.map<TrainScorerStep>(logScorerStep => ({
         input: logScorerStep.input,
         labelAction: logScorerStep.predictedAction,
+        logicResult: undefined,
         scoredAction: undefined
       }))
     }
@@ -166,6 +169,7 @@ export class ModelUtils {
     return {
       input: logScorerStep.input,
       labelAction: logScorerStep.predictedAction,
+      logicResult: undefined,
       scoredAction: undefined
     }
   }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) Microsoft Corporation. All rights reserved.  
+ * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
 import { ScoreResponse, ScoreInput } from './Score'
@@ -26,6 +26,8 @@ export interface LogRound {
 }
 
 export interface LogDialog {
+  createdDateTime: string
+  lastModifiedDateTime: string
   logDialogId: string
   targetTrainDialogIds: string[]
   dialogBeginDatetime: string
