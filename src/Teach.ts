@@ -38,15 +38,6 @@ export interface TeachIdList {
   teachIds: string[]
 }
 
-export enum HistoryMode {
-  /** Only return next Score, abandoning TeachSession */
-  SCORE_ONLY = 'SCORE_ONLY',
-  /** Only return extraction, abandoning TeachSession */
-  EXTRACT_ONLY = 'EXTRACT_ONLY',
-  /** Keep TeachSession Open */
-  CONTINUE = 'CONTINUE' // Waiting for user input,
-}
-
 export interface TeachWithHistory {
   teach: Teach | undefined
   history: any[]
