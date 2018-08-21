@@ -5,6 +5,7 @@
 import { EntityBase } from './Entity'
 import { ActionBase } from './Action'
 import { TrainDialog } from './TrainDialog'
+import { AppBase } from './App'
 
 export interface AppDefinition {
   entities: EntityBase[]
@@ -12,7 +13,28 @@ export interface AppDefinition {
   trainDialogs: TrainDialog[]
 }
 
-export interface AppDefinitionChange {
+export interface AppDefinitionChanges {
+  entities: IChangeResult<EntityBase>[]
+  actions: IChangeResult<ActionBase>[]
+  trainDialogs: IChangeResult<TrainDialog>[]
+}
+
+export interface AppDefinitionWithoutChange {
+  isChanged: false
   currentAppDefinition: AppDefinition
-  updatedAppDefinition: AppDefinition | undefined
+}
+
+export interface AppDefinitionWithChange {
+  isChanged: true
+  currentAppDefinition: AppDefinition
+  updatedAppDefinition: AppDefinition
+  appDefinitionChanges: AppDefinitionChanges
+}
+
+export type AppDefinitionChange = AppDefinitionWithChange | AppDefinitionWithoutChange
+
+export interface IChangeResult<T> {
+  isChanged: boolean
+  value: T
+  changes: string[]
 }
