@@ -178,24 +178,7 @@ export class ApiAction extends ActionBase {
       throw new Error(`You attempted to create api action from action of type: ${action.actionType}`)
     }
 
-    // const actionPayload: ActionPayload = JSON.parse(this.payload)
-    /**
-     * For backwards-compatibility we must check if the action payload has old 'arguments'
-     * array.  If so, convert it up to the new arguments.
-     */
-    let actionPayload: ActionPayload
-    const untypedActionPayload: any = JSON.parse(this.payload)
-    if (Array.isArray(untypedActionPayload.arguments)) {
-      const legacyActionPayload: ActionPayloadSingleArguments = untypedActionPayload
-      actionPayload = {
-        payload: legacyActionPayload.payload,
-        logicArguments: legacyActionPayload.arguments,
-        renderArguments: []
-      }
-    } else {
-      actionPayload = untypedActionPayload
-    }
-
+    const actionPayload: ActionPayload = JSON.parse(this.payload)
     this.name = actionPayload.payload
     this.logicArguments = actionPayload.logicArguments.map(aa => new ActionArgument(aa))
     this.renderArguments = actionPayload.renderArguments.map(aa => new ActionArgument(aa))
