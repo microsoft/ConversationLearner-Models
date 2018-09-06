@@ -94,6 +94,7 @@
     "@types/fs-extra": "^5.0.0",
     "@types/jest": "^22.1.0",
     "@types/node": "^8.0.0",
+    "@types/uuid": "^3.4.4",
     "colors": "^1.1.2",
     "commitizen": "^2.9.6",
     "coveralls": "^3.0.0",
@@ -130,5 +131,8 @@
   },
   "prettier": {
     "printWidth": 140
+  },
+  "dependencies": {
+    "uuid": "^3.3.2"
   }
 }
