@@ -107,7 +107,7 @@ describe('ModelUtils', () => {
     })
   })
 
-  describe('ToCreateTeachParams', () => {
+  describe('Params', () => {
     const trainDialog: TrainDialog = {
       createdDateTime: new Date().toJSON(),
       lastModifiedDateTime: new Date().toJSON(),

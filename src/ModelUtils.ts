@@ -4,9 +4,9 @@
  */
 import { ExtractResponse } from './Extract'
 import { Teach, TeachResponse } from './Teach'
-import { TrainRound, TrainDialog, TrainExtractorStep, TrainScorerStep, TextVariation, CreateTeachParams } from './TrainDialog'
+import { TrainRound, TrainDialog, TrainScorerStep, TextVariation, CreateTeachParams, SenderType } from './TrainDialog'
 import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
-import { EntityList, EntityBase, LabeledEntity, PredictedEntity } from './Entity'
+import { EntityBase, LabeledEntity, PredictedEntity } from './Entity'
 import { ActionBase } from './Action'
 import { AppDefinition } from './AppDefinition'
 
@@ -206,6 +206,36 @@ export class ModelUtils {
       lastQueryDatetime: undefined,
       packageId: undefined
     }
+  }
+
+  //====================================================================
+  // Misc utils shared between SDK and UI
+  //====================================================================
+  /* Converts user intput into BB.Activity */
+  public static InputToActivity(userText: string, userName: string, userId: string, roundNum: number): any {
+    // Generate activity
+    return {
+      id: this.generateGUID(),
+      from: { id: userId, name: userName },
+      channelData: {
+        senderType: SenderType.User,
+        roundIndex: roundNum,
+        scoreIndex: 0,
+        clientActivityId: this.generateGUID()
+      },
+      type: 'message',
+      text: userText
+    }
+  }
+
+  public static generateGUID(): string {
+    let d = new Date().getTime()
+    let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, char => {
+      let r = ((d + Math.random() * 16) % 16) | 0
+      d = Math.floor(d / 16)
+      return (char === 'x' ? r : (r & 0x3) | 0x8).toString(16)
+    })
+    return guid
   }
 
   public static PrebuiltDisplayText(builtinType: string, resolution: any, entityText: string): string {
