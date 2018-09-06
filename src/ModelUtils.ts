@@ -9,9 +9,18 @@ import { LogDialog, LogRound, LogScorerStep } from './LogDialog'
 import { EntityBase, LabeledEntity, PredictedEntity } from './Entity'
 import { ActionBase } from './Action'
 import { AppDefinition } from './AppDefinition'
-import * as uuid from 'uuid'
 
 export class ModelUtils {
+  public static generateGUID(): string {
+    let d = new Date().getTime()
+    let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, char => {
+      let r = ((d + Math.random() * 16) % 16) | 0
+      d = Math.floor(d / 16)
+      return (char === 'x' ? r : (r & 0x3) | 0x8).toString(16)
+    })
+    return guid
+  }
+
   /** Remove n words from start of string */
   public static RemoveWords(text: string, numWords: number): string {
     if (text.length === 0 || numWords === 0) {
@@ -216,13 +225,13 @@ export class ModelUtils {
   public static InputToActivity(userText: string, userName: string, userId: string, roundNum: number): any {
     // Generate activity
     return {
-      id: uuid.v4(),
+      id: this.generateGUID(),
       from: { id: userId, name: userName },
       channelData: {
         senderType: SenderType.User,
         roundIndex: roundNum,
         scoreIndex: 0,
-        clientActivityId: uuid.v4()
+        clientActivityId: this.generateGUID()
       },
       type: 'message',
       text: userText
