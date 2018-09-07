@@ -144,7 +144,8 @@ describe('ModelUtils', () => {
 
     expect(createTeachParams).toEqual({
       contextDialog: trainDialog.rounds,
-      sourceLogDialogId: trainDialog.sourceLogDialogId
+      sourceLogDialogId: trainDialog.sourceLogDialogId,
+      initialFilledEntities: trainDialog.initialFilledEntities
     })
   })
 })
