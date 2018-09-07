@@ -118,6 +118,7 @@ describe('ModelUtils', () => {
       packageDeletionId: 2,
       definitions: null,
       invalid: false,
+      initialFilledEntities: [],
       rounds: [
         {
           extractorStep: {

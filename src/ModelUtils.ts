@@ -146,7 +146,8 @@ export class ModelUtils {
       sourceLogDialogId: logDialog.logDialogId,
       version: 0,
       rounds: trainRounds,
-      definitions: appDefinition
+      definitions: appDefinition,
+      initialFilledEntities: logDialog.initialFilledEntities
     }
   }
 
@@ -190,7 +191,8 @@ export class ModelUtils {
   public static ToCreateTeachParams(trainDialog: TrainDialog): CreateTeachParams {
     let createTeachParams: CreateTeachParams = {
       contextDialog: trainDialog.rounds,
-      sourceLogDialogId: trainDialog.sourceLogDialogId
+      sourceLogDialogId: trainDialog.sourceLogDialogId,
+      initialFilledEntities: trainDialog.initialFilledEntities
     }
 
     // TODO: Change to non destructive operation
