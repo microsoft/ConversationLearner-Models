@@ -11,7 +11,10 @@ export enum ReplayErrorType {
   EntityEmpty = 'EntityEmpty',
   /* Selected Action is not available with given constraints */
   ActionUnavailable = 'ActionUnavailable',
+  /* NOT YET USED: For api changes */
   EntityDiscrepancy = 'EntityDiscrepancy',
+  /* Entity was labelled inconsistently */
+  LabelDiscrepancy = 'LabelDiscrepancy',
   /* Action in Score Rounds after Wait action */
   ActionAfterWait = 'ActionAfterWait',
   /* Two consecutive user inputs */
@@ -51,6 +54,12 @@ export class ReplayErrorActionUnavailable extends ReplayError {
 export class ReplayErrorEntityDiscrepancy extends ReplayError {
   constructor(public lastUserInput: string, public originalEntities: string[], public newEntities: string[]) {
     super(ReplayErrorType.EntityDiscrepancy)
+  }
+}
+
+export class ReplayErrorLabelDiscrepancy extends ReplayError {
+  constructor(public entityName: string) {
+    super(ReplayErrorType.LabelDiscrepancy)
   }
 }
 
