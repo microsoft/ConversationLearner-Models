@@ -6,7 +6,6 @@ import { ScoreInput, ScoredAction } from './Score'
 import { LabeledEntity } from './Entity'
 import { AppDefinition } from './AppDefinition'
 import { FilledEntity } from './FilledEntity'
-import { LogDialog } from './LogDialog'
 
 export enum SenderType {
   User = 0,
