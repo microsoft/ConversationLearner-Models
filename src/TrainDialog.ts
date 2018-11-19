@@ -53,6 +53,10 @@ export interface TrainScorerStep {
   logicResult: LogicResult | undefined
   // Score of the selected action
   scoredAction: ScoredAction | undefined
+  // Stub text for this action (before real action is created)
+  stubText?: string
+  // Stub entity output for this action (before real action is created)
+  stubFilledEntities?: FilledEntity[]
 }
 
 export interface TrainRound {
