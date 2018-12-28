@@ -17,6 +17,6 @@ export interface BotInfo {
   callbacks: Callback[]
   templates: Template[]
   validationErrors: string[]
-  checksum: string
+  checksum?: string
   banner: Banner | null
 }
