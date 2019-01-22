@@ -19,7 +19,6 @@ npm run build
 npm test
 ```
 
-
 ### Importing library
 
 ```typescript
