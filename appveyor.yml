@@ -1,5 +1,20 @@
 skip_branch_with_pr: true
 
+branches:
+  only:
+    - master
+
+skip_tags: true
+
+skip_commits:
+  files:
+    - README.md
+    - code-of-conduct.md
+    - CONTRIBUTING.md
+    - LICENSE
+    - .circleci/*
+    - .vscode/*
+
 cache:
   - '%AppData%\npm-cache -> appveyor.yml'
   - node_modules -> package-lock.json
