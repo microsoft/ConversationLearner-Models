@@ -44,12 +44,6 @@ export interface EntityBase {
   doNotMemorize: boolean | null
 }
 
-export interface EntityEnum extends EntityBase {
-  enumGuid: string
-  enumValue: string
-  enumName: string
-}
-
 export function isPrebuilt(entity: EntityBase) {
   return (entity.entityName === `builtin-${entity.entityType.toLowerCase()}`)
 }
