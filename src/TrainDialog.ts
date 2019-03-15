@@ -56,7 +56,7 @@ export enum Validity {
 }
 
 export interface TrainDialogInput {
-  sourceLogDialogId: string
+  sourceLogDialogId?: string
   rounds: TrainRound[]
   definitions?: AppDefinition | null
   validity?: Validity

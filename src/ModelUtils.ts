@@ -164,7 +164,7 @@ export class ModelUtils {
       packageCreationId: 0,
       packageDeletionId: 0,
       trainDialogId: '',
-      sourceLogDialogId: logDialog.logDialogId,
+      sourceLogDialogId: undefined,
       version: 0,
       rounds: trainRounds,
       definitions: appDefinition,
