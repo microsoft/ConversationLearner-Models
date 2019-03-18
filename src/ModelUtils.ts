@@ -141,7 +141,8 @@ export class ModelUtils {
   public static ToTrainDialog(
     logDialog: LogDialog,
     actions: ActionBase[] | null = null,
-    entities: EntityBase[] | null = null
+    entities: EntityBase[] | null = null,
+    setSourceId: boolean = false
   ): TrainDialog {
     let trainRounds: TrainRound[] = []
     for (let logRound of logDialog.rounds) {
@@ -164,7 +165,9 @@ export class ModelUtils {
       packageCreationId: 0,
       packageDeletionId: 0,
       trainDialogId: '',
-      sourceLogDialogId: undefined,
+      sourceLogDialogId: setSourceId
+        ? logDialog.logDialogId
+        : undefined,
       version: 0,
       rounds: trainRounds,
       definitions: appDefinition,
