@@ -223,7 +223,7 @@ describe('ModelUtils', () => {
     test(`equal`, () => {
       let mv1 = makeMemoryValue('mv1')
       let mv2 = makeMemoryValue('mv2')
-      expect(ModelUtils.areEqualMemoryValues([mv1], [mv1])).toEqual(true)
+      expect(ModelUtils.areEqualMemoryValues([mv1], [mv2])).toEqual(true)
     })
 
     test(`mv1 diff`, () => {

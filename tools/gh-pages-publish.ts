@@ -1,6 +1,6 @@
-const { cd, exec, echo, touch } = require("shelljs")
-const { readFileSync } = require("fs")
-const url = require("url")
+import { cd, exec, echo, touch } from "shelljs"
+import { readFileSync } from "fs"
+import * as url from "url"
 
 let repoUrl
 let pkg = JSON.parse(readFileSync("package.json") as any)
