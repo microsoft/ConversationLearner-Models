@@ -15,7 +15,7 @@ jobs:
 
       - run: node --version
       - run: npm --version
-      - run: npm install
+      - run: npm ci
 
       - save_cache:
           paths:
