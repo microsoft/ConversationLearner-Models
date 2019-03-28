@@ -24,6 +24,7 @@ jobs:
 
       - run: npm run test 
       - run: npm run build
+      - run: npm run update-docs
       - run: npm run report-coverage
 
 workflows:

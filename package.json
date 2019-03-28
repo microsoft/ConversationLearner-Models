@@ -10,9 +10,8 @@
     "bot framework",
     "models"
   ],
-  "main": "dist/conversationlearner-models.umd.js",
-  "module": "dist/conversationlearner-models.es5.js",
-  "typings": "dist/conversationlearner-models.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
