@@ -6,6 +6,7 @@ Models for ConversationLearner
 [![Travis](https://api.travis-ci.com/Microsoft/ConversationLearner-Models.svg?token=x6vFsyYxGQbhsxY6ztLP&branch=master)](https://travis-ci.com/Microsoft/ConversationLearner-Models)
 [![CircleCI](https://circleci.com/gh/Microsoft/ConversationLearner-Models.svg?style=shield)](https://circleci.com/gh/Microsoft/ConversationLearner-Models)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Microsoft/ConversationLearner-Models?branch=master&svg=true)](https://ci.appveyor.com/project/conversationlearner/conversationlearner-models)
+[![Coverage Status](https://coveralls.io/repos/github/Microsoft/ConversationLearner-Models/badge.svg)](https://coveralls.io/github/Microsoft/ConversationLearner-Models)
 
 ### Usage
 
@@ -24,16 +25,6 @@ npm test
 ```typescript
 import * as models from '@conversationlearner/models'
 ```
-
-### NPM scripts
-
- - `npm t`: Run test suite
- - `npm start`: Run `npm run build` in watch mode
- - `npm run test:watch`: Run test suite in [interactive watch mode](http://facebook.github.io/jest/docs/cli.html#watch)
- - `npm run test:prod`: Run linting and generate coverage
- - `npm run build`: Generate bundles and typings, create docs
- - `npm run lint`: Lints code
- - `npm run commit`: Commit using conventional commit style ([husky](https://github.com/typicode/husky) will tell you to use it if you haven't :wink:)
 
 ### Semantic Release
 

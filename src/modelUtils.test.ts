@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-import { ModelUtils, TrainDialog, Validity, MemoryValue, FilledEntity, FilledEntityMap } from './conversationlearner-models'
+import { ModelUtils, TrainDialog, Validity, MemoryValue, FilledEntity, FilledEntityMap } from './'
 
 function makeMemoryValue(userText: string = 'userText'): MemoryValue {
   return {
@@ -10,7 +10,7 @@ function makeMemoryValue(userText: string = 'userText'): MemoryValue {
     displayText: 'displayText',
     builtinType: 'number',
     resolution: { data: 'one', number: '5' }
-  } as MemoryValue
+  }
 }
 
 function makeFilledEntity(elementValues: string[]): FilledEntity {
@@ -221,9 +221,10 @@ describe('ModelUtils', () => {
 
   describe('areEqualMemoryValues', () => {
     test(`equal`, () => {
-      let mv1 = makeMemoryValue('mv1')
-      let mv2 = makeMemoryValue('mv2')
-      expect(ModelUtils.areEqualMemoryValues([mv1], [mv1])).toEqual(true)
+      const userText = 'User Text'
+      let mv1 = makeMemoryValue(userText)
+      let mv2 = makeMemoryValue(userText)
+      expect(ModelUtils.areEqualMemoryValues([mv1], [mv2])).toEqual(true)
     })
 
     test(`mv1 diff`, () => {
