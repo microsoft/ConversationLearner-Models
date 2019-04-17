@@ -9,7 +9,8 @@ export enum ActionTypes {
   TEXT = 'TEXT',
   API_LOCAL = 'API_LOCAL',
   CARD = 'CARD',
-  END_SESSION = 'END_SESSION'
+  END_SESSION = 'END_SESSION',
+  SET_ENTITY = 'SET_ENTITY',
 }
 
 export enum ConditionType {
@@ -37,6 +38,8 @@ export class ActionBase {
   version: number
   packageCreationId: number
   packageDeletionId: number
+  entityId: string | undefined
+  enumValueId: string | undefined
 
   constructor(action: ActionBase) {
     this.actionId = action.actionId
@@ -53,6 +56,8 @@ export class ActionBase {
     this.version = action.version
     this.packageCreationId = action.packageCreationId
     this.packageDeletionId = action.packageDeletionId
+    this.entityId = action.entityId
+    this.enumValueId = action.enumValueId
   }
 
   // TODO: Refactor away from generic GetPayload for different action types
