@@ -4,7 +4,7 @@
  */
 import { Memory } from './Memory'
 import { ScoreInput, ScoreResponse } from './Score'
-import { TrainExtractorStep, TrainScorerStep, BotAPIError } from './TrainDialog'
+import { TrainExtractorStep, TrainScorerStep, LogicAPIError } from './TrainDialog'
 import { EntityBase } from './Entity'
 import { ExtractResponse } from './Extract'
 import { TeachResponse } from './Teach'
@@ -13,6 +13,7 @@ import { CLChannelData } from './CLChannelData'
 
 export const CL_USER_NAME_ID = 'CLTrainer'
 export const MEMORY_KEY_HEADER_NAME = 'x-conversationlearner-memory-key'
+export const BOT_CHECKSUM_HEADER_NAME = 'x-conversationlearner-bot-checksum'
 
 /** Indicates whether END_SESSION was called on the running Session */
 export enum SessionEndState {
@@ -54,7 +55,7 @@ export interface UIScoreResponse {
   scoreInput?: ScoreInput
   memories?: Memory[]
   extractConflict?: ExtractResponse | null
-  botAPIError?: BotAPIError | null
+  botAPIError?: LogicAPIError | null
 }
 
 export interface UITrainScorerStep {

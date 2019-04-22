@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-import { ScoreInput, ScoredAction } from './Score'
+import { ScoreInput, ScoredAction, ScoreResponse } from './Score'
 import { LabeledEntity } from './Entity'
 import { AppDefinition } from './AppDefinition'
 import { FilledEntity } from './FilledEntity'
@@ -28,21 +28,7 @@ export interface LogicResult {
   changedFilledEntities: FilledEntity[]
 }
 
-export function GetBotAPIError(logicResult: LogicResult | undefined): BotAPIError | null {
-  if (!logicResult) {
-    return null
-  }
-  if (!logicResult.logicValue) {
-    return null
-  }
-  const logicAPIResult = JSON.parse(logicResult.logicValue) as BotAPIError
-  if (!logicAPIResult.APIError) {
-    return null
-  }
-  return logicAPIResult
-}
-
-export interface BotAPIError {
+export interface LogicAPIError {
   APIError: string
 }
 
@@ -57,6 +43,8 @@ export interface TrainScorerStep {
   stubText?: string
   // Stub entity output for this action (before real action is created)
   stubFilledEntities?: FilledEntity[]
+  // Used for UI rendering only
+  uiScoreResponse?: ScoreResponse
 }
 
 export interface TrainRound {
@@ -86,6 +74,8 @@ export interface TrainDialog extends TrainDialogInput {
   packageCreationId: number
   packageDeletionId: number
   initialFilledEntities: FilledEntity[]
+  tags: string[]
+  description: string
 }
 
 export interface TrainResponse {

@@ -6,10 +6,9 @@ branches:
     - /^greenkeeper/.*$/
 
 cache:
-  yarn: true
   directories:
     - ~/.npm
-    - node_modules
+    - ~/.cache
 
 notifications:
   email: false
@@ -17,8 +16,11 @@ notifications:
 node_js:
   - node
 
+install:
+  - npm ci
+  
 script:
-  - npm run test:prod
+  - npm run test
   - npm run build
 
 # after_success:

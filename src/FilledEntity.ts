@@ -6,11 +6,9 @@ import { MemoryValue, Memory } from './Memory'
 import { ModelUtils } from './ModelUtils'
 import { EntityBase } from './Entity'
 
-const SUBSTITUTE_PREFIX = '$'
-
 export interface FilledEntity {
   entityId: string | null
-  values: MemoryValue[]
+  values: MemoryValue[] 
 }
 
 export const filledEntityValueAsString = (fe: FilledEntity): string => memoryValuesAsString(fe.values)
@@ -40,9 +38,24 @@ export const getEntityDisplayValueMap = (filledEntityMap: FilledEntityMap): Map<
   return Object.keys(filledEntityMap.map).reduce((m, key) => {
     const entityDisplayValue = filledEntityMap.ValueAsString(key)
 
-    // TODO: Required check because poor API from filledEntityMap which can return null
     if (entityDisplayValue) {
       m.set(key, entityDisplayValue)
+    }
+
+    // Entity is missing. Provide readable error message
+    else {
+      // Default to showing key
+      let missingValue = key
+
+      // If key is an entityId, try to get value from name key
+      if (filledEntityMap.map[key].entityId ===  key) {
+        for (let k of Object.keys(filledEntityMap.map)) {
+          if (k !== key && filledEntityMap.map[k].entityId === key) {
+            missingValue = k
+          }
+        }
+      }
+      m.set(key,`[$${missingValue}]`)
     }
 
     return m
@@ -56,13 +69,23 @@ export class FilledEntityMap {
     Object.assign(this, init)
   }
 
-  public static FromFilledEntities(filledEntities: FilledEntity[], entities: EntityBase[]) {
+  public static FromFilledEntities(filledEntities: FilledEntity[], entities: EntityBase[]): FilledEntityMap {
     let filledEntityMap = new FilledEntityMap()
     for (let filledEntity of filledEntities) {
       let entity = entities.find(e => e.entityId === filledEntity.entityId)
       if (entity) {
         filledEntityMap.map[entity.entityName] = filledEntity
       }
+    }
+    return filledEntityMap
+  }
+
+  // Flips entity name based map to entityId based map
+  public EntityMapToIdMap() {
+    let filledEntityMap = new FilledEntityMap()
+    for (let entityName in this.map) {
+      const filledEntity = this.map[entityName]
+      filledEntityMap.map[filledEntity.entityId!] = filledEntity
     }
     return filledEntityMap
   }
@@ -100,7 +123,7 @@ export class FilledEntityMap {
     }
 
     if (this.map[entityName].values.length === 0) {
-      return `[?????]`
+      return null
     }
     // Print out[] list in friendly manner
     return filledEntityValueAsString(this.map[entityName])
@@ -136,7 +159,7 @@ export class FilledEntityMap {
     return null
   }
 
-  public ValueAsPrebuilt(entityName: string): MemoryValue[] {
+  public Values(entityName: string): MemoryValue[] {
     if (!this.map[entityName]) {
       return []
     }
@@ -180,7 +203,17 @@ export class FilledEntityMap {
     builtinType: string | null = null,
     resolution: {} | null = null
   ): void {
-    for (let entityValue of entityValues) {
+
+    // Filter out empty strings
+    const values = entityValues.filter(s => s !== "")
+
+    // If no non-empty values, acts as delete
+    if (values.length === 0) {
+      this.Forget(entityName)
+      return
+    }
+
+    for (let entityValue of values) {
       this.Remember(entityName, entityId, entityValue, isBucket, builtinType, resolution)
     }
   }
@@ -192,8 +225,16 @@ export class FilledEntityMap {
     entityValue: string,
     isBucket: boolean = false,
     builtinType: string | null = null,
-    resolution: any | null = null
+    resolution: any | null = null,
+    enumValueId: string | null = null
   ): void {
+
+    // If setting to an empty string is actually a delete
+    if (entityValue === "") {
+      this.Forget(entityName)
+      return
+    }
+
     // If we don't already have entry in map for this item, create one
     if (!this.map[entityName]) {
       this.map[entityName] = {
@@ -204,11 +245,12 @@ export class FilledEntityMap {
 
     const displayText = builtinType && resolution ? ModelUtils.PrebuiltDisplayText(builtinType, resolution, entityValue) : entityValue
 
-    const newFilledEntityValue = {
+    const newFilledEntityValue: MemoryValue = {
       userText: entityValue,
       displayText,
       builtinType,
-      resolution
+      resolution,
+      enumValueId
     }
 
     const filledEntity = this.map[entityName]

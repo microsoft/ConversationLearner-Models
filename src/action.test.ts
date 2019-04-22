@@ -22,7 +22,9 @@ const createEmptyAction = (): ActionBase => ({
   isTerminal: false,
   requiredEntitiesFromPayload: [],
   requiredEntities: [],
+  requiredConditions: [],
   negativeEntities: [],
+  negativeConditions: [],
   suggestedEntity: '',
   version: 0,
   packageCreationId: 0,
@@ -125,131 +127,6 @@ const textPayloadWithRequiredEntity: TextPayload = {
   }
 }
 
-const textPayloadWithRequiredEntityAndOptionalEntity: TextPayload = {
-  json: {
-    kind: 'value',
-    document: {
-      kind: 'document',
-      data: {},
-      nodes: [
-        {
-          kind: 'block',
-          type: 'line',
-          isVoid: false,
-          data: {},
-          nodes: [
-            {
-              kind: 'text',
-              leaves: [
-                {
-                  kind: 'leaf',
-                  text: 'Action with required ',
-                  marks: []
-                }
-              ]
-            },
-            {
-              kind: 'inline',
-              type: 'mention-inline-node',
-              isVoid: false,
-              data: {
-                completed: true,
-                option: {
-                  id: '627a43be-4675-4b98-84a7-537262561be6',
-                  name: 'custom'
-                }
-              },
-              nodes: [
-                {
-                  kind: 'text',
-                  leaves: [
-                    {
-                      kind: 'leaf',
-                      text: '$custom',
-                      marks: []
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              kind: 'text',
-              leaves: [
-                {
-                  kind: 'leaf',
-                  text: ' entity and ',
-                  marks: []
-                }
-              ]
-            },
-            {
-              kind: 'inline',
-              type: 'optional-inline-node',
-              isVoid: false,
-              data: {},
-              nodes: [
-                {
-                  kind: 'text',
-                  leaves: [
-                    {
-                      kind: 'leaf',
-                      text: '[ optional ',
-                      marks: []
-                    }
-                  ]
-                },
-                {
-                  kind: 'inline',
-                  type: 'mention-inline-node',
-                  isVoid: false,
-                  data: {
-                    completed: true,
-                    option: {
-                      id: '5745fcb3-93ef-405a-b587-8edfb9f0a6a4',
-                      name: 'name'
-                    }
-                  },
-                  nodes: [
-                    {
-                      kind: 'text',
-                      leaves: [
-                        {
-                          kind: 'leaf',
-                          text: '$name',
-                          marks: []
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  kind: 'text',
-                  leaves: [
-                    {
-                      kind: 'leaf',
-                      text: ' entity]',
-                      marks: []
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              kind: 'text',
-              leaves: [
-                {
-                  kind: 'leaf',
-                  text: '',
-                  marks: []
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
 const textAction1: ActionBase = {
   ...createEmptyAction(),
   actionType: ActionTypes.TEXT,
@@ -332,6 +209,8 @@ describe('Action', () => {
         requiredEntitiesFromPayload: [],
         requiredEntities: [],
         negativeEntities: [],
+        requiredConditions: [],
+        negativeConditions: [],
         suggestedEntity: 'fake-action',
         version: 1,
         packageCreationId: 1,
@@ -357,7 +236,9 @@ describe('Action', () => {
         isTerminal: false,
         requiredEntitiesFromPayload: [],
         requiredEntities: [],
+        requiredConditions: [],
         negativeEntities: [],
+        negativeConditions: [],
         suggestedEntity: 'fake-action',
         version: 1,
         packageCreationId: 1,
@@ -381,7 +262,9 @@ describe('Action', () => {
         isTerminal: false,
         requiredEntitiesFromPayload: [],
         requiredEntities: [],
+        requiredConditions: [],
         negativeEntities: [],
+        negativeConditions: [],
         suggestedEntity: 'fake-action',
         version: 1,
         packageCreationId: 1,

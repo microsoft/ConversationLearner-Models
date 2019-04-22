@@ -11,6 +11,7 @@ import { ActionBase } from './Action'
 import { MemoryValue } from './Memory'
 import { FilledEntityMap, FilledEntity } from './FilledEntity'
 import { AppDefinition } from './AppDefinition'
+import { CLChannelData } from './CLChannelData'
 
 export class ModelUtils {
   public static generateGUID(): string {
@@ -41,7 +42,7 @@ export class ModelUtils {
   //====================================================================
   public static ToLabeledEntity(predictedEntity: PredictedEntity): LabeledEntity {
     const { score, ...labeledEntity } = predictedEntity
-    return predictedEntity
+    return labeledEntity
   }
 
   public static ToLabeledEntities(predictedEntities: PredictedEntity[]): LabeledEntity[] {
@@ -157,6 +158,18 @@ export class ModelUtils {
       }
     }
 
+    // Update initialFilledEntity list to include those that were saved in onEndSession
+    let initialFilledEntities: FilledEntity[] = []
+    if (trainRounds.length !== 0 && trainRounds[0].scorerSteps.length !== 0) {
+
+          // Get entities extracted on first input
+          const firstEntityIds = trainRounds[0].extractorStep.textVariations[0].labelEntities.map(le => le.entityId)
+  
+          // Intial entities are ones on first round that weren't extracted on the first utterance 
+          initialFilledEntities = trainRounds[0].scorerSteps[0].input.filledEntities
+              .filter(fe => !firstEntityIds.includes(fe.entityId!))
+    }
+
     return {
       createdDateTime: logDialog.createdDateTime,
       lastModifiedDateTime: logDialog.lastModifiedDateTime,
@@ -167,12 +180,14 @@ export class ModelUtils {
       version: 0,
       rounds: trainRounds,
       definitions: appDefinition,
-      initialFilledEntities: logDialog.initialFilledEntities
+      initialFilledEntities: initialFilledEntities,
+      tags: [],
+      description: ''
     }
   }
 
   //====================================================================
-  // CONVERSION: LogRoung == TrainRound
+  // CONVERSION: LogRound == TrainRound
   //====================================================================
   public static ToTrainRound(logRound: LogRound): TrainRound {
     return {
@@ -188,7 +203,8 @@ export class ModelUtils {
         input: logScorerStep.input,
         labelAction: logScorerStep.predictedAction,
         logicResult: logScorerStep.logicResult,
-        scoredAction: undefined
+        scoredAction: undefined,
+        uiScoreResponse: logScorerStep.predictionDetails
       }))
     }
   }
@@ -318,19 +334,55 @@ export class ModelUtils {
 
   /* Converts user intput into BB.Activity */
   public static InputToActivity(userText: string, userName: string, userId: string, roundNum: number): any {
+    let clData: CLChannelData = {
+      senderType: SenderType.User,
+      roundIndex: roundNum,
+      scoreIndex: null
+    }
     // Generate activity
     return {
       id: this.generateGUID(),
       from: { id: userId, name: userName },
       channelData: {
-        senderType: SenderType.User,
-        roundIndex: roundNum,
-        scoreIndex: 0,
+        clData,
         clientActivityId: this.generateGUID()
       },
       type: 'message',
       text: userText
     }
+  }
+
+  public static textVariationToMarkdown(textVariation: TextVariation, excludeEntities: string[]) {
+    if (textVariation.labelEntities.length === 0) {
+      return textVariation.text
+    }
+
+    // Remove resolvers that aren't labelled
+    let labelEntities = textVariation.labelEntities.filter(le => !excludeEntities.includes(le.entityId))
+    
+    // Remove duplicate labels
+    labelEntities = labelEntities.filter((le,i) => labelEntities.findIndex(fi => fi.startCharIndex === le.startCharIndex) === i)
+
+    if (labelEntities.length === 0) {
+      return textVariation.text
+    }
+    
+    labelEntities = labelEntities.sort(
+      (a, b) => (a.startCharIndex > b.startCharIndex ? 1 : a.startCharIndex < b.startCharIndex ? -1 : 0)
+    )
+
+    let text = textVariation.text.substring(0, labelEntities[0].startCharIndex)
+    for (let index in labelEntities) {
+      let curEntity = labelEntities[index]
+      text = `${text}**_${textVariation.text.substring(curEntity.startCharIndex, curEntity.endCharIndex + 1)}_**`
+      let nextEntity = labelEntities[Number(index) + 1]
+      if (nextEntity) {
+        text = `${text}${textVariation.text.substring(curEntity.endCharIndex + 1, nextEntity.startCharIndex)}`
+      } else {
+        text = `${text}${textVariation.text.substring(curEntity.endCharIndex + 1, textVariation.text.length)}`
+      }
+    }
+    return text
   }
 
   public static PrebuiltDisplayText(builtinType: string, resolution: any, entityText: string): string {

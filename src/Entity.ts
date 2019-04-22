@@ -3,8 +3,12 @@
  * Licensed under the MIT License.
  */
 export enum EntityType {
+  // Programmatic Entity
   LOCAL = 'LOCAL',
-  LUIS = 'LUIS'
+  // Entity trained in LUIS
+  LUIS = 'LUIS',
+  // Enumeration
+  ENUM = 'ENUM'
 }
 
 export const makeNegative = (entity: EntityBase, positiveId: string): EntityBase => ({
@@ -16,11 +20,13 @@ export const makeNegative = (entity: EntityBase, positiveId: string): EntityBase
 export interface EntityBase {
   entityId: string
   entityName: string
-  entityType: string
+  entityType: EntityType | string
+  resolverType: string | null
   createdDateTime: string
   version: number | null
   packageCreationId: number | null
   packageDeletionId: number | null
+  lastModifiedDateTime?: string
 
   isMultivalue: boolean
 
@@ -33,10 +39,25 @@ export interface EntityBase {
   /** If a Negative, Id of positive entity associated with this Entity */
   positiveId: string | null
 
+  /** If an ENUM entity, the supported enums */
+  enumValues?: EnumValue[]
+
   /** If it is set to true, it means that the entity is not persisted in the bot memory.
    * This is only true for built-in entities that are not created with "Always extract"
    */
   doNotMemorize: boolean | null
+
+}
+
+export function isPrebuilt(entity: EntityBase) {
+  return (entity.entityName === `builtin-${entity.entityType.toLowerCase()}`)
+}
+
+export const MAX_ENUM_VALUES = 5
+
+export interface EnumValue {
+  enumValueId?: string
+  enumValue: string
 }
 
 export interface LabeledEntity {

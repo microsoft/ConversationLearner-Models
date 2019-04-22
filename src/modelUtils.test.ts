@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-import { ModelUtils, TrainDialog, Validity, MemoryValue, FilledEntity, FilledEntityMap } from './conversationlearner-models'
+import { ModelUtils, TrainDialog, Validity, MemoryValue, FilledEntity, FilledEntityMap } from './'
 
 function makeMemoryValue(userText: string = 'userText'): MemoryValue {
   return {
@@ -10,7 +10,7 @@ function makeMemoryValue(userText: string = 'userText'): MemoryValue {
     displayText: 'displayText',
     builtinType: 'number',
     resolution: { data: 'one', number: '5' }
-  } as MemoryValue
+  }
 }
 
 function makeFilledEntity(elementValues: string[]): FilledEntity {
@@ -221,9 +221,10 @@ describe('ModelUtils', () => {
 
   describe('areEqualMemoryValues', () => {
     test(`equal`, () => {
-      let mv1 = makeMemoryValue('mv1')
-      let mv2 = makeMemoryValue('mv2')
-      expect(ModelUtils.areEqualMemoryValues([mv1], [mv1])).toEqual(true)
+      const userText = 'User Text'
+      let mv1 = makeMemoryValue(userText)
+      let mv2 = makeMemoryValue(userText)
+      expect(ModelUtils.areEqualMemoryValues([mv1], [mv2])).toEqual(true)
     })
 
     test(`mv1 diff`, () => {
@@ -378,6 +379,8 @@ describe('ModelUtils', () => {
       definitions: null,
       validity: Validity.VALID,
       initialFilledEntities: [],
+      tags: [],
+      description: '',
       rounds: [
         {
           extractorStep: {
@@ -406,5 +409,231 @@ describe('ModelUtils', () => {
       sourceLogDialogId: trainDialog.sourceLogDialogId,
       initialFilledEntities: trainDialog.initialFilledEntities
     })
+  })
+})
+
+describe('textVariationToMarkdown', () => {
+  test('no entities', () => {
+    let textVariation = { text: 'no entities', labelEntities: [] }
+    let expected = 'no entities'
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  test('**_start_** entity only', () => {
+    let textVariation = {
+      text: 'start entity only',
+      labelEntities: [
+        {
+          entityId: '0f427885-b4b2-4b62-af10-040e5e1001de',
+          startCharIndex: 0,
+          endCharIndex: 4,
+          entityText: 'start',
+          resolution: {},
+          builtinType: 'LUIS'
+        }
+      ]
+    }
+    let expected = '**_start_** entity only'
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  test('**_start_** and **_end_**', () => {
+    let textVariation = {
+      text: 'start and end',
+      labelEntities: [
+        {
+          entityId: '0f427885-b4b2-4b62-af10-040e5e1001de',
+          startCharIndex: 0,
+          endCharIndex: 4,
+          entityText: 'start',
+          resolution: {},
+          builtinType: 'LUIS'
+        },
+        {
+          entityId: 'b558509d-5045-4055-b8c4-a8673b4b9ace',
+          startCharIndex: 10,
+          endCharIndex: 12,
+          entityText: 'end',
+          resolution: {},
+          builtinType: 'LUIS'
+        }
+      ]
+    }
+    let expected = '**_start_** and **_end_**'
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  test('is **_next_** **_together_** entities', () => {
+    let textVariation = {
+      text: 'is next together entities',
+      labelEntities: [
+        {
+          entityId: '0f427885-b4b2-4b62-af10-040e5e1001de',
+          startCharIndex: 3,
+          endCharIndex: 6,
+          entityText: 'next',
+          resolution: {},
+          builtinType: 'LUIS'
+        },
+        {
+          entityId: 'b558509d-5045-4055-b8c4-a8673b4b9ace',
+          startCharIndex: 8,
+          endCharIndex: 15,
+          entityText: 'together',
+          resolution: {},
+          builtinType: 'LUIS'
+        }
+      ]
+    }
+    let expected = 'is **_next_** **_together_** entities'
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  test('a **_multi word_** entity', () => {
+    let textVariation = {
+      text: 'a multi word entity',
+      labelEntities: [
+        {
+          entityId: '0f427885-b4b2-4b62-af10-040e5e1001de',
+          startCharIndex: 2,
+          endCharIndex: 11,
+          entityText: 'multi word',
+          resolution: {},
+          builtinType: 'LUIS'
+        }
+      ]
+    }
+    let expected = 'a **_multi word_** entity'
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  test('**_solo_**', () => {
+    let textVariation = {
+      text: 'solo',
+      labelEntities: [
+        {
+          entityId: '0f427885-b4b2-4b62-af10-040e5e1001de',
+          startCharIndex: 0,
+          endCharIndex: 3,
+          entityText: 'solo',
+          resolution: {},
+          builtinType: 'LUIS'
+        }
+      ]
+    }
+    let expected = '**_solo_**'
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  test(`i'd like to go **_tomorrow_**`, () => {
+    let textVariation = {  
+      text:"i'd like to go tomorrow",
+      labelEntities:[  
+         {  
+            score:0,
+            entityId:"b18c67af-26c3-4756-88af-76baf68a59ee",
+            startCharIndex:15,
+            endCharIndex:22,
+            entityText:"tomorrow",
+            resolution:{  
+               values:[  
+                  {  
+                     timex:"2019-01-03",
+                     type: "date",
+                     value:"2019-01-03"
+                  }
+               ]
+            },
+            builtinType:"builtin.datetimeV2.date"
+         },
+         {  
+            entityId:"7367096c-80a1-4fe6-8d55-e78522e342bf",
+            startCharIndex:15,
+            endCharIndex:22,
+            entityText:"tomorrow",
+            resolution:{  
+   
+            },
+            builtinType:"LUIS",
+            score:0
+         }
+      ]
+    }
+    let expected = `i'd like to go **_tomorrow_**`
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  test(`**_today_**`, () => {
+    let textVariation = {  
+        text: "today",
+        labelEntities:[  
+          {  
+              entityId: "cb7c14f5-bb3b-4f4f-a7ba-bd8289efa995",
+              startCharIndex: 0,
+              endCharIndex: 4,
+              entityText: "today"
+          }
+        ]
+    }
+    let expected = `**_today_**`
+    let result = ModelUtils.textVariationToMarkdown(textVariation as any, [])
+    expect(result).toBe(expected)
+  })
+
+  test(`send to **_lars@outlook.com_**`, () => {
+    let textVariation = {  
+      text: "send to lars@outlook.com",
+      labelEntities: [  
+         {  
+            entityId: "1a4cad5c-0eab-41d4-b569-e93af4b6a19e",
+            startCharIndex: 8,
+            endCharIndex: 23,
+            entityText: "lars@outlook.com",
+            resolution:{  
+               value: "lars@outlook.com"
+            },
+            builtinType: "builtin.email"
+         }
+      ]
+   }
+    let expected = `send to **_lars@outlook.com_**`
+    let result = ModelUtils.textVariationToMarkdown(textVariation, [])
+    expect(result).toBe(expected)
+  })
+
+  // Built in that is only used as a resolver and not labelled
+  test(`i'd like to go tomorrow`, () => {
+    let textVariation = {  
+      text:"i'd like to go tomorrow",
+      labelEntities:[  
+         {  
+            score:0,
+            entityId:"b18c67af-26c3-4756-88af-76baf68a59ee",
+            startCharIndex:15,
+            endCharIndex:22,
+            entityText:"tomorrow",
+            resolution:{  
+               values:[  
+                  {  
+                     timex:"2019-01-03",
+                     type: "date",
+                     value:"2019-01-03"
+                  }
+               ]
+            },
+            builtinType:"builtin.datetimeV2.date"
+         }
+      ]
+    }
+    let expected = `i'd like to go tomorrow`
+    let result = ModelUtils.textVariationToMarkdown(textVariation, ["b18c67af-26c3-4756-88af-76baf68a59ee"])
+    expect(result).toBe(expected)
   })
 })

@@ -7,6 +7,14 @@ export enum ReplayErrorType {
   ActionUndefined = 'ActionUndefined',
   /* Entity does not exist in the model */
   EntityUndefined = 'EntityUndefined',
+  /* API bad Card */
+  APIBadCard = 'APIBadCard',
+  /* API returns logicValue but has no Render function */
+  APIMalformed = 'APIMalformed',
+  /* API does not exist on the Bot */
+  APIUndefined = 'APIUndefined',
+  /* Bot API threw and exception */
+  APIException= 'APIException',
   /* Entity used in Action but has not value */
   EntityEmpty = 'EntityEmpty',
   /* Non-multi value has multiple values */
@@ -46,6 +54,30 @@ export class ReplayErrorActionUndefined extends ReplayError {
 export class ReplayErrorEntityUndefined extends ReplayError {
   constructor(public value: string) {
     super(ReplayErrorType.EntityUndefined, ReplayErrorLevel.WARNING)
+  }
+}
+
+export class ReplayErrorAPIBadCard extends ReplayError {
+  constructor() {
+    super(ReplayErrorType.APIBadCard, ReplayErrorLevel.ERROR)
+  }
+}
+
+export class ReplayErrorAPIMalformed extends ReplayError {
+  constructor() {
+    super(ReplayErrorType.APIMalformed, ReplayErrorLevel.ERROR)
+  }
+}
+
+export class ReplayErrorAPIUndefined extends ReplayError {
+  constructor(public value: string) {
+    super(ReplayErrorType.APIUndefined, ReplayErrorLevel.ERROR)
+  }
+}
+
+export class ReplayErrorAPIException extends ReplayError {
+  constructor() {
+    super(ReplayErrorType.APIException, ReplayErrorLevel.ERROR)
   }
 }
 
