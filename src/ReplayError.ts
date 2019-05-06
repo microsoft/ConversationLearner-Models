@@ -5,6 +5,8 @@
 export enum ReplayErrorType {
   /* Action does not exist in the model */
   ActionUndefined = 'ActionUndefined',
+  /* Action has not been created for this imported utterance */
+  ActionStub = 'ActionStub',
   /* Entity does not exist in the model */
   EntityUndefined = 'EntityUndefined',
   /* API bad Card */
@@ -51,6 +53,12 @@ export class ReplayError {
 export class ReplayErrorActionUndefined extends ReplayError {
   constructor(public lastUserInput: string) {
     super(ReplayErrorType.ActionUndefined, ReplayErrorLevel.BLOCKING)
+  }
+}
+
+export class ReplayErrorActionStub extends ReplayError {
+  constructor(public lastUserInput: string) {
+    super(ReplayErrorType.ActionStub, ReplayErrorLevel.BLOCKING)
   }
 }
 
