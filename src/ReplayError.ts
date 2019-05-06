@@ -11,6 +11,8 @@ export enum ReplayErrorType {
   APIBadCard = 'APIBadCard',
   /* API returns logicValue but has no Render function */
   APIMalformed = 'APIMalformed',
+  /* API is stub */
+  APIStub = 'APIStub',
   /* API does not exist on the Bot */
   APIUndefined = 'APIUndefined',
   /* Bot API threw and exception */
@@ -67,6 +69,13 @@ export class ReplayErrorAPIBadCard extends ReplayError {
 export class ReplayErrorAPIMalformed extends ReplayError {
   constructor() {
     super(ReplayErrorType.APIMalformed, ReplayErrorLevel.ERROR)
+  }
+}
+
+
+export class ReplayErrorAPIStub extends ReplayError {
+  constructor() {
+    super(ReplayErrorType.APIStub, ReplayErrorLevel.WARNING)
   }
 }
 

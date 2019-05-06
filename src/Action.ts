@@ -23,6 +23,12 @@ export interface Condition {
   condition: ConditionType
 }
 
+export interface ActionClientData {
+  // Used to match import utterances to actions
+  importHashes?: string[]
+  isStubbed?: boolean
+}
+
 export class ActionBase {
   actionId: string
   actionType: ActionTypes
@@ -40,6 +46,7 @@ export class ActionBase {
   packageDeletionId: number
   entityId: string | undefined
   enumValueId: string | undefined
+  clientData?: ActionClientData
 
   constructor(action: ActionBase) {
     this.actionId = action.actionId
@@ -58,6 +65,7 @@ export class ActionBase {
     this.packageDeletionId = action.packageDeletionId
     this.entityId = action.entityId
     this.enumValueId = action.enumValueId
+    this.clientData = action.clientData
   }
 
   // TODO: Refactor away from generic GetPayload for different action types
@@ -97,6 +105,35 @@ export class ActionBase {
       return actionPayload.payload
     }
     return action.payload
+  }
+
+  // Return true if action is a stub action
+  static isStubbedAPI(action: ActionBase | undefined): boolean {
+    return (action !== undefined && action.clientData !== undefined && action.clientData.isStubbed === true)
+  }
+
+  // Create dummy stub action
+  static getStubAction(): ActionBase
+  {
+    return new ActionBase({
+      actionId: null!,
+      payload: JSON.stringify({payload: "", logicArguments: [], renderArguments: []}),
+      createdDateTime: new Date().toJSON(),
+      isTerminal: false,
+      requiredEntitiesFromPayload: [],
+      requiredEntities: [],
+      negativeEntities: [],
+      requiredConditions: [],
+      negativeConditions: [],
+      suggestedEntity: null,
+      version: 0,
+      packageCreationId: 0,
+      packageDeletionId: 0,
+      actionType: ActionTypes.API_LOCAL,
+      entityId: undefined,
+      enumValueId: undefined,
+      clientData: {isStubbed: true}
+    })
   }
 
   /** Return arguments for an action */
@@ -199,8 +236,8 @@ export class ApiAction extends ActionBase {
 
     const actionPayload: ActionPayload = JSON.parse(this.payload)
     this.name = actionPayload.payload
-    this.logicArguments = actionPayload.logicArguments.map(aa => new ActionArgument(aa))
-    this.renderArguments = actionPayload.renderArguments.map(aa => new ActionArgument(aa))
+    this.logicArguments = actionPayload.logicArguments ? actionPayload.logicArguments.map(aa => new ActionArgument(aa)): []
+    this.renderArguments = actionPayload.renderArguments ? actionPayload.renderArguments.map(aa => new ActionArgument(aa)) : []
   }
   renderLogicArguments(entityValues: Map<string, string>, serializerOptions: Partial<IOptions> = {}): RenderedActionArgument[] {
     return this.renderArgs(this.logicArguments, entityValues, serializerOptions)
