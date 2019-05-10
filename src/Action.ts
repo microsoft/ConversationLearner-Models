@@ -125,7 +125,7 @@ export class ActionBase {
       negativeEntities: [],
       requiredConditions: [],
       negativeConditions: [],
-      suggestedEntity: null,
+      suggestedEntity: undefined,
       version: 0,
       packageCreationId: 0,
       packageDeletionId: 0,
