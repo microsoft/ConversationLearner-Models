@@ -108,7 +108,7 @@ export class ActionBase {
   }
 
   // Return true if action is a stub action
-  static isStubbedAPI(action: ActionBase | undefined): boolean {
+  static isStubbedAPI(action: Partial<ActionBase> | undefined): boolean {
     return (action !== undefined && action.clientData !== undefined && action.clientData.isStubbed === true)
   }
 
