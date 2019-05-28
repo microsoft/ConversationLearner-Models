@@ -3,7 +3,7 @@
  * Licensed under the MIT License.
  */
 import EntityIdSerializer, { IOptions } from './slateSerializer'
-import { ScoredAction } from './Score'
+import { ScoredBase, ScoredAction } from './Score'
 
 export enum ActionTypes {
   TEXT = 'TEXT',
@@ -26,8 +26,10 @@ export interface Condition {
 export interface ActionClientData {
   // Used to match import utterances to actions
   importHashes?: string[]
-  isStubbed?: boolean
 }
+
+// Need dummy actionId for stub action
+export const CL_STUB_IMPORT_ACTION_ID = '51cd7df5-e504-451d-b629-0932e604689c'
 
 export class ActionBase {
   actionId: string
@@ -73,7 +75,7 @@ export class ActionBase {
   // This causes issue of having to pass in entityValueMap even when it's not required, but making it optional ruins
   // safety for those places which should require it.
   // TODO: Remove ScoredAction since it doesn't have payload
-  static GetPayload(action: ActionBase | ScoredAction, entityValues: Map<string, string>): string {
+  static GetPayload(action: ActionBase | ScoredBase, entityValues: Map<string, string>): string {
     if (action.actionType === ActionTypes.TEXT) {
       /**
        * For backwards compatibility check if payload is of new TextPayload type
@@ -109,7 +111,13 @@ export class ActionBase {
 
   // Return true if action is a stub action
   static isStubbedAPI(action: Partial<ActionBase> | undefined): boolean {
-    return (action !== undefined && action.clientData !== undefined && action.clientData.isStubbed === true)
+    if (!action) {
+      return false
+    }
+    if (action.payload && JSON.parse(action.payload).payload === "STUB_API") {
+      return true
+    }
+    return false
   }
 
   // Create dummy stub action
@@ -117,7 +125,7 @@ export class ActionBase {
   {
     return new ActionBase({
       actionId: null!,
-      payload: JSON.stringify({payload: "", logicArguments: [], renderArguments: []}),
+      payload: JSON.stringify({payload: "STUB_API", logicArguments: [], renderArguments: []}),
       createdDateTime: new Date().toJSON(),
       isTerminal: false,
       requiredEntitiesFromPayload: [],
@@ -131,8 +139,7 @@ export class ActionBase {
       packageDeletionId: 0,
       actionType: ActionTypes.API_LOCAL,
       entityId: undefined,
-      enumValueId: undefined,
-      clientData: {isStubbed: true}
+      enumValueId: undefined
     })
   }
 
