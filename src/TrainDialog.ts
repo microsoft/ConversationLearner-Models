@@ -64,6 +64,11 @@ export interface TrainDialogInput {
   validity?: Validity
 }
 
+export interface TrainDialogClientData {
+  // List of .transcript files used to create this TrainDialog
+  importHashes: string[]
+}
+
 export interface TrainDialog extends TrainDialogInput {
   createdDateTime: string
   lastModifiedDateTime: string
@@ -74,6 +79,7 @@ export interface TrainDialog extends TrainDialogInput {
   initialFilledEntities: FilledEntity[]
   tags: string[]
   description: string
+  clientData?: TrainDialogClientData
 }
 
 export interface TrainResponse {
