@@ -36,7 +36,7 @@
     "tsc": "tsc",
     "update-docs": "typedoc",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz"
+    "cm": "git-cz"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
