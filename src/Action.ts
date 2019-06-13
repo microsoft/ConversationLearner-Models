@@ -114,18 +114,18 @@ export class ActionBase {
     if (!action) {
       return false
     }
-    if (action.payload && JSON.parse(action.payload).payload === "STUB_API") {
+    if (action.payload && JSON.parse(action.payload).isStub) {
       return true
     }
     return false
   }
 
   // Create dummy stub action
-  static getStubAction(): ActionBase
+  static createStubAction(apiStubName: string): ActionBase
   {
     return new ActionBase({
       actionId: null!,
-      payload: JSON.stringify({payload: "STUB_API", logicArguments: [], renderArguments: []}),
+      payload: JSON.stringify({payload: apiStubName, logicArguments: [], renderArguments: [], isStub: true}),
       createdDateTime: new Date().toJSON(),
       isTerminal: false,
       requiredEntitiesFromPayload: [],
@@ -180,6 +180,7 @@ export interface ActionPayload {
   payload: string
   logicArguments: IActionArgument[]
   renderArguments: IActionArgument[]
+  isStub?: boolean
 }
 
 export interface CardPayload {
@@ -233,6 +234,7 @@ export class ApiAction extends ActionBase {
   name: string
   logicArguments: ActionArgument[]
   renderArguments: ActionArgument[]
+  isStub?: boolean
 
   constructor(action: ActionBase) {
     super(action)
@@ -245,6 +247,7 @@ export class ApiAction extends ActionBase {
     this.name = actionPayload.payload
     this.logicArguments = actionPayload.logicArguments ? actionPayload.logicArguments.map(aa => new ActionArgument(aa)): []
     this.renderArguments = actionPayload.renderArguments ? actionPayload.renderArguments.map(aa => new ActionArgument(aa)) : []
+    this.isStub = actionPayload.isStub
   }
   renderLogicArguments(entityValues: Map<string, string>, serializerOptions: Partial<IOptions> = {}): RenderedActionArgument[] {
     return this.renderArgs(this.logicArguments, entityValues, serializerOptions)
