@@ -121,13 +121,13 @@ export class ActionBase {
   }
 
   // Create dummy stub action
-  static createStubAction(apiStubName: string): ActionBase
+  static createStubAction(apiStubName: string, isTerminal: boolean): ActionBase
   {
     return new ActionBase({
       actionId: null!,
       payload: JSON.stringify({payload: apiStubName, logicArguments: [], renderArguments: [], isStub: true}),
       createdDateTime: new Date().toJSON(),
-      isTerminal: false,
+      isTerminal,
       requiredEntitiesFromPayload: [],
       requiredEntities: [],
       negativeEntities: [],

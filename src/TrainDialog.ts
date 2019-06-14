@@ -7,6 +7,8 @@ import { LabeledEntity } from './Entity'
 import { AppDefinition } from './AppDefinition'
 import { FilledEntity } from './FilledEntity'
 
+export const MAX_TEXT_VARIATIONS = 20
+
 export enum SenderType {
   User = 0,
   Bot = 1
