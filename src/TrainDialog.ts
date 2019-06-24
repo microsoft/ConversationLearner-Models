@@ -66,6 +66,11 @@ export interface TrainDialogInput {
   validity?: Validity
 }
 
+export interface TurnValidation {
+  inputText: string
+  actionHashes: string[]
+}
+
 export interface TrainDialogClientData {
   // List of .transcript files used to create this TrainDialog
   importHashes: string[]
