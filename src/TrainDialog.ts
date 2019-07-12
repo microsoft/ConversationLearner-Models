@@ -7,6 +7,8 @@ import { LabeledEntity } from './Entity'
 import { AppDefinition } from './AppDefinition'
 import { FilledEntity } from './FilledEntity'
 
+export const MAX_TEXT_VARIATIONS = 20
+
 export enum SenderType {
   User = 0,
   Bot = 1
@@ -39,6 +41,8 @@ export interface TrainScorerStep {
   logicResult: LogicResult | undefined
   // Score of the selected action
   scoredAction: ScoredAction | undefined
+  // Import text for this action (before real action is created)
+  importText?: string
   // Used for UI rendering only
   uiScoreResponse?: ScoreResponse
 }
@@ -62,6 +66,24 @@ export interface TrainDialogInput {
   validity?: Validity
 }
 
+export interface TranscriptValidationTurn {
+  inputText: string
+  actionHashes: string[]
+}
+
+export interface TranscriptValidationResult {
+  validity: Validity
+  logDialogId: string | null
+  fileName?: string
+  // Original transcript history
+  sourceHistory?: any
+}
+
+export interface TrainDialogClientData {
+  // Hashes of .transcript files used to create this TrainDialog
+  importHashes: string[]
+}
+
 export interface TrainDialog extends TrainDialogInput {
   createdDateTime: string
   lastModifiedDateTime: string
@@ -72,6 +94,7 @@ export interface TrainDialog extends TrainDialogInput {
   initialFilledEntities: FilledEntity[]
   tags: string[]
   description: string
+  clientData?: TrainDialogClientData
 }
 
 export interface TrainResponse {
