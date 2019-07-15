@@ -13,7 +13,7 @@ pr:
     - master
 
 jobs:
-- job: Linux - Build
+- job: Linux_Build
   pool:
     vmImage: 'ubuntu-16.04'
 
@@ -22,7 +22,7 @@ jobs:
   - bash: npm ci
   - bash: npm run build
 
-- job: Windows - Build
+- job: Windows_Build
   pool:
     vmImage: 'windows-2019'
 
