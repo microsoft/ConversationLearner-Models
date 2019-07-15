@@ -13,16 +13,21 @@ pr:
     - master
 
 jobs:
-- job: Linux_Build
+- job: linux_build
   pool:
     vmImage: 'ubuntu-16.04'
 
   steps:
   - bash: npm --version
-  - bash: npm ci
-  - bash: npm run build
+    displayName: 'npm --version'
 
-- job: Windows_Build
+  - bash: npm ci
+    displayName: 'npm ci'
+    
+  - bash: npm run build
+    displayName: 'npm run build'
+
+- job: windows-build
   pool:
     vmImage: 'windows-2019'
 
@@ -43,4 +48,7 @@ jobs:
     displayName: 'Install Node.js'
 
   - script: npm ci
+    displayName: 'npm ci'
+
   - script: npm run build
+    displayName: 'npm run build'
