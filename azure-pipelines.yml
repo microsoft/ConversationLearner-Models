@@ -9,7 +9,8 @@ trigger:
 pr:
   autoCancel: true
   branches:
-    include: master
+    include:
+    - master
 
 jobs:
 - job: Linux - Build
