@@ -25,7 +25,13 @@ jobs:
 
   - bash: npm ci
     displayName: 'npm ci'
-    
+
+  # - task: CacheBeta@0
+  #   inputs:
+  #   key: $(Build.SourcesDirectory)/package-lock.json
+  #   path: $(npm_config_cache)
+  #   displayName: Cache npm
+
   - bash: npm run build
     displayName: 'npm run build'
 
