@@ -27,7 +27,7 @@ jobs:
   - bash: npm run build
     displayName: 'npm run build'
 
-- job: windows-build
+- job: windows_build
   pool:
     vmImage: 'windows-2019'
 
