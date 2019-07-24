@@ -125,7 +125,7 @@ export class ActionBase {
   {
     return new ActionBase({
       actionId: null!,
-      payload: JSON.stringify({payload: placeholderName, logicArguments: [], renderArguments: [], isStub: true}),
+      payload: JSON.stringify({payload: placeholderName, logicArguments: [], renderArguments: [], isPlaceholder: true}),
       createdDateTime: new Date().toJSON(),
       isTerminal,
       requiredEntitiesFromPayload: [],
