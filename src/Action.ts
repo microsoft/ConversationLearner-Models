@@ -50,7 +50,6 @@ export class ActionBase {
   entityId: string | undefined
   enumValueId: string | undefined
   clientData?: ActionClientData
-  modelId?: string
 
   constructor(action: ActionBase) {
     this.actionId = action.actionId
@@ -70,7 +69,6 @@ export class ActionBase {
     this.entityId = action.entityId
     this.enumValueId = action.enumValueId
     this.clientData = action.clientData
-    this.modelId = action.modelId
   }
 
   // TODO: Refactor away from generic GetPayload for different action types
