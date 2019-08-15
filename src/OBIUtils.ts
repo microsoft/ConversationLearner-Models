@@ -8,12 +8,6 @@ export interface LGItem {
     suggestions: string[]
 }
 
-export interface ComposerDialog {
-    //    dialogs: OBIDialog[]
-    luMap: Map<string, string[]>
-    lgMap: Map<string, LGItem>
-}
-
 const findOrThrow = (haystack_fn: (s: string) => number, needle: string): number => {
     const i = haystack_fn(needle)
     if (i === -1) throw new RangeError(`${needle} not found`)
@@ -51,7 +45,8 @@ export class OBIDialogParser {
             if (backticksStart > suggestionsStart) throw new RangeError('``` not found')
             const body = item.substring(backticksStart + 3, suggestionsStart).trim()
             const suggestionTag = "[Suggestions="
-            const suggestionList = item.substring(findLastOrThrow(item, suggestionTag) + suggestionTag.length,
+            const suggestionList = item.substring(
+                findLastOrThrow(item, suggestionTag) + suggestionTag.length,
                 findLastOrThrow(item, "]"))
             const suggestions = suggestionList.length > 0 ? suggestionList.split('|') : []
             const element = {
