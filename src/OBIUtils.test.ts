@@ -1,18 +1,9 @@
-import { LGItem, OBIDialogParser } from "./OBIUtils";
+import { LGItem, ObiUtils } from "./ObiUtils";
 
 /**
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-
-// let objectToMap = (obj: Object) => {
-//     let map = new Map()
-//     for (let key in obj) {
-//         let val = String(obj[key])
-//         map.set(key, val)
-//     }
-//     return map
-// }
 
 interface TestData {
     tag: string
@@ -33,7 +24,7 @@ const testDataToMap = (data : TestData[]) => {
 }
 
 describe('OBIutils', () => {
-    describe('OBIDialogParser', () => {
+    describe('ObiUtils', () => {
         test('Given a well-formed input, verifies the expected output', () => {
             let input = `
             # option0
@@ -47,7 +38,7 @@ describe('OBIutils', () => {
             [Suggestions=Talk to agent|Goodbye]
             \`\`\`
             `
-            const map = OBIDialogParser.parseLGString(input)
+            const map = ObiUtils.parseLGString(input)
             let expected: Map<string, LGItem> = testDataToMap([
                 {
                     tag: 'option0',
@@ -106,8 +97,7 @@ describe('OBIutils', () => {
             ]
             for (const data of inputs) {
                 try {
-                    console.log(`Testing ${data.input}`)
-                    OBIDialogParser.parseLGString(data.input)
+                    ObiUtils.parseLGString(data.input)
                     fail('Did not get expected exception')
                 } catch (e) {
                     if (e instanceof RangeError) {
