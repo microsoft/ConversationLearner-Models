@@ -34,7 +34,7 @@ const findLastOrThrow = (haystack: string, needle: string): number => {
 export class ObiUtils {
 
     public static parseLGString(text: string): Map<string, LGItem> {
-        let output = new Map<string, LGItem>()
+        let lgMap = new Map<string, LGItem>()
         const items = text.split('# ')
         for (let item of items) {
             item = item.trim()
@@ -53,8 +53,8 @@ export class ObiUtils {
                 text: body,
                 suggestions
             }
-            output.set(key, element)
+            lgMap.set(key, element)
         }
-        return output
+        return lgMap
     }
 }
