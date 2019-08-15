@@ -31,7 +31,7 @@ const findLastOrThrow = (haystack: string, needle: string): number => {
 /**
  * Parses OBI .dialog files from custom format into structured data.
  */
-export class OBIDialogParser {
+export class ObiUtils {
 
     public static parseLGString(text: string): Map<string, LGItem> {
         let output = new Map<string, LGItem>()
