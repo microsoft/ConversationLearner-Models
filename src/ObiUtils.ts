@@ -48,11 +48,11 @@ export class ObiUtils {
                 findLastOrThrow(item, suggestionTag) + suggestionTag.length,
                 findLastOrThrow(item, "]"))
             const suggestions = suggestionList.length > 0 ? suggestionList.split('|') : []
-            const element = {
+            const lgItem: LGItem = {
                 text: body,
                 suggestions
             }
-            lgMap.set(key, element)
+            lgMap.set(key, lgItem)
         }
     }
 }
