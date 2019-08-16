@@ -37,7 +37,8 @@ describe('OBIutils', () => {
             [Suggestions=Talk to agent|Goodbye]
             \`\`\`
             `
-            const map = ObiUtils.parseLGString(input)
+            const lgMap = new Map<string, LGItem>()
+            ObiUtils.parseLGString(input, lgMap)
             let expected: Map<string, LGItem> = testDataToMap([
                 {
                     tag: 'option0',
@@ -51,7 +52,7 @@ describe('OBIutils', () => {
 
                 }
             ])
-            expect(map).toMatchObject(expected)
+            expect(lgMap).toMatchObject(expected)
         })
         test('Validate exception on missing expected tokens', () => {
             let inputs = [
@@ -96,7 +97,7 @@ describe('OBIutils', () => {
             ]
             for (const data of inputs) {
                 try {
-                    ObiUtils.parseLGString(data.input)
+                    ObiUtils.parseLGString(data.input, new Map<string, LGItem>())
                     fail('Did not get expected exception')
                 } catch (e) {
                     if (e instanceof RangeError) {
