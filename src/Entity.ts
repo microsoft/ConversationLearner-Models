@@ -49,6 +49,17 @@ export interface EntityBase {
 
 }
 
+export interface AddEntityResponse {
+  entity: EntityBase
+  packageId: string
+  trainingStatus: string
+}
+
+export interface UpdateEntityResponse extends AddEntityResponse {
+  actionIds: string[]
+  trainDialogIds: string[]
+}
+
 export function isPrebuilt(entity: EntityBase) {
   return (entity.entityName === `builtin-${entity.entityType.toLowerCase()}`)
 }
