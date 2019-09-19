@@ -34,7 +34,7 @@ export interface EntityBase {
   isNegatible: boolean
 
   /** If true, entity with resolver must have resolution */
-  isResolverStrict: boolean
+  isResolutionRequired: boolean
 
   /** If Negatable, the Id of negative entity associates with this Entity */
   negativeId: string | null
