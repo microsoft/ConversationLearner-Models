@@ -19,7 +19,8 @@ jobs:
       with:
         node-version: 12.x
 
-    - uses: npm --version
+    - run: node --version
+    - run: npm --version
 
     - name: npm ci, build, and test
       run: |
