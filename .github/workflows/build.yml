@@ -28,7 +28,7 @@ jobs:
         env:
           CI: true
 
-  build-ubuntu-latest:
+  build-windows-latest:
     runs-on: windows-latest
 
     steps:
