@@ -84,8 +84,7 @@ export class ActionBase {
   // TODO: Remove ScoredAction since it doesn't have payload
   static GetPayload(action: ActionBase | ScoredBase, entityValues: Map<string, string>): string {
     switch (action.actionType) {
-      case ActionTypes.TEXT:
-        {
+      case ActionTypes.TEXT: {
           /**
            * For backwards compatibility check if payload is of new TextPayload type
            * Ideally we would implement schema refactor:
@@ -104,25 +103,21 @@ export class ActionBase {
             )
           }
         }
-      case ActionTypes.END_SESSION:
-        {
+      case ActionTypes.END_SESSION: {
           const textPayload = JSON.parse(action.payload) as TextPayload
           return EntityIdSerializer.serialize(textPayload.json, entityValues)
         }
-      case ActionTypes.CARD:
+      case ActionTypes.CARD: {
         // For API or CARD the payload field of the outer payload is the name of API or the filename of the card template without extension
-        {
           let cardPayload = JSON.parse(action.payload) as CardPayload
           return cardPayload.payload
         }
-      case ActionTypes.API_LOCAL:
-        {
+      case ActionTypes.API_LOCAL: {
           let actionPayload = JSON.parse(action.payload) as ActionPayload
           return actionPayload.payload
         }
-      case ActionTypes.DISPATCH:
+      case ActionTypes.DISPATCH: {
         // TODO: Another reason to schema refactor...
-        {
           let actionPayload = JSON.parse(action.payload) as DispatchPayload
           return `${ActionTypes.DISPATCH}: ${actionPayload.modelName}`
         }
