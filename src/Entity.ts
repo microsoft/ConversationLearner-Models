@@ -56,7 +56,6 @@ export function isPrebuilt(entity: EntityBase) {
   return (entity.entityName === `builtin-${entity.entityType.toLowerCase()}`)
 }
 
-export const MAX_ENUM_VALUES = 5  // TODO(thpar) : Obsolete, delete after references cleaned up
 export const MAX_ENUM_VALUE_COUNT = 5
 export const MAX_ENUM_VALUE_NAME_LENGTH = 10
 
