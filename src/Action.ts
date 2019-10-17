@@ -12,6 +12,7 @@ export enum ActionTypes {
   END_SESSION = 'END_SESSION',
   SET_ENTITY = 'SET_ENTITY',
   DISPATCH = 'DISPATCH',
+  CHANGE_MODEL = 'CHANGE_MODEL',
 }
 
 export enum ConditionType {
