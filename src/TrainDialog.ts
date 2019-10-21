@@ -2,10 +2,11 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-import { ScoreInput, ScoredAction, ScoreResponse } from './Score'
-import { LabeledEntity } from './Entity'
+import { Condition } from './Action'
 import { AppDefinition } from './AppDefinition'
+import { LabeledEntity } from './Entity'
 import { FilledEntity } from './FilledEntity'
+import { ScoreInput, ScoredAction, ScoreResponse } from './Score'
 
 export const MAX_TEXT_VARIATIONS = 20
 
@@ -45,6 +46,8 @@ export interface TrainScorerStep {
   importText?: string
   // Used for UI rendering only
   uiScoreResponse?: ScoreResponse
+  // If set, this action should be created with the specified condition(s).
+  requiredConditions?: Condition[]
 }
 
 export interface TrainRound {
