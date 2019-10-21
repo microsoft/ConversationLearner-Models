@@ -24,16 +24,10 @@ jobs:
       - run: npm ci
       - run: npm run test
       - run: npm run build
-      - run: echo ${{github.event_name}}
-      - run: ${{toJSON(job)}}
-      - run: ${{toJSON(steps)}}
-      - run: ${{toJSON(strategy)}}
-      - run: ${{toJSON(matrix)}}
 
-      - name: Run semantic-release deployment
+      - run: npx semantic-release
         if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
-        run: npx semantic-release
-        
+
         env:
           CI: true
 
