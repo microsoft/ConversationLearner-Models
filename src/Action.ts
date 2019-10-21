@@ -390,7 +390,8 @@ export class DispatchAction extends ActionBase {
   constructor(action: ActionBase) {
     super(action)
 
-    if (action.actionType !== ActionTypes.DISPATCH) {
+    if (action.actionType !== ActionTypes.DISPATCH
+      && action.actionType !== ActionTypes.CHANGE_MODEL) {
       throw new Error(`You attempted to create Dispatch action from action of type: ${action.actionType}`)
     }
 
