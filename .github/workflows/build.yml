@@ -25,9 +25,12 @@ jobs:
       - run: npm run test
       - run: npm run build
       - run: echo ${{github.event}}
-      - name: Only build on merge
+      - name: My first step
+        if: github.event_name == 'pull_request' && github.event.action == 'unassigned'
+        run: echo This event is a pull request that had an assignee removed.
+      - name: Only run on merge
         if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
-        run: echo: This pull request is merged.
+        run: echo This pull request is merged.
 
         env:
           CI: true
