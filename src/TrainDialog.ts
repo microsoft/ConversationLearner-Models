@@ -2,7 +2,6 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-import { Condition } from './Action'
 import { AppDefinition } from './AppDefinition'
 import { LabeledEntity } from './Entity'
 import { FilledEntity } from './FilledEntity'
