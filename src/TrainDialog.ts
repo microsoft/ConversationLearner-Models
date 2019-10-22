@@ -46,8 +46,8 @@ export interface TrainScorerStep {
   importText?: string
   // Used for UI rendering only
   uiScoreResponse?: ScoreResponse
-  // If set, this action should be created with the specified condition(s).
-  requiredConditions?: Condition[]
+  // May be set during TrainDialog import to uniquely identify this scorer step.
+  importId?: string
 }
 
 export interface TrainRound {
