@@ -129,6 +129,10 @@ export class ActionBase {
           let actionPayload = JSON.parse(action.payload) as DispatchPayload
           return `${ActionTypes.DISPATCH}: ${actionPayload.modelName}`
         }
+      case ActionTypes.CHANGE_MODEL: {
+        const actionPayload = JSON.parse(action.payload) as DispatchPayload
+        return `${ActionTypes.CHANGE_MODEL}: ${actionPayload.modelName}`
+      }
       default:
         return action.payload
     }
