@@ -15,12 +15,18 @@ export enum ActionTypes {
 }
 
 export enum ConditionType {
-  EQUAL = "EQUAL"
+  EQUAL = "EQUAL",
+  NOT_EQUAL = "NOT_EQUAL",
+  GREATER_THAN = "GREATER_THAN",
+  GREATER_THAN_OR_EQUAL = "GREATER_THAN_OR_EQUAL",
+  LESS_THAN = "LESS_THAN",
+  LESS_THEN_OR_EQUAL = "LESS_THEN_OR_EQUAL",
 }
 
 export interface Condition {
   entityId: string
-  valueId: string
+  valueId?: string
+  value?: number
   condition: ConditionType
 }
 
@@ -66,11 +72,11 @@ export class ActionBase {
     this.isTerminal = action.isTerminal
     this.isEntryNode = action.isEntryNode
     this.repromptActionId = action.repromptActionId
-    this.requiredEntitiesFromPayload = action.requiredEntitiesFromPayload || []
-    this.requiredEntities = action.requiredEntities || []
-    this.negativeEntities = action.negativeEntities || []
-    this.requiredConditions = action.requiredConditions || []
-    this.negativeConditions = action.negativeConditions || []
+    this.requiredEntitiesFromPayload = action.requiredEntitiesFromPayload
+    this.requiredEntities = action.requiredEntities
+    this.negativeEntities = action.negativeEntities
+    this.requiredConditions = action.requiredConditions
+    this.negativeConditions = action.negativeConditions
     this.suggestedEntity = action.suggestedEntity
     this.version = action.version
     this.packageCreationId = action.packageCreationId
