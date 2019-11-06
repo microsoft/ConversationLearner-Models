@@ -96,7 +96,7 @@
     "tslint-config-standard": "^7.0.0",
     "tslint-microsoft-contrib": "^5.0.3",
     "typedoc": "^0.15.0",
-    "typescript": "3.3.4000"
+    "typescript": "3.7.2"
   },
   "publishConfig": {
     "tag": "next",
