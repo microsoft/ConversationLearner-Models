@@ -56,7 +56,6 @@ export class ActionBase {
   negativeEntities: string[] = []
   requiredConditions: Condition[] = []
   negativeConditions: Condition[] = []
-  // Id of 
   suggestedEntity: string | undefined
   version: number
   packageCreationId: number
