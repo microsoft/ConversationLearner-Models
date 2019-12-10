@@ -8,7 +8,7 @@ import { ScoredBase, ScoredAction } from './Score'
 export enum ActionTypes {
   TEXT = 'TEXT',
   API_LOCAL = 'API_LOCAL',
-  API_FLOW = "API_FLOW",
+  API_FLOW = 'API_FLOW',
   CARD = 'CARD',
   END_SESSION = 'END_SESSION',
   SET_ENTITY = 'SET_ENTITY',
