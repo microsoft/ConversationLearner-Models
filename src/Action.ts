@@ -8,12 +8,12 @@ import { ScoredBase, ScoredAction } from './Score'
 export enum ActionTypes {
   TEXT = 'TEXT',
   API_LOCAL = 'API_LOCAL',
-  FLOW = 'FLOW',
   CARD = 'CARD',
   END_SESSION = 'END_SESSION',
   SET_ENTITY = 'SET_ENTITY',
   DISPATCH = 'DISPATCH',
   CHANGE_MODEL = 'CHANGE_MODEL',
+  FLOW = 'FLOW',
 }
 
 export enum ConditionType {
