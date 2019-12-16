@@ -24,7 +24,7 @@ jobs:
       - run: npm ci
       - run: npm run test
       - run: npm run build
-      - run: npx semantic-release
+      # - run: npx semantic-release
 
         env:
           CI: true
